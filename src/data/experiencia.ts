@@ -10,15 +10,18 @@ export interface ExperienciaItem {
   logo?: string;
 }
 
-/** Adicione a experiência mais recente no topo do array. */
+/**
+ * Adicione a experiência mais recente no topo do array. Cargos, datas e
+ * bullets abaixo são placeholders — ajuste para refletir seu histórico real.
+ */
 export const experiencia: ExperienciaItem[] = [
   {
-    empresa: 'Órbita Cloud',
-    cargo: 'Site Reliability Engineer — Canais Digitais',
+    empresa: 'uma empresa internacional',
+    cargo: 'Site Reliability Engineer',
     periodoInicio: '2025-03',
-    periodoFim: '2026-01',
+    periodoFim: 'atual',
     localizacao: 'Remoto',
-    logo: '/logos/orbita-cloud.svg',
+    logo: '/logos/empresa-internacional.svg',
     bullets: [
       'Responsável por confiabilidade e escalabilidade de aplicações digitais voltadas a milhões de usuários (web e mobile).',
       'Defini e operacionalizei SLOs/SLIs junto a produto e engenharia, reduzindo incidentes com impacto ao usuário trimestre a trimestre.',
@@ -27,24 +30,24 @@ export const experiencia: ExperienciaItem[] = [
     ],
   },
   {
-    empresa: 'NimbusTech',
+    empresa: 'Itaú',
     cargo: 'Tech Lead SRE — Canais Digitais',
     periodoInicio: '2024-10',
     periodoFim: '2025-03',
-    localizacao: 'Remoto',
-    logo: '/logos/nimbustech.svg',
+    localizacao: 'São Paulo, SP',
+    logo: '/logos/itau.svg',
     bullets: [
       'Liderança técnica da função de SRE, mentorando engenheiros e definindo direção de confiabilidade.',
       'Programa de elevação de security score em aplicações legadas e modernas.',
     ],
   },
   {
-    empresa: 'CloudNine Systems',
+    empresa: 'Stone Pagamentos',
     cargo: 'Site Reliability Engineer',
     periodoInicio: '2024-06',
     periodoFim: '2024-10',
-    localizacao: 'Remoto',
-    logo: '/logos/cloudnine-systems.svg',
+    localizacao: 'São Paulo, SP',
+    logo: '/logos/stone-pagamentos.svg',
     bullets: [
       'Playbooks de resposta a incidentes e runbooks automatizados; dashboards e alertas inteligentes.',
     ],

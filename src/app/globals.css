@@ -3,7 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: var(--font-geist-sans);
+  /* Site inteiro usa fonte monospace — --font-sans aponta pra mono de propósito. */
+  --font-sans: var(--font-geist-mono);
   --font-mono: var(--font-geist-mono);
   --color-accent: var(--accent);
   --color-background: var(--background);

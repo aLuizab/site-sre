@@ -3,10 +3,11 @@ import { palestras } from '@/data/palestras';
 import { SITE_URL } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Site é uma landing page única — experiência/projetos/palestras são
+  // seções em "/", não rotas próprias. Só as páginas de detalhe de cada
+  // palestra têm URL dedicada.
   const estaticas: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: 'monthly', priority: 1 },
-    { url: `${SITE_URL}/experiencia`, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/palestras`, changeFrequency: 'weekly', priority: 0.8 },
   ];
 
   const dinamicas: MetadataRoute.Sitemap = palestras.map((p) => ({

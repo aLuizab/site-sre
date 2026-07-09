@@ -10,8 +10,8 @@ export interface Perfil {
 }
 
 export const perfil: Perfil = {
-  nome: 'Aluiza Primo',
-  saudacao: 'Oi! Eu sou a Aluiza 👋',
+  nome: 'Ana Luiza Primo',
+  saudacao: 'Oi! Eu sou a Ana Luiza 👋',
   tagline:
     'Site Reliability Engineer — confiabilidade, observabilidade e performance em produção.',
   bio: [
@@ -19,6 +19,6 @@ export const perfil: Perfil = {
     'Também crio conteúdo sobre carreira em SRE/DevOps e mentoro profissionais que querem crescer na área, inclusive para o mercado internacional.',
   ],
   avatar: '/images/avatar-placeholder.svg',
-  avatarAlt: 'Foto de perfil de Aluiza Primo',
+  avatarAlt: 'Foto de perfil de Ana Luiza Primo',
   localizacao: 'Brasil',
 };

@@ -40,7 +40,7 @@ export default async function PalestraDetailPage({ params }: Props) {
   return (
     <Container className="py-16">
       <Link
-        href="/palestras"
+        href="/#palestras"
         className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         <ArrowLeft size={16} aria-hidden="true" />

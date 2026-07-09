@@ -1,25 +1,26 @@
-import { Suspense } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Hero } from '@/components/home/Hero';
 import { CompaniesRow } from '@/components/home/CompaniesRow';
 import { SocialLinks } from '@/components/home/SocialLinks';
 import { AboutSection } from '@/components/home/AboutSection';
-import { PalestrasCta } from '@/components/home/PalestrasCta';
-import { LatestVideos } from '@/components/home/LatestVideos';
+import { ExperienciaSection } from '@/components/home/ExperienciaSection';
+import { ProjetosSection } from '@/components/home/ProjetosSection';
+import { PalestrasSection } from '@/components/home/PalestrasSection';
 
 export default function Home() {
   return (
-    <Container>
+    <>
       <Hero />
-      <div className="space-y-10 pb-12">
-        <CompaniesRow />
-        <SocialLinks />
-      </div>
+      <Container>
+        <div className="space-y-10 pb-12">
+          <CompaniesRow />
+          <SocialLinks />
+        </div>
+      </Container>
       <AboutSection />
-      <PalestrasCta />
-      <Suspense fallback={null}>
-        <LatestVideos />
-      </Suspense>
-    </Container>
+      <ExperienciaSection />
+      <ProjetosSection />
+      <PalestrasSection />
+    </>
   );
 }

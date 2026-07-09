@@ -1,9 +1,11 @@
 # site-sre
 
-Site pessoal minimalista para apresentação como Site Reliability Engineer —
-Next.js (App Router) + TypeScript + TailwindCSS. Inclui uma página dedicada
-de **Palestras & Apresentações**, com slides em PDF e galeria de fotos por
-evento.
+Site pessoal — landing page única — para apresentação como Site Reliability
+Engineer. Next.js (App Router) + TypeScript + TailwindCSS, tipografia
+monospace em todo o site. Todo o conteúdo (sobre, experiência, projetos e
+palestras) fica em seções na própria home (`/`); cada palestra ainda ganha
+sua própria página em `/palestras/<slug>` para hospedar slides em PDF,
+galeria de fotos e vídeo sem pesar a landing page.
 
 ## Rodando localmente
 
@@ -32,7 +34,21 @@ Veja `.env.example`. Nenhuma é obrigatória para rodar localmente:
 | Variável | Para quê serve |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | URL pública usada em metadados/SEO (sitemap, Open Graph, canonical). Defina antes de publicar. |
-| `YOUTUBE_API_KEY` / `YOUTUBE_CHANNEL_ID` | Opcionais. Se as duas estiverem definidas, a Home passa a exibir uma seção "Últimos vídeos" buscando o canal via YouTube Data API. Sem elas, a seção é simplesmente omitida (sem quebrar o build). |
+| `YOUTUBE_API_KEY` / `YOUTUBE_CHANNEL_ID` | Opcionais. Se as duas estiverem definidas, a seção de palestras passa a exibir "Últimos vídeos" buscando o canal via YouTube Data API. Sem elas, a seção é simplesmente omitida (sem quebrar o build). |
+
+## Estrutura da página
+
+A home (`src/app/page.tsx`) empilha as seções, cada uma com um `id` para
+navegação por âncora (usado pelo menu do `Header`):
+
+| Seção | Âncora | Componente |
+| --- | --- | --- |
+| Hero | — | `components/home/Hero.tsx` |
+| Empresas + redes | — | `components/home/CompaniesRow.tsx`, `SocialLinks.tsx` |
+| Sobre mim | `#sobre` | `components/home/AboutSection.tsx` |
+| Experiência | `#experiencia` | `components/home/ExperienciaSection.tsx` |
+| Projetos | `#projetos` | `components/home/ProjetosSection.tsx` |
+| Palestras | `#palestras` | `components/home/PalestrasSection.tsx` |
 
 ## Como editar o conteúdo
 
@@ -43,11 +59,12 @@ links ou adicionar itens.
 | Arquivo | O que controla |
 | --- | --- |
 | `src/data/perfil.ts` | Nome, saudação, tagline, bio, foto de perfil |
-| `src/data/empresas.ts` | Empresas exibidas na Home ("Já atuei em...") e seus logos |
+| `src/data/empresas.ts` | Empresas da seção "Já atuei em..." e seus logos |
 | `src/data/socials.ts` | Links de redes/conteúdo (YouTube, LinkedIn, Instagram, GitHub) |
 | `src/data/experiencia.ts` | Itens da timeline de experiência |
-| `src/data/stack.ts` | Chips de stack/ferramentas em `/experiencia` |
-| `src/data/palestras.ts` | Palestras exibidas em `/palestras` |
+| `src/data/stack.ts` | Chips de stack/ferramentas na seção Experiência |
+| `src/data/projetos.ts` | Cards da seção Projetos |
+| `src/data/palestras.ts` | Palestras exibidas na seção Palestras |
 
 ### Adicionando uma nova palestra
 
@@ -77,12 +94,26 @@ links ou adicionar itens.
    }
    ```
 
-4. Pronto — o card aparece automaticamente em `/palestras`, com sua própria
-   página em `/palestras/meu-novo-talk` (título, descrição, tags, slides,
-   galeria com lightbox e, se houver, o vídeo embutido).
+4. Pronto — o card aparece automaticamente na seção Palestras da home, com
+   sua própria página em `/palestras/meu-novo-talk` (título, descrição,
+   tags, slides, galeria com lightbox e, se houver, o vídeo embutido).
 
 O campo `alt` é obrigatório em toda imagem — preencha com uma descrição
 real, não deixe vazio.
+
+### Adicionando um novo projeto
+
+Adicione um objeto ao array `projetos` em `src/data/projetos.ts`:
+
+```ts
+{
+  nome: 'nome-do-projeto',
+  descricao: 'O que o projeto faz, em 1-3 linhas.',
+  tags: ['TypeScript', 'Terraform'],
+  repoUrl: 'https://github.com/usuario/projeto',  // opcional
+  demoUrl: 'https://projeto.exemplo.com',          // opcional
+}
+```
 
 ### Adicionando uma nova experiência
 
@@ -120,16 +151,28 @@ manter contraste legível nos dois fundos):
 Exemplo de alternativa verde-terminal: `oklch(40% 0.14 150)` (claro) /
 `oklch(80% 0.19 150)` (escuro).
 
+### Trocando a fonte
+
+O site inteiro usa Geist Mono (fonte monospace). Para trocar, edite
+`src/app/layout.tsx` (import de `next/font/google` ou `next/font/local`) e
+`--font-sans`/`--font-mono` em `src/app/globals.css`.
+
 ## Placeholders para substituir antes de publicar
 
 - Foto de perfil: `public/images/avatar-placeholder.svg` → troque o
   `avatar` em `src/data/perfil.ts` para sua foto real.
-- Logos das empresas: `public/logos/*.svg`.
+- Empresa atual: em `src/data/empresas.ts`, o item com `atual: true` está
+  como `"uma empresa internacional"` (nome genérico de propósito) — troque
+  `nome` e o logo em `public/logos/empresa-internacional.svg` se quiser
+  divulgar o nome real.
+- Logos da Stone Pagamentos e do Itaú em `public/logos/` são versões
+  simplificadas/estilizadas (não são os logotipos oficiais das marcas) —
+  troque pelos arquivos oficiais se for publicar externamente.
 - Fotos e PDFs das palestras de exemplo em `public/palestras/*` e
   `public/slides/*.pdf` — as duas palestras em `src/data/palestras.ts` são
   só exemplos com conteúdo fictício.
+- Projetos de exemplo em `src/data/projetos.ts` são fictícios.
 - URLs de redes sociais em `src/data/socials.ts`.
-- Nome, bio e empresas reais em `src/data/perfil.ts` / `empresas.ts`.
 
 ## Deploy na Vercel
 
