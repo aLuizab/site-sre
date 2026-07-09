@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/*
+ * Cor de destaque: um valor por tema, para manter contraste AA como
+ * texto nos dois fundos (claro precisa de um tom mais escuro que o
+ * escuro). Troque as DUAS linhas "--accent" abaixo para mudar a cor.
+ * Alternativa verde-terminal: oklch(40% 0.14 150) / oklch(80% 0.19 150)
+ */
+:root {
+  --background: oklch(99% 0 0);
+  --foreground: oklch(12% 0 0);
+  --muted: oklch(45% 0.01 260);
+  --border: oklch(88% 0.005 260);
+  --accent: oklch(48% 0.13 195);
+}
+
+.dark {
+  --background: oklch(15% 0.02 260);
+  --foreground: oklch(97% 0 0);
+  --muted: oklch(70% 0.01 260);
+  --border: oklch(27% 0.015 260);
+  --accent: oklch(78% 0.15 195);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Avatar placeholder">
+  <rect width="400" height="400" fill="#111827"/>
+  <circle cx="200" cy="200" r="196" fill="none" stroke="#5fd9d0" stroke-width="4"/>
+  <circle cx="200" cy="160" r="70" fill="#2c3646"/>
+  <path d="M70 360c0-90 58-150 130-150s130 60 130 150" fill="#2c3646"/>
+  <text x="200" y="215" font-family="monospace" font-size="56" fill="#5fd9d0" text-anchor="middle">AP</text>
+</svg>
