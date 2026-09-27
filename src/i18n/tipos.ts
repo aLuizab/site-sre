@@ -43,7 +43,6 @@ export interface Conteudo {
     projetos: string;
     palestras: string;
     artigos: string;
-    newsletter: string;
   };
 
   secoes: {
@@ -63,15 +62,9 @@ export interface Conteudo {
     vazio: string;
   };
 
-  /** Página de inscrição na newsletter. */
   newsletter: {
-    tituloPagina: string;
+    /** Rótulo do bloco de inscrição no painel flutuante. */
     eyebrow: string;
-    descricao: string;
-    rotuloEmail: string;
-    placeholderEmail: string;
-    botao: string;
-    privacidade: string;
   };
 
   ui: {

@@ -12,9 +12,8 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
     { href: `/${locale}#experiencia`, label: c.nav.experiencia },
     { href: `/${locale}#projetos`, label: c.nav.projetos },
     { href: `/${locale}#palestras`, label: c.nav.palestras },
-    // Páginas próprias, não âncoras da home.
+    // Página própria, não âncora da home.
     { href: `/${locale}/artigos`, label: c.nav.artigos },
-    { href: `/${locale}/newsletter`, label: c.nav.newsletter },
   ];
 
   return (

@@ -24,7 +24,6 @@ export const en: Conteudo = {
     projetos: 'Projects',
     palestras: 'Talks',
     artigos: 'Articles',
-    newsletter: 'Newsletter',
   },
 
   secoes: {
@@ -175,15 +174,7 @@ export const en: Conteudo = {
   },
 
   newsletter: {
-    tituloPagina: 'Newsletter',
     eyebrow: '# newsletter',
-    descricao:
-      'Get what I write about SRE, observability and building an international tech career, straight to your inbox. The newsletter lives on Substack — subscribing here is the same as subscribing there.',
-    rotuloEmail: 'Your email',
-    placeholderEmail: 'you@example.com',
-    botao: 'Sign me up',
-    privacidade:
-      'Your email goes straight to Substack, which handles sending and unsubscribing. This site keeps no copy.',
   },
 
   meta: {
