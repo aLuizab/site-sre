@@ -43,7 +43,7 @@ const csp = [
    * para NÃO precisarem entrar em script-src: iframe fica isolado na
    * origem dele, script de terceiro leria o DOM do site inteiro.
    */
-  "frame-src 'self' https://www.youtube-nocookie.com https://www.instagram.com",
+  "frame-src 'self' https://www.youtube-nocookie.com https://www.instagram.com https://*.substack.com",
   "object-src 'none'",
   "base-uri 'self'",
   /*

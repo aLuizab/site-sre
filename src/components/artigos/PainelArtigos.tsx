@@ -26,10 +26,9 @@ export async function PainelArtigos({
   if (artigos.length === 0) return null;
 
   return (
-    <aside
-      aria-labelledby="titulo-artigos"
-      className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto"
-    >
+    // O sticky fica no contêiner da coluna, em page.tsx, para o painel
+    // grudar junto com o bloco de inscrição e não separado dele.
+    <aside aria-labelledby="titulo-artigos">
       <div className="rounded-xl border border-border bg-background/60 p-5 backdrop-blur">
         <p className="font-mono text-sm text-accent">{c.secoes.artigos.eyebrow}</p>
         <h2 id="titulo-artigos" className="mt-1 text-lg font-semibold tracking-tight">

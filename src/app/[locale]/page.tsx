@@ -11,6 +11,7 @@ import { PalestrasSection } from '@/components/home/PalestrasSection';
 import { LatestVideos } from '@/components/home/LatestVideos';
 import { InstagramSection } from '@/components/instagram/InstagramSection';
 import { PainelArtigos } from '@/components/artigos/PainelArtigos';
+import { EmbedSubstack } from '@/components/newsletter/EmbedSubstack';
 import { isLocale } from '@/i18n/config';
 import { getConteudo } from '@/i18n';
 
@@ -47,11 +48,19 @@ export default async function Home(props: PageProps<'/[locale]'>) {
         <InstagramSection c={c} />
       </div>
 
+      {/*
+        Coluna direita: inscrição em cima, artigos embaixo. O bloco
+        inteiro é sticky junto, para o formulário não sumir enquanto a
+        pessoa lê o resto da página.
+      */}
       <div className="px-6 pb-12 lg:px-0 lg:pt-24">
-        {/* Idem para o feed do Medium. */}
-        <Suspense fallback={null}>
-          <PainelArtigos locale={locale} c={c} />
-        </Suspense>
+        <div className="space-y-4 lg:sticky lg:top-24">
+          <EmbedSubstack titulo={c.newsletter.eyebrow} />
+          {/* Suspense para o feed do Medium não segurar o resto. */}
+          <Suspense fallback={null}>
+            <PainelArtigos locale={locale} c={c} />
+          </Suspense>
+        </div>
       </div>
     </div>
   );
