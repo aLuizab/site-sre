@@ -13,23 +13,39 @@ import type { NextConfig } from "next";
  *
  * `style-src` idem, por causa dos estilos inline do Next e do Tailwind.
  */
+const ehProducao = process.env.NODE_ENV === "production";
+
+/*
+ * 'unsafe-eval' entra SÓ em desenvolvimento. O React usa eval() no modo
+ * dev para remontar stack traces e outras ferramentas de depuração —
+ * sem isso o overlay de erro do Next reclama a cada carga de página.
+ * Em produção o React nunca chama eval(), então a diretiva fica fora e
+ * a política publicada continua estrita.
+ */
+const scriptSrc = ehProducao
+  ? "script-src 'self' 'unsafe-inline'"
+  : "script-src 'self' 'unsafe-inline' 'unsafe-eval'";
+
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  scriptSrc,
   "style-src 'self' 'unsafe-inline'",
   // Miniaturas do YouTube passam pelo otimizador, que devolve do próprio
   // domínio; data: cobre os placeholders embutidos do next/image.
   "img-src 'self' data: https://i.ytimg.com",
   // next/font embute a Geist Mono no próprio domínio — sem CDN de fonte.
   "font-src 'self'",
-  "connect-src 'self'",
+  // ws: só em dev, para o hot reload do Turbopack.
+  ehProducao ? "connect-src 'self'" : "connect-src 'self' ws: wss:",
   // Player do YouTube (nocookie) e o visualizador de PDF local.
   "frame-src 'self' https://www.youtube-nocookie.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-  "upgrade-insecure-requests",
+  // Em dev o site roda em http (localhost ou IP do WSL); forçar upgrade
+  // para https ali quebraria o carregamento dos recursos.
+  ...(ehProducao ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const nextConfig: NextConfig = {
