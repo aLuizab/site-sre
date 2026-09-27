@@ -10,7 +10,7 @@ export function Hero({ c }: { c: Conteudo }) {
       <div className="absolute inset-x-0 bottom-0 -z-10">
         <LatencySparkline />
       </div>
-      <Container>
+      <Container alinhamento="esquerda">
         <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-center sm:gap-8 sm:text-left">
           <Image
             src={perfil.avatar}

@@ -22,7 +22,7 @@ export async function LatestVideos({ c }: { c: Conteudo }) {
 
   return (
     <section id="videos" className="scroll-mt-24 py-12">
-      <Container wide>
+      <Container wide alinhamento="esquerda">
         <FadeIn>
           <SectionHeading
             eyebrow={c.secoes.videos.eyebrow}

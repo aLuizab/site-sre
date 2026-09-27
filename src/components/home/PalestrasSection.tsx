@@ -29,7 +29,7 @@ export function PalestrasSection({ locale, c }: { locale: Locale; c: Conteudo })
 
   return (
     <section id="palestras" className="scroll-mt-24 py-12">
-      <Container wide>
+      <Container wide alinhamento="esquerda">
         <FadeIn>
           <SectionHeading
             eyebrow={c.secoes.palestras.eyebrow}

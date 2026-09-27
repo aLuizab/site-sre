@@ -37,11 +37,21 @@ const csp = [
   "font-src 'self'",
   // ws: só em dev, para o hot reload do Turbopack.
   ehProducao ? "connect-src 'self'" : "connect-src 'self' ws: wss:",
-  // Player do YouTube (nocookie) e o visualizador de PDF local.
-  "frame-src 'self' https://www.youtube-nocookie.com",
+  /*
+   * Player do YouTube (nocookie), visualizador de PDF local e os embeds
+   * do Instagram. Os embeds do Instagram entram como iframe justamente
+   * para NÃO precisarem entrar em script-src: iframe fica isolado na
+   * origem dele, script de terceiro leria o DOM do site inteiro.
+   */
+  "frame-src 'self' https://www.youtube-nocookie.com https://www.instagram.com",
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  /*
+   * O formulário da newsletter posta direto para o Substack (do
+   * navegador, porque pelo servidor o Substack responde 403). Sem o
+   * domínio aqui, o CSP bloqueia o envio.
+   */
+  "form-action 'self' https://*.substack.com",
   "frame-ancestors 'none'",
   // Em dev o site roda em http (localhost ou IP do WSL); forçar upgrade
   // para https ali quebraria o carregamento dos recursos.

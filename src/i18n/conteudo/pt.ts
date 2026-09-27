@@ -4,7 +4,7 @@ export const pt: Conteudo = {
   perfil: {
     saudacao: 'Oi! Eu sou a Ana Luiza 👋',
     tagline:
-      'Site Reliability Engineer — confiabilidade, observabilidade e performance em produção.',
+      'Site Reliability Engineer/DevOps Engineer: confiabilidade, observabilidade e performance em produção.',
     bio: [
       'Sou Site Reliability Engineer com foco em confiabilidade, observabilidade e performance de sistemas em produção. Já trabalhei com plataformas de alto tráfego voltadas ao cliente, definindo SLOs/SLIs, reduzindo MTTR e construindo observabilidade ponta a ponta.',
       'Também crio conteúdo sobre carreira em SRE/DevOps e mentoro profissionais que querem crescer na área, inclusive para o mercado internacional.',
@@ -18,6 +18,8 @@ export const pt: Conteudo = {
     experiencia: 'Experiência',
     projetos: 'Projetos',
     palestras: 'Palestras',
+    artigos: 'Artigos',
+    newsletter: 'Newsletter',
   },
 
   secoes: {
@@ -26,6 +28,8 @@ export const pt: Conteudo = {
     projetos: { eyebrow: '# projetos', titulo: 'Meus projetos' },
     palestras: { eyebrow: '# palestras', titulo: 'Palestras & Apresentações' },
     videos: { eyebrow: '# youtube', titulo: 'Últimos vídeos' },
+    artigos: { eyebrow: '# medium', titulo: 'Artigos' },
+    instagram: { eyebrow: '# instagram', titulo: 'No Instagram' },
   },
 
   ui: {
@@ -36,7 +40,7 @@ export const pt: Conteudo = {
     temaParaEscuro: 'Mudar para o tema escuro',
     seletorIdioma: 'Escolher idioma',
     creditoRodape: 'Criado por {nome} com Next.js e TailwindCSS. © {ano}.',
-    trajetoriaComAtual: 'Já atuei em {passadas}, e hoje trabalho em {atual}.',
+    trajetoriaComAtual: 'Já atuei em {passadas}, e hoje atuo em {atual}.',
     trajetoriaSemAtual: 'Já atuei em {passadas}.',
     conjuncaoE: 'e',
     formacao: 'formação',
@@ -55,6 +59,9 @@ export const pt: Conteudo = {
     tituloGravacao: 'Gravação: {titulo}',
     rotuloSlides: 'Slides: {titulo}',
     verTodosVideos: 'Ver todos os vídeos no canal',
+    verTodosArtigos: 'Ver todos os artigos',
+    verPerfilInstagram: 'Ver o perfil no Instagram',
+    voltarInicio: 'Voltar para o início',
     inscritosUm: '{n} inscrito',
     inscritosVarios: '{n} inscritos',
 
@@ -64,7 +71,7 @@ export const pt: Conteudo = {
 
   experiencia: {
     internacional: {
-      empresa: 'uma empresa internacional',
+      empresa: 'Contratos internacionais — Estados Unidos',
       cargo: 'Site Reliability Engineer',
       localizacao: 'Remoto',
       bullets: [
@@ -112,9 +119,9 @@ export const pt: Conteudo = {
 
   empresas: {
     stone: 'Stone Pagamentos',
-    iti: 'iti',
+    iti: 'Banco Iti',
     itau: 'Itaú Unibanco',
-    internacional: 'uma empresa internacional',
+    internacional: 'contratos internacionais nos Estados Unidos',
   },
 
   projetos: {
@@ -155,9 +162,28 @@ export const pt: Conteudo = {
   },
 
 
+  artigos: {
+    tituloPagina: 'Artigos',
+    descricao:
+      'O que venho escrevendo sobre SRE, cloud, arquitetura e carreira. Publicado no Medium.',
+    vazio: 'Nenhum artigo publicado ainda.',
+  },
+
+  newsletter: {
+    tituloPagina: 'Newsletter',
+    eyebrow: '# newsletter',
+    descricao:
+      'Receba por e-mail o que eu escrevo sobre SRE, observabilidade e carreira internacional em tecnologia. A newsletter é publicada no Substack — a inscrição aqui é a mesma de lá.',
+    rotuloEmail: 'Seu e-mail',
+    placeholderEmail: 'voce@exemplo.com',
+    botao: 'Quero receber',
+    privacidade:
+      'Seu e-mail vai direto para o Substack, que cuida do envio e do descadastro. O site não guarda cópia.',
+  },
+
   meta: {
     titulo: 'Ana Luiza Primo — Site Reliability Engineer',
     descricao:
-      'Site Reliability Engineer — confiabilidade, observabilidade e performance em produção.',
+      'Site Reliability Engineer/DevOps Engineer: confiabilidade, observabilidade e performance em produção.',
   },
 };

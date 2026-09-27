@@ -6,7 +6,7 @@ import type { Conteudo } from '@/i18n';
 export function AboutSection({ c }: { c: Conteudo }) {
   return (
     <section id="sobre" className="scroll-mt-24 py-12">
-      <Container>
+      <Container alinhamento="esquerda">
         <FadeIn>
           <SectionHeading eyebrow={c.secoes.sobre.eyebrow} title={c.secoes.sobre.titulo} />
           <div className="space-y-4 text-muted">

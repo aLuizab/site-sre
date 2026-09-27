@@ -4,5 +4,5 @@
  */
 export const perfil = {
   nome: 'Ana Luiza Primo',
-  avatar: '/images/avatar-placeholder.svg',
+  avatar: '/images/perfil.png',
 } as const;

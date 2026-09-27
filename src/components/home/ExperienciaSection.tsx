@@ -10,7 +10,7 @@ import type { Conteudo } from '@/i18n';
 export function ExperienciaSection({ locale, c }: { locale: Locale; c: Conteudo }) {
   return (
     <section id="experiencia" className="scroll-mt-24 py-12">
-      <Container>
+      <Container alinhamento="esquerda">
         <FadeIn>
           <SectionHeading
             eyebrow={c.secoes.experiencia.eyebrow}

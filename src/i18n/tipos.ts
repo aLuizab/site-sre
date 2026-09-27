@@ -42,6 +42,8 @@ export interface Conteudo {
     experiencia: string;
     projetos: string;
     palestras: string;
+    artigos: string;
+    newsletter: string;
   };
 
   secoes: {
@@ -50,6 +52,26 @@ export interface Conteudo {
     projetos: ConteudoSecao;
     palestras: ConteudoSecao;
     videos: ConteudoSecao;
+    artigos: ConteudoSecao;
+    instagram: ConteudoSecao;
+  };
+
+  /** Página de artigos do Medium. */
+  artigos: {
+    tituloPagina: string;
+    descricao: string;
+    vazio: string;
+  };
+
+  /** Página de inscrição na newsletter. */
+  newsletter: {
+    tituloPagina: string;
+    eyebrow: string;
+    descricao: string;
+    rotuloEmail: string;
+    placeholderEmail: string;
+    botao: string;
+    privacidade: string;
   };
 
   ui: {
@@ -87,6 +109,9 @@ export interface Conteudo {
     /** Usa {titulo}. */
     rotuloSlides: string;
     verTodosVideos: string;
+    verTodosArtigos: string;
+    verPerfilInstagram: string;
+    voltarInicio: string;
     /**
      * Contador de inscritos do YouTube. O número é buscado ao vivo, então
      * só o substantivo fica aqui — em singular e plural, porque "1

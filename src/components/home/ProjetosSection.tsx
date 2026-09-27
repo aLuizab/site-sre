@@ -8,7 +8,7 @@ import type { Conteudo } from '@/i18n';
 export function ProjetosSection({ c }: { c: Conteudo }) {
   return (
     <section id="projetos" className="scroll-mt-24 py-12">
-      <Container wide>
+      <Container wide alinhamento="esquerda">
         <FadeIn>
           <SectionHeading
             eyebrow={c.secoes.projetos.eyebrow}

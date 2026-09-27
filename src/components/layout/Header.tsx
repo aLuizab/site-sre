@@ -12,6 +12,9 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
     { href: `/${locale}#experiencia`, label: c.nav.experiencia },
     { href: `/${locale}#projetos`, label: c.nav.projetos },
     { href: `/${locale}#palestras`, label: c.nav.palestras },
+    // Páginas próprias, não âncoras da home.
+    { href: `/${locale}/artigos`, label: c.nav.artigos },
+    { href: `/${locale}/newsletter`, label: c.nav.newsletter },
   ];
 
   return (
@@ -24,7 +27,7 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
           >
             {perfil.nome}
           </Link>
-          <nav aria-label={c.ui.navPrincipal} className="flex items-center gap-6">
+          <nav aria-label={c.ui.navPrincipal} className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
