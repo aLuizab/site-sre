@@ -7,6 +7,7 @@ import type { Conteudo } from '@/i18n';
 export function Hero({ c }: { c: Conteudo }) {
   return (
     <div className="relative overflow-hidden pt-16 pb-12 sm:pt-24 sm:pb-16">
+      <div className="brilho-hero pointer-events-none absolute inset-0 -z-20" aria-hidden="true" />
       <div className="absolute inset-x-0 bottom-0 -z-10">
         <LatencySparkline />
       </div>

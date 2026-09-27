@@ -31,8 +31,11 @@ export default async function Image({
           flexDirection: 'column',
           justifyContent: 'center',
           padding: '80px',
-          background: '#111827',
-          color: '#f5f5f5',
+          // Mesmos valores dos tokens do tema escuro em globals.css —
+          // aqui precisam ser literais porque o gerador de imagem não
+          // enxerga CSS custom properties.
+          background: '#0f0a18',
+          color: '#f5f4f8',
           fontFamily: 'sans-serif',
         }}
       >
@@ -41,14 +44,14 @@ export default async function Image({
             display: 'flex',
             width: 64,
             height: 4,
-            background: '#5fd9d0',
+            background: '#cda6ff',
             marginBottom: 32,
           }}
         />
         <div style={{ display: 'flex', fontSize: 64, fontWeight: 700 }}>
           {perfil.nome}
         </div>
-        <div style={{ display: 'flex', fontSize: 32, marginTop: 24, color: '#a3a3a3' }}>
+        <div style={{ display: 'flex', fontSize: 32, marginTop: 24, color: '#a19ab1' }}>
           {c.perfil.tagline}
         </div>
       </div>

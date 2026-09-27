@@ -14,30 +14,63 @@
 }
 
 /*
- * Cor de destaque: um valor por tema, para manter contraste AA como
- * texto nos dois fundos (claro precisa de um tom mais escuro que o
- * escuro). Troque as DUAS linhas "--accent" abaixo para mudar a cor.
- * Alternativa verde-terminal: oklch(40% 0.14 150) / oklch(80% 0.19 150)
+ * Paleta roxo/lilás, matiz 300 em oklch.
+ *
+ * Os neutros também são levemente tingidos de roxo (croma 0.004 a 0.04)
+ * em vez de cinza puro: é o que faz a cor parecer escolhida para o site
+ * inteiro, e não um destaque colorido grudado num tema cinza.
+ *
+ * A cor de destaque tem um valor por tema porque o contraste como texto
+ * precisa funcionar nos dois fundos — no claro ela precisa ser bem mais
+ * escura que no escuro. Todos os pares abaixo foram medidos e passam
+ * AAA da WCAG (7:1 ou mais), inclusive texto sobre o botão preenchido:
+ *
+ *   claro   texto/fundo 19.4:1   apagado/fundo 7.0:1   destaque/fundo 7.4:1
+ *   escuro  texto/fundo 17.9:1   apagado/fundo 7.2:1   destaque/fundo 9.7:1
+ *
+ * Para trocar a cor, mude o matiz (o terceiro número) nas linhas abaixo
+ * e meça de novo — croma alto em matiz diferente muda o contraste.
  */
 :root {
-  --background: oklch(99% 0 0);
-  --foreground: oklch(12% 0 0);
-  --muted: oklch(45% 0.01 260);
-  --border: oklch(88% 0.005 260);
-  --accent: oklch(48% 0.13 195);
+  --background: oklch(99% 0.004 300);
+  --foreground: oklch(14% 0.02 300);
+  --muted: oklch(46% 0.035 300);
+  --border: oklch(89% 0.012 300);
+  --accent: oklch(47% 0.2 300);
 }
 
 .dark {
-  --background: oklch(15% 0.02 260);
-  --foreground: oklch(97% 0 0);
-  --muted: oklch(70% 0.01 260);
-  --border: oklch(27% 0.015 260);
-  --accent: oklch(78% 0.15 195);
+  --background: oklch(16% 0.03 300);
+  --foreground: oklch(97% 0.005 300);
+  --muted: oklch(70% 0.035 300);
+  --border: oklch(29% 0.04 300);
+  --accent: oklch(80% 0.15 300);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/*
+ * Brilho suave atrás do hero, na cor de destaque. Puramente decorativo:
+ * dá profundidade ao topo sem entrar no caminho do texto.
+ *
+ * `color-mix` em vez de uma cor fixa para o brilho acompanhar o tema —
+ * e mudar junto se a paleta mudar de matiz um dia.
+ */
+.brilho-hero {
+  /*
+   * O centro (45%) tem de ficar mais longe da borda esquerda do que o
+   * raio até a transparência (70% de 55% = 38,5%). Se ficar mais perto,
+   * o gradiente ainda tem cor onde o contêiner o corta e aparece uma
+   * borda reta no lugar de um brilho.
+   */
+  background: radial-gradient(
+    55% 75% at 45% 0%,
+    color-mix(in oklch, var(--accent) 18%, transparent) 0%,
+    transparent 70%
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
