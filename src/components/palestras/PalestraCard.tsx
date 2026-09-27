@@ -1,12 +1,32 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Palestra } from '@/data/palestras';
-import { formatarData } from '@/lib/formatarData';
+import type { Locale } from '@/i18n/config';
 
-export function PalestraCard({ palestra }: { palestra: Palestra }) {
+/** Palestra já resolvida no idioma, pronta para render. */
+export interface PalestraCardData {
+  slug: string;
+  /** ISO, para o <time dateTime>. */
+  data: string;
+  /** Já formatada no servidor, no idioma certo. */
+  dataFormatada: string;
+  capa: string;
+  capaAlt: string;
+  titulo: string;
+  evento: string;
+  local: string;
+  tags: string[];
+}
+
+export function PalestraCard({
+  palestra,
+  locale,
+}: {
+  palestra: PalestraCardData;
+  locale: Locale;
+}) {
   return (
     <Link
-      href={`/palestras/${palestra.slug}`}
+      href={`/${locale}/palestras/${palestra.slug}`}
       className="group block overflow-hidden rounded-xl border border-border transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       <Image
@@ -18,7 +38,7 @@ export function PalestraCard({ palestra }: { palestra: Palestra }) {
       />
       <div className="p-4">
         <p className="font-mono text-xs text-accent">
-          <time dateTime={palestra.data}>{formatarData(palestra.data)}</time>
+          <time dateTime={palestra.data}>{palestra.dataFormatada}</time>
         </p>
         <h3 className="mt-1 font-medium group-hover:text-accent">{palestra.titulo}</h3>
         <p className="mt-1 text-sm text-muted">

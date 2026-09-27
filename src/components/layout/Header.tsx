@@ -2,27 +2,30 @@ import Link from 'next/link';
 import { perfil } from '@/data/perfil';
 import { Container } from '@/components/ui/Container';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import type { Locale } from '@/i18n/config';
+import type { Conteudo } from '@/i18n';
 
-const NAV_ITEMS = [
-  { href: '/#sobre', label: 'Sobre' },
-  { href: '/#experiencia', label: 'Experiência' },
-  { href: '/#projetos', label: 'Projetos' },
-  { href: '/#palestras', label: 'Palestras' },
-];
+export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
+  const navItems = [
+    { href: `/${locale}#sobre`, label: c.nav.sobre },
+    { href: `/${locale}#experiencia`, label: c.nav.experiencia },
+    { href: `/${locale}#projetos`, label: c.nav.projetos },
+    { href: `/${locale}#palestras`, label: c.nav.palestras },
+  ];
 
-export function Header() {
   return (
     <header className="border-b border-border">
       <Container wide>
         <div className="flex h-16 flex-wrap items-center justify-between gap-4">
           <Link
-            href="/"
+            href={`/${locale}`}
             className="font-mono text-sm font-semibold tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             {perfil.nome}
           </Link>
-          <nav aria-label="Navegação principal" className="flex items-center gap-6">
-            {NAV_ITEMS.map((item) => (
+          <nav aria-label={c.ui.navPrincipal} className="flex items-center gap-6">
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -31,7 +34,8 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <ThemeToggle />
+            <LanguageSwitcher locale={locale} rotulo={c.ui.seletorIdioma} />
+            <ThemeToggle paraClaro={c.ui.temaParaClaro} paraEscuro={c.ui.temaParaEscuro} />
           </nav>
         </div>
       </Container>

@@ -1,17 +1,17 @@
-export interface Empresa {
-  nome: string;
-  logo: string;
+/**
+ * O nome fica em src/i18n/conteudo/<idioma>.ts porque a empresa atual é
+ * descrita genericamente ("uma empresa internacional") e isso traduz.
+ */
+export interface EmpresaBase {
+  id: string;
   url?: string;
   /** true só para a empresa atual — muda o texto da CompaniesRow na Home. */
   atual?: boolean;
 }
 
-/**
- * "Empresa internacional" é um placeholder genérico — troque `nome` (e o
- * logo em /public/logos/) pelo nome real quando quiser divulgá-lo.
- */
-export const empresas: Empresa[] = [
-  { nome: 'Stone Pagamentos', logo: '/logos/stone-pagamentos.svg' },
-  { nome: 'Itaú', logo: '/logos/itau.svg' },
-  { nome: 'uma empresa internacional', logo: '/logos/empresa-internacional.svg', atual: true },
+export const empresas: EmpresaBase[] = [
+  { id: 'stone', url: 'https://www.stone.com.br/' },
+  { id: 'iti', url: 'https://iti.itau/' },
+  { id: 'itau', url: 'https://www.itau.com.br' },
+  { id: 'internacional', atual: true },
 ];

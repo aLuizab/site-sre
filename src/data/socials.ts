@@ -1,5 +1,9 @@
 import type { SocialIcon } from '@/types/shared';
 
+/**
+ * URL e rótulo são nomes de marca e não traduzem. O contador ("12,4 mil
+ * inscritos") traduz e fica em src/i18n/conteudo/<idioma>.ts.
+ */
 export interface SocialLink {
   id: SocialIcon;
   icon: SocialIcon;
@@ -7,7 +11,6 @@ export interface SocialLink {
   url: string;
   /** true só para a rede que deve ganhar destaque visual (pill preenchida). */
   destaque?: boolean;
-  contador?: string;
 }
 
 export const socials: SocialLink[] = [
@@ -15,9 +18,8 @@ export const socials: SocialLink[] = [
     id: 'youtube',
     icon: 'youtube',
     label: 'YouTube',
-    url: 'https://www.youtube.com/@analuizaprimo',
+    url: 'https://www.youtube.com/@analuiizaprimo',
     destaque: true,
-    contador: '12,4 mil inscritos',
   },
   {
     id: 'linkedin',
@@ -29,12 +31,12 @@ export const socials: SocialLink[] = [
     id: 'instagram',
     icon: 'instagram',
     label: 'Instagram',
-    url: 'https://www.instagram.com/analuizaprimo',
+    url: 'https://www.instagram.com/aluiza.tech',
   },
   {
     id: 'github',
     icon: 'github',
     label: 'GitHub',
-    url: 'https://github.com/analuizaprimo',
+    url: 'https://github.com/aLuizab',
   },
 ];

@@ -2,24 +2,29 @@
 
 Site pessoal — landing page única — para apresentação como Site Reliability
 Engineer. Next.js (App Router) + TypeScript + TailwindCSS, tipografia
-monospace em todo o site. Todo o conteúdo (sobre, experiência, projetos e
-palestras) fica em seções na própria home (`/`); cada palestra ainda ganha
-sua própria página em `/palestras/<slug>` para hospedar slides em PDF,
-galeria de fotos e vídeo sem pesar a landing page.
+monospace em todo o site, em **três idiomas** (português, inglês e
+espanhol).
+
+Todo o conteúdo (sobre, experiência, projetos, palestras e últimos vídeos)
+fica em seções da própria home; cada palestra ainda ganha sua própria
+página para hospedar slides em PDF, galeria de fotos e vídeo sem pesar a
+landing page.
 
 ## Rodando localmente
 
-Pré-requisitos: Node.js 20.9+ e npm.
+Pré-requisitos: Node.js 22+ e npm.
 
 ```bash
 npm install
-cp .env.example .env.local   # opcional, veja "Variáveis de ambiente" abaixo
+cp .env.example .env.local   # opcional, veja "Variáveis de ambiente"
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000).
+Abra [http://localhost:3000](http://localhost:3000) — a raiz negocia o
+idioma pelo `Accept-Language` do navegador e redireciona para `/pt`, `/en`
+ou `/es`.
 
-Outros comandos úteis:
+Outros comandos:
 
 ```bash
 npm run build   # build de produção
@@ -27,19 +32,51 @@ npm run start   # roda o build de produção localmente
 npm run lint    # ESLint
 ```
 
+## Idiomas
+
+Cada idioma tem sua própria URL, então as três versões indexam separado no
+Google e dá para mandar um link direto em inglês.
+
+```
+/pt   (padrão)      /en                 /es
+```
+
+A arquitetura separa **dados invariantes** de **texto traduzível**:
+
+| Onde | O que fica lá |
+| --- | --- |
+| `src/data/*.ts` | Datas, URLs, slugs, caminhos de imagem, tags — o que não muda entre idiomas |
+| `src/i18n/conteudo/{pt,en,es}.ts` | Todo o texto, indexado pelo `id` do item correspondente em `src/data/` |
+| `src/i18n/config.ts` | Idiomas suportados, negociação de `Accept-Language` |
+| `src/i18n/tipos.ts` | O contrato `Conteudo`, que os três dicionários implementam |
+| `src/proxy.ts` | Redireciona `/` para o idioma do visitante |
+
+Como os três dicionários são tipados pela mesma interface, **esquecer uma
+chave em qualquer idioma vira erro de compilação**, não string faltando na
+tela.
+
+Para adicionar um idioma: inclua o código em `locales` e `localeInfo`
+(`src/i18n/config.ts`), crie `src/i18n/conteudo/<código>.ts` e registre-o
+em `src/i18n/index.ts`. O TypeScript aponta tudo que falta.
+
 ## Variáveis de ambiente
 
-Veja `.env.example`. Nenhuma é obrigatória para rodar localmente:
+Veja `.env.example`.
 
-| Variável | Para quê serve |
-| --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | URL pública usada em metadados/SEO (sitemap, Open Graph, canonical). Defina antes de publicar. |
-| `YOUTUBE_API_KEY` / `YOUTUBE_CHANNEL_ID` | Opcionais. Se as duas estiverem definidas, a seção de palestras passa a exibir "Últimos vídeos" buscando o canal via YouTube Data API. Sem elas, a seção é simplesmente omitida (sem quebrar o build). |
+| Variável | Obrigatória | Para quê serve |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Em produção | URL pública usada em canonical, hreflang, sitemap e Open Graph. Por ser `NEXT_PUBLIC_*`, é embutida em tempo de **build** — defina antes do primeiro deploy. |
+| `YOUTUBE_API_KEY` | Não | Usa a API oficial do YouTube em vez de ler o feed público. Lida só no servidor. |
+| `YOUTUBE_CHANNEL_ID` | Não | Canal de onde vêm os vídeos e o contador de inscritos. |
+
+Sem as duas do YouTube o site funciona igual: os vídeos vêm do feed RSS
+público e o contador de inscritos, da página do canal. Se as duas fontes
+falharem, a seção some e o contador não aparece — nunca um número inventado.
 
 ## Estrutura da página
 
-A home (`src/app/page.tsx`) empilha as seções, cada uma com um `id` para
-navegação por âncora (usado pelo menu do `Header`):
+A home (`src/app/[locale]/page.tsx`) empilha as seções, cada uma com um
+`id` para navegação por âncora:
 
 | Seção | Âncora | Componente |
 | --- | --- | --- |
@@ -49,140 +86,150 @@ navegação por âncora (usado pelo menu do `Header`):
 | Experiência | `#experiencia` | `components/home/ExperienciaSection.tsx` |
 | Projetos | `#projetos` | `components/home/ProjetosSection.tsx` |
 | Palestras | `#palestras` | `components/home/PalestrasSection.tsx` |
+| Últimos vídeos | `#videos` | `components/home/LatestVideos.tsx` |
 
 ## Como editar o conteúdo
 
-Todo o conteúdo do site vive em `src/data/*.ts` — arquivos de dados
-tipados, sem JSX. Não é preciso mexer em componentes para atualizar texto,
-links ou adicionar itens.
+**Texto vai nos três dicionários; estrutura vai em `src/data/`.**
 
-| Arquivo | O que controla |
-| --- | --- |
-| `src/data/perfil.ts` | Nome, saudação, tagline, bio, foto de perfil |
-| `src/data/empresas.ts` | Empresas da seção "Já atuei em..." e seus logos |
-| `src/data/socials.ts` | Links de redes/conteúdo (YouTube, LinkedIn, Instagram, GitHub) |
-| `src/data/experiencia.ts` | Itens da timeline de experiência |
-| `src/data/stack.ts` | Chips de stack/ferramentas na seção Experiência |
-| `src/data/projetos.ts` | Cards da seção Projetos |
-| `src/data/palestras.ts` | Palestras exibidas na seção Palestras |
+| Arquivo de dados | Dicionário correspondente | O que controla |
+| --- | --- | --- |
+| `src/data/perfil.ts` | `perfil` | Nome e avatar / saudação, tagline, bio |
+| `src/data/empresas.ts` | `empresas` | Seção "Já atuei em..." |
+| `src/data/socials.ts` | — | Links de redes (URLs não traduzem) |
+| `src/data/experiencia.ts` | `experiencia` | Datas e logos / cargo, empresa, bullets |
+| `src/data/formacao.ts` | `formacao` | Instituição e período / nome do curso |
+| `src/data/stack.ts` | — | Chips de ferramentas (nomes técnicos) |
+| `src/data/projetos.ts` | `projetos` | Repo, tags / descrição |
+| `src/data/palestras.ts` | `palestras` | Slug, data, arquivos / título, descrição |
 
 ### Adicionando uma nova palestra
 
-1. Coloque a foto de capa e as fotos da galeria em
-   `public/palestras/<slug>/` (ex.: `capa.svg`/`.jpg`, `foto-1.jpg`, ...).
-2. Coloque o PDF dos slides em `public/slides/<slug>.pdf` — ou, se os
-   slides estiverem no SpeakerDeck/Slideshare, use a URL externa direto no
+1. Coloque a capa e as fotos em `public/palestras/<slug>/`.
+2. Coloque o PDF em `public/slides/<slug>.pdf` — ou use uma URL externa no
    campo `slidesPdf`.
-3. Adicione um novo objeto ao array `palestras` em `src/data/palestras.ts`:
+3. Adicione a **estrutura** em `src/data/palestras.ts`:
 
    ```ts
    {
      slug: 'meu-novo-talk',
-     titulo: 'Título da palestra',
-     evento: 'Nome do evento',
-     data: '2026-03-10',        // AAAA-MM-DD
-     local: 'Cidade, UF',
-     descricao: 'Descrição curta em 2-4 linhas.',
+     data: '2026-03-10',                       // AAAA-MM-DD
      capa: '/palestras/meu-novo-talk/capa.jpg',
-     capaAlt: 'Descrição da imagem de capa para leitores de tela',
-     fotos: [
-       { src: '/palestras/meu-novo-talk/foto-1.jpg', alt: '...' },
-     ],
-     slidesPdf: '/slides/meu-novo-talk.pdf', // ou uma URL externa
-     videoUrl: 'https://www.youtube.com/watch?v=...', // opcional
+     fotos: ['/palestras/meu-novo-talk/foto-1.jpg'],
+     slidesPdf: '/slides/meu-novo-talk.pdf',   // ou URL externa
+     videoUrl: 'https://www.youtube.com/watch?v=...',  // opcional
      tags: ['sre', 'observabilidade'],
    }
    ```
 
-4. Pronto — o card aparece automaticamente na seção Palestras da home, com
-   sua própria página em `/palestras/meu-novo-talk` (título, descrição,
-   tags, slides, galeria com lightbox e, se houver, o vídeo embutido).
+4. Adicione o **texto** nos três dicionários, sob a mesma chave `slug`:
 
-O campo `alt` é obrigatório em toda imagem — preencha com uma descrição
+   ```ts
+   'meu-novo-talk': {
+     titulo: 'Título da palestra',
+     evento: 'Nome do evento',
+     local: 'Cidade, UF',
+     descricao: 'Descrição curta em 2-4 linhas.',
+     capaAlt: 'Descrição da capa para leitores de tela',
+     fotosAlt: ['Descrição da foto 1'],   // mesma ordem de `fotos`
+   }
+   ```
+
+O slug é o mesmo nos três idiomas de propósito: a URL fica estável e só o
+prefixo de idioma muda. Todo `alt` é obrigatório — preencha com descrição
 real, não deixe vazio.
-
-### Adicionando um novo projeto
-
-Adicione um objeto ao array `projetos` em `src/data/projetos.ts`:
-
-```ts
-{
-  nome: 'nome-do-projeto',
-  descricao: 'O que o projeto faz, em 1-3 linhas.',
-  tags: ['TypeScript', 'Terraform'],
-  repoUrl: 'https://github.com/usuario/projeto',  // opcional
-  demoUrl: 'https://projeto.exemplo.com',          // opcional
-}
-```
 
 ### Adicionando uma nova experiência
 
-Adicione um objeto no **topo** do array `experiencia` em
-`src/data/experiencia.ts` (mais recente primeiro):
+No **topo** do array em `src/data/experiencia.ts` (mais recente primeiro):
 
 ```ts
-{
+{ id: 'empresa-x', periodoInicio: '2026-02', periodoFim: 'atual', logo: '/logos/x.svg' }
+```
+
+`periodoInicio` e `periodoFim` aceitam `'AAAA'` ou `'AAAA-MM'` — use só o
+ano quando não souber o mês, em vez de inventar um. Depois, nos três
+dicionários:
+
+```ts
+'empresa-x': {
   empresa: 'Nome da empresa',
   cargo: 'Cargo',
-  periodoInicio: '2026-02',      // AAAA-MM
-  periodoFim: 'atual',            // ou 'AAAA-MM'
   localizacao: 'Remoto',
   bullets: ['Ponto de impacto 1', 'Ponto de impacto 2'],
-  logo: '/logos/empresa.svg',     // opcional
 }
 ```
 
 ### Trocando a cor de destaque
 
-A cor de destaque (usada em botões, links, bordas e ícones) fica em duas
-linhas de `src/app/globals.css` — uma para o tema claro, outra para o
-escuro (o tom claro precisa ser mais escuro que o do modo escuro para
-manter contraste legível nos dois fundos):
+Duas linhas de `src/app/globals.css` — uma por tema. O tom claro precisa
+ser mais escuro que o do modo escuro para manter contraste nos dois fundos:
 
 ```css
-:root {
-  --accent: oklch(48% 0.13 195); /* tema claro */
-}
-.dark {
-  --accent: oklch(78% 0.15 195); /* tema escuro */
-}
+:root { --accent: oklch(48% 0.13 195); }  /* tema claro */
+.dark { --accent: oklch(78% 0.15 195); }  /* tema escuro */
 ```
-
-Exemplo de alternativa verde-terminal: `oklch(40% 0.14 150)` (claro) /
-`oklch(80% 0.19 150)` (escuro).
 
 ### Trocando a fonte
 
-O site inteiro usa Geist Mono (fonte monospace). Para trocar, edite
-`src/app/layout.tsx` (import de `next/font/google` ou `next/font/local`) e
-`--font-sans`/`--font-mono` em `src/app/globals.css`.
+Edite `src/app/[locale]/layout.tsx` (import de `next/font/google` ou
+`next/font/local`) e `--font-sans`/`--font-mono` em `src/app/globals.css`.
 
-## Placeholders para substituir antes de publicar
+## Placeholders que ainda faltam substituir
 
-- Foto de perfil: `public/images/avatar-placeholder.svg` → troque o
-  `avatar` em `src/data/perfil.ts` para sua foto real.
-- Empresa atual: em `src/data/empresas.ts`, o item com `atual: true` está
-  como `"uma empresa internacional"` (nome genérico de propósito) — troque
-  `nome` e o logo em `public/logos/empresa-internacional.svg` se quiser
-  divulgar o nome real.
-- Logos da Stone Pagamentos e do Itaú em `public/logos/` são versões
-  simplificadas/estilizadas (não são os logotipos oficiais das marcas) —
-  troque pelos arquivos oficiais se for publicar externamente.
-- Fotos e PDFs das palestras de exemplo em `public/palestras/*` e
-  `public/slides/*.pdf` — as duas palestras em `src/data/palestras.ts` são
-  só exemplos com conteúdo fictício.
-- Projetos de exemplo em `src/data/projetos.ts` são fictícios.
-- URLs de redes sociais em `src/data/socials.ts`.
+- **Foto de perfil**: `public/images/avatar-placeholder.svg` — troque
+  `avatar` em `src/data/perfil.ts`.
+- **Palestras**: as duas em `src/data/palestras.ts` são fictícias, assim
+  como as fotos e PDFs em `public/palestras/` e `public/slides/`. Uma
+  delas tem um `videoUrl` que aponta para um vídeo placeholder.
+- **Empresa atual**: em `src/data/empresas.ts` o item `atual: true` está
+  como "uma empresa internacional" (genérico de propósito).
 
-## Deploy na Vercel
+## Deploy no Railway
 
-1. Suba o repositório para o GitHub/GitLab/Bitbucket.
-2. Importe o projeto em [vercel.com/new](https://vercel.com/new) — o
-   framework Next.js é detectado automaticamente, nenhum build command
-   customizado é necessário.
-3. Configure `NEXT_PUBLIC_SITE_URL` (e, se for usar, `YOUTUBE_API_KEY` /
-   `YOUTUBE_CHANNEL_ID`) nas variáveis de ambiente do projeto na Vercel.
-4. Deploy.
+O `railway.json` na raiz já define build, start e healthcheck.
+
+1. **Suba o repositório para o GitHub.**
+2. No Railway: *New Project* → *Deploy from GitHub repo* → selecione este
+   repositório.
+3. **Antes do primeiro build**, em *Variables*, defina:
+
+   ```
+   NEXT_PUBLIC_SITE_URL=https://<seu-domínio-ou-subdomínio>.up.railway.app
+   ```
+
+   Isso não é opcional: a variável é embutida no bundle em tempo de build,
+   então defini-la depois exige um **novo build**, não só um restart. Sem
+   ela, canonical, hreflang e sitemap apontam para `localhost`.
+
+4. Em *Settings* → *Networking*, gere o domínio público.
+5. Se usar domínio próprio, aponte o DNS e **atualize
+   `NEXT_PUBLIC_SITE_URL`**, refazendo o deploy.
+
+O `PORT` é injetado pelo Railway e o `next start` o respeita; o
+`-H 0.0.0.0` no script `start` garante que o servidor não suba preso em
+`localhost`. O healthcheck aponta para `/pt` em vez de `/`, porque a raiz
+responde `307` (redirecionamento de idioma) e não `200`.
+
+## Segurança
+
+- **Headers** (`next.config.ts`): CSP, `X-Frame-Options`, `nosniff`,
+  `Referrer-Policy`, `Permissions-Policy` e HSTS, com `poweredByHeader`
+  desligado.
+- **CSP**: `script-src` usa `'unsafe-inline'` porque o Next injeta o
+  payload de hidratação inline e a alternativa (nonce) exigiria abrir mão
+  da geração estática. Aceitável enquanto o site não tiver formulário,
+  login ou entrada de usuário — **se isso mudar, revise**.
+- **Otimizador de imagens**: `remotePatterns` restrito a
+  `i.ytimg.com/vi/**`. Um padrão aberto transformaria o site num proxy de
+  imagem para qualquer origem. SVG remoto segue bloqueado.
+- **Segredos**: `.gitignore` cobre `.env*` (exceto `.env.example`). A
+  `YOUTUBE_API_KEY` é lida só em Server Components e nunca chega ao
+  navegador.
+- **JSON-LD** é serializado por `src/lib/jsonLd.ts`, que escapa `<` e os
+  separadores U+2028/U+2029.
+
+Rode `npm audit` antes de cada deploy.
 
 ## Stack
 

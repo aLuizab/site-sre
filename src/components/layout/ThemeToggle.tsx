@@ -11,15 +11,23 @@ function useMounted() {
   return useSyncExternalStore(subscribeNoop, () => true, () => false);
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({
+  paraClaro,
+  paraEscuro,
+}: {
+  paraClaro: string;
+  paraEscuro: string;
+}) {
   const { resolvedTheme, setTheme } = useTheme();
   const mounted = useMounted();
 
   if (!mounted) {
+    // Antes de montar não dá para saber o tema atual, então o rótulo
+    // anuncia a ação padrão (ir para o escuro) em vez de mentir.
     return (
       <button
         type="button"
-        aria-label="Alternar tema claro/escuro"
+        aria-label={paraEscuro}
         className="rounded-full border border-border p-2 text-muted"
       >
         <Sun size={18} aria-hidden="true" />
@@ -33,7 +41,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label="Alternar tema claro/escuro"
+      aria-label={isDark ? paraClaro : paraEscuro}
       className="rounded-full border border-border p-2 text-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {isDark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}

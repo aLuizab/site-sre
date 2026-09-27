@@ -8,7 +8,8 @@ export function VideoEmbed({ url, titulo }: { url: string; titulo: string }) {
     <div className="aspect-video w-full overflow-hidden rounded-lg border border-border">
       <iframe
         src={`https://www.youtube-nocookie.com/embed/${id}`}
-        title={`Gravação: ${titulo}`}
+        // Já interpolado pelo chamador, ex.: "Gravação: SRE além do hype".
+        title={titulo}
         loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

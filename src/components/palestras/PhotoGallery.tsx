@@ -4,7 +4,11 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import 'yet-another-react-lightbox/styles.css';
-import type { PalestraFoto } from '@/data/palestras';
+/** src vem de data/palestras.ts; alt vem do dicionário do idioma. */
+export interface PalestraFoto {
+  src: string;
+  alt: string;
+}
 
 const Lightbox = dynamic(() => import('yet-another-react-lightbox'), {
   ssr: false,

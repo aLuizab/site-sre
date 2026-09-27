@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# script local de conveniência (caminho e versão de Node da máquina)
+.dev-run.sh

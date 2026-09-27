@@ -2,14 +2,15 @@ import { perfil } from '@/data/perfil';
 import { socials } from '@/data/socials';
 import { SOCIAL_ICONS } from '@/lib/socialIcons';
 import { Container } from '@/components/ui/Container';
+import { preencher, type Conteudo } from '@/i18n';
 
-export function Footer() {
+export function Footer({ c }: { c: Conteudo }) {
   const ano = new Date().getFullYear();
 
   return (
     <footer className="border-t border-border">
       <Container wide className="flex flex-col items-center gap-6 py-10 sm:flex-row sm:justify-between">
-        <nav aria-label="Redes sociais" className="flex items-center gap-4">
+        <nav aria-label={c.ui.redesSociais} className="flex items-center gap-4">
           {socials.map((social) => {
             const Icon = SOCIAL_ICONS[social.icon];
             return (
@@ -27,7 +28,7 @@ export function Footer() {
           })}
         </nav>
         <p className="font-mono text-xs text-muted">
-          Criado por {perfil.nome} com Next.js e TailwindCSS. © {ano}.
+          {preencher(c.ui.creditoRodape, { nome: perfil.nome, ano })}
         </p>
       </Container>
     </footer>

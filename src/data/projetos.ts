@@ -1,32 +1,33 @@
-export interface Projeto {
+/**
+ * Nome do repositório, links e tags são termos técnicos e não mudam entre
+ * idiomas. Só a descrição traduz — ela fica em
+ * src/i18n/conteudo/<idioma>.ts, indexada por este `id`.
+ */
+export interface ProjetoBase {
+  id: string;
   nome: string;
-  descricao: string;
   tags: string[];
   repoUrl?: string;
   demoUrl?: string;
 }
 
-/** Projetos fictícios de exemplo — troque pelos seus projetos reais. */
-export const projetos: Projeto[] = [
+export const projetos: ProjetoBase[] = [
   {
-    nome: 'slo-dashboard',
-    descricao:
-      'Dashboard de SLOs em tempo real, agregando métricas do Prometheus e do Datadog num painel único para times de produto acompanharem error budget sem precisar entender PromQL.',
-    tags: ['Grafana', 'Prometheus', 'TypeScript'],
-    repoUrl: 'https://github.com/analuizaprimo/slo-dashboard',
+    id: '100-dias-kubernetes',
+    nome: '100DiasDeKubernetes',
+    tags: ['Kubernetes', 'Docs', 'Community'],
+    repoUrl: 'https://github.com/aLuizab/100DiasDeKubernetes',
   },
   {
-    nome: 'runbook-bot',
-    descricao:
-      'Bot de Slack que transforma runbooks em Markdown em playbooks interativos, guiando o time passo a passo durante incidentes Sev-1.',
-    tags: ['Python', 'Slack API', 'Incident Response'],
-    repoUrl: 'https://github.com/analuizaprimo/runbook-bot',
+    id: 'datadog-automation',
+    nome: 'datadog-automation',
+    tags: ['Python', 'Datadog', 'Observability'],
+    repoUrl: 'https://github.com/aLuizab/datadog-automation',
   },
   {
-    nome: 'terraform-eks-baseline',
-    descricao:
-      'Módulo Terraform opinativo para provisionar clusters EKS com observabilidade (OpenTelemetry Collector) e políticas de segurança já configuradas.',
-    tags: ['Terraform', 'Kubernetes', 'AWS EKS'],
-    repoUrl: 'https://github.com/analuizaprimo/terraform-eks-baseline',
+    id: 'arquitetura-celular',
+    nome: 'arquitetura-celular',
+    tags: ['Terraform', 'AWS', 'High availability'],
+    repoUrl: 'https://github.com/aLuizab/arquitetura-celular',
   },
 ];
