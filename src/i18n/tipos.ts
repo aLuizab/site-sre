@@ -58,6 +58,7 @@ export interface Conteudo {
     palestras: string;
     artigos: string;
     mentoria: string;
+    materiais: string;
   };
 
   secoes: {
@@ -128,6 +129,42 @@ export interface Conteudo {
     campoObjetivoDica: string;
     formBotao: string;
     formNota: string;
+    formEnviando: string;
+    formSucesso: string;
+    formInvalido: string;
+    formLimite: string;
+    formErro: string;
+
+    /** Princípios da metodologia (GROW e cadência antes/durante/depois). */
+    principiosTitulo: string;
+    principios: { titulo: string; descricao: string }[];
+
+    /** Planos, indexados pelo `id` de data/mentoria.ts. */
+    planosTitulo: string;
+    planosIntro: string;
+    /** Sufixo do preço por pessoa, ex.: "por pessoa". */
+    porPessoa: string;
+    planos: Record<string, { nome: string; descricao: string; inclui: string[] }>;
+    /** Chamada para os materiais gratuitos, dentro da página da mentoria. */
+    materiaisChamada: string;
+  };
+
+  /** Página de materiais. */
+  materiais: {
+    eyebrow: string;
+    tituloPagina: string;
+    descricao: string;
+    seloGratuito: string;
+    seloMentoria: string;
+    /** Usa {min}. */
+    leitura: string;
+    /** Aviso nas páginas em/es de que o corpo está em português. */
+    avisoIdioma: string;
+    /** Teaser dos materiais que vêm com a mentoria. */
+    incluidoNaMentoria: string;
+    verMentoria: string;
+    voltarMateriais: string;
+    itens: Record<string, { titulo: string; descricao: string }>;
   };
 
   ui: {

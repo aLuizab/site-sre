@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { palestras } from '@/data/palestras';
+import { materiais } from '@/data/materiais';
 import { SITE_URL, alternatesPara } from '@/lib/seo';
 import { locales } from '@/i18n/config';
 
@@ -25,6 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { caminho: '', changeFrequency: 'monthly', priority: 1 },
     { caminho: '/artigos', changeFrequency: 'weekly', priority: 0.8 },
     { caminho: '/mentoria', changeFrequency: 'monthly', priority: 0.9 },
+    { caminho: '/materiais', changeFrequency: 'monthly', priority: 0.8 },
+    ...materiais.map(
+      (m): Entrada => ({
+        caminho: `/materiais/${m.slug}`,
+        changeFrequency: 'monthly',
+        priority: m.gratuito ? 0.7 : 0.4,
+      })
+    ),
     ...palestras.map(
       (p): Entrada => ({
         caminho: `/palestras/${p.slug}`,

@@ -68,6 +68,10 @@ Veja `.env.example`.
 | `NEXT_PUBLIC_SITE_URL` | Em produção | URL pública usada em canonical, hreflang, sitemap e Open Graph. Por ser `NEXT_PUBLIC_*`, é embutida em tempo de **build** — defina antes do primeiro deploy. |
 | `YOUTUBE_API_KEY` | Não | Usa a API oficial do YouTube em vez de ler o feed público. Lida só no servidor. |
 | `YOUTUBE_CHANNEL_ID` | Não | Canal de onde vêm os vídeos e o contador de inscritos. |
+| `RESEND_API_KEY` | Para o formulário de mentoria | Chave do Resend, só com permissão de envio. Sem ela o formulário responde erro e o servidor registra a inscrição perdida. Crie a conta no Resend **com o mesmo e-mail de destino** — sem domínio verificado, ele só entrega para o dono da conta. |
+| `EMAIL_DESTINO` / `EMAIL_REMETENTE` | Não | Destino e remetente do formulário. Padrão: o e-mail em `src/data/mentoria.ts` e o sandbox do Resend. |
+| `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` | Recomendada | Chave estável para as Server Actions entre deploys (`openssl rand -base64 32`). |
+| `SUBSTACK_PUBLICATION` / `MEDIUM_USERNAME` | Não | Fontes dos artigos e da newsletter. Padrões no código. |
 
 Sem as duas do YouTube o site funciona igual: os vídeos vêm do feed RSS
 público e o contador de inscritos, da página do canal. Se as duas fontes
@@ -87,6 +91,15 @@ A home (`src/app/[locale]/page.tsx`) empilha as seções, cada uma com um
 | Projetos | `#projetos` | `components/home/ProjetosSection.tsx` |
 | Palestras | `#palestras` | `components/home/PalestrasSection.tsx` |
 | Últimos vídeos | `#videos` | `components/home/LatestVideos.tsx` |
+
+Páginas próprias, fora da home:
+
+| Rota | O que é |
+| --- | --- |
+| `/artigos` | Medium + Substack numa lista só |
+| `/mentoria` | Metodologia, formatos e preços, formulário |
+| `/materiais` e `/materiais/<slug>` | Guias gratuitos na íntegra; os da mentoria só com descrição |
+| `/palestras/<slug>` | Detalhe de cada palestra, com navegador de slides |
 
 ## Como editar o conteúdo
 
@@ -185,6 +198,25 @@ Edite `src/app/[locale]/layout.tsx` (import de `next/font/google` ou
 - **Empresa atual**: em `src/data/empresas.ts` o item `atual: true` está
   como "uma empresa internacional" (genérico de propósito).
 
+## Mentoria e materiais
+
+**Formulário.** Envia por Server Action (`src/app/[locale]/mentoria/acoes.ts`);
+o servidor manda o e-mail pelo Resend (`src/lib/email.ts`). Proteções:
+campo-armadilha para robôs, validação e limite de tamanho por campo,
+limite de 3 envios por IP por hora (em memória — basta para uma instância;
+para várias, seria preciso Redis ou o WAF da plataforma), e nada do que a
+pessoa digita vira HTML nem cabeçalho de e-mail. Sem `RESEND_API_KEY`, a
+pessoa vê um erro genérico e o log registra o e-mail perdido.
+
+**Preços e formatos** ficam em `src/data/mentoria.ts` (valores) e no bloco
+`mentoria.planos` dos dicionários (nome, descrição, o que inclui).
+
+**Materiais.** A lista está em `src/data/materiais.ts`. Os gratuitos têm o
+corpo em `src/data/materiais/<slug>.ts` (só em português — as páginas em
+inglês e espanhol avisam). Os que vêm com a mentoria ficam em
+`docs/materiais-mentoria/*.md`, fora do bundle: não faz sentido publicar
+de graça, no código, o que é entregue na mentoria.
+
 ## Deploy no Railway
 
 O deploy é feito pelo GitHub Actions (`.github/workflows/deploy.yml`),
@@ -276,6 +308,18 @@ não-saudável.
 
 O `.railwayignore` mantém os `.pptx` (158 MB) fora do upload.
 
+### Configurações recomendadas no painel do Railway
+
+| Onde | O quê | Por quê |
+| --- | --- | --- |
+| Variables | `RESEND_API_KEY`, `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` como **sealed** | Não ficam visíveis nem em log |
+| Variables | `NEXT_TELEMETRY_DISABLED=1` | Build não manda telemetria |
+| Settings → Deploy | Healthcheck `/pt`, timeout 120 s | Já vem do `railway.json`; confira que não foi sobrescrito |
+| Settings → Deploy | Restart policy *On failure*, 10 tentativas | Idem |
+| Settings → Deploy | **Wait for CI** ligado, se usar a integração nativa | Só publica com o workflow verde |
+| Settings → Networking | Só a porta pública do serviço; sem TCP proxy | Menos superfície |
+| Settings → Service | 1 réplica | O limite por IP do formulário é em memória; com 2+ réplicas ele enfraquece |
+
 ## Segurança
 
 - **Headers** (`next.config.ts`): CSP, `X-Frame-Options`, `nosniff`,
@@ -293,6 +337,16 @@ O `.railwayignore` mantém os `.pptx` (158 MB) fora do upload.
   navegador.
 - **JSON-LD** é serializado por `src/lib/jsonLd.ts`, que escapa `<` e os
   separadores U+2028/U+2029.
+- **Server Actions**: o Next compara `Origin` com `X-Forwarded-Host` (o
+  Railway envia esse header) e rejeita origem diferente — CSRF coberto sem
+  token próprio. Corpo limitado a 1 MB por padrão; os campos têm limite
+  bem menor.
+- **`/.well-known/security.txt`** (RFC 9116) diz a quem reportar uma falha.
+- **`Cross-Origin-Opener-Policy: same-origin`**: aba aberta daqui não
+  referencia esta janela de volta.
+- **Segredos no Railway**: use variáveis *seladas* para `RESEND_API_KEY` e
+  `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` — não aparecem no painel depois
+  de salvas nem nos logs de build.
 
 Rode `npm audit` antes de cada deploy.
 

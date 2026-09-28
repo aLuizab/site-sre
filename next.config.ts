@@ -70,6 +70,13 @@ const nextConfig: NextConfig = {
           { key: "Content-Security-Policy", value: csp },
           // frame-ancestors já cobre navegadores modernos; mantido para os antigos.
           { key: "X-Frame-Options", value: "DENY" },
+          /*
+           * Isola o contexto de navegação: uma aba aberta a partir daqui
+           * não consegue referenciar esta janela de volta. Não afeta os
+           * iframes embutidos (YouTube, Instagram, Substack) — COOP é
+           * sobre janelas/abas, não sobre frames.
+           */
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {

@@ -32,6 +32,7 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
     // Páginas próprias, não âncoras da home.
     { href: `/${locale}/artigos`, label: c.nav.artigos },
     { href: `/${locale}/mentoria`, label: c.nav.mentoria },
+    { href: `/${locale}/materiais`, label: c.nav.materiais },
   ];
 
   const classeLink =
@@ -40,7 +41,9 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
   const nome = (
     <Link
       href={`/${locale}`}
-      className="font-mono text-sm font-semibold tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      // whitespace-nowrap: com sete itens no menu, o nome quebrava em
+      // duas linhas antes de o menu ceder. O nome não cede; o menu, sim.
+      className="shrink-0 whitespace-nowrap font-mono text-sm font-semibold tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {perfil.nome}
     </Link>
@@ -93,7 +96,7 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
           {/* Arranjo em linha, a partir de lg. */}
           <nav
             aria-label={c.ui.navPrincipal}
-            className="hidden items-center gap-x-5 lg:flex"
+            className="hidden items-center gap-x-4 lg:flex"
           >
             {navItems.map((item) => (
               <Link key={item.href} href={item.href} className={classeLink}>

@@ -38,6 +38,7 @@ export function TerminalPrompt({ locale, c }: { locale: Locale; c: Conteudo }) {
     palestras: '#palestras',
     artigos: '/artigos',
     mentoria: '/mentoria',
+    materiais: '/materiais',
     // inglês
     about: '#sobre',
     experience: '#experiencia',
@@ -45,10 +46,12 @@ export function TerminalPrompt({ locale, c }: { locale: Locale; c: Conteudo }) {
     talks: '#palestras',
     articles: '/artigos',
     mentoring: '/mentoria',
+    resources: '/materiais',
     // espanhol
     proyectos: '#projetos',
     charlas: '#palestras',
     articulos: '/artigos',
+    materiales: '/materiais',
   };
 
   const ajuda = ['ajuda', 'help', 'ayuda'];

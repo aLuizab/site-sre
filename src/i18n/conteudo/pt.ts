@@ -39,6 +39,7 @@ export const pt: Conteudo = {
     palestras: 'Palestras',
     artigos: 'Artigos',
     mentoria: 'Mentoria',
+    materiais: 'Materiais',
   },
 
   secoes: {
@@ -230,6 +231,7 @@ export const pt: Conteudo = {
       { nome: 'palestras', descricao: 'onde eu falei' },
       { nome: 'artigos', descricao: 'o que eu escrevi' },
       { nome: 'mentoria', descricao: 'mentoria de carreira internacional' },
+      { nome: 'materiais', descricao: 'guias e checklists gratuitos' },
       { nome: 'tema', descricao: 'alterna claro e escuro' },
       { nome: 'limpar', descricao: 'limpa a tela' },
     ],
@@ -243,7 +245,7 @@ export const pt: Conteudo = {
     eyebrow: '# mentoria',
     tituloPagina: 'Mentoria de carreira internacional',
     resumo:
-      'Duas horas comigo, em videochamada, para revisar seu currículo, mapear as lacunas técnicas que estão travando você e montar um plano concreto para chegar ao mercado internacional. Depois da sessão, você continua com acesso a mim no WhatsApp para tirar dúvidas.',
+      'Direcionamento para quem trabalha com infraestrutura, DevOps ou SRE e quer chegar ao mercado internacional: onde você está, o que falta para o nível que quer, e por onde começar. Em formatos e preços para caber em momentos diferentes da carreira.',
     precoNota: '2h de mentoria + acompanhamento por WhatsApp',
     ctaBotao: 'Quero agendar',
     ctaAssunto: 'Mentoria de carreira internacional',
@@ -256,7 +258,31 @@ export const pt: Conteudo = {
       'Quem quer saber o que falta tecnicamente para o nível que está mirando — e em que ordem estudar.',
     ],
 
-    metodologiaTitulo: 'Como funciona',
+    principiosTitulo: 'Em que a metodologia se baseia',
+    principios: [
+      {
+        titulo: 'GROW: meta, realidade, opções, ação',
+        descricao:
+          'O modelo de John Whitmore, usado nas mentorias e coachings de carreira mais eficazes. Toda sessão passa pelas quatro perguntas, nessa ordem: aonde você quer chegar, onde está de verdade, que caminhos existem, e o que você vai fazer até semana que vem.',
+      },
+      {
+        titulo: 'Diagnóstico antes da conversa',
+        descricao:
+          'Currículo, LinkedIn e um questionário chegam antes. A sessão começa com o mapa pronto, não com você me explicando quem é — é o que separa direcionamento de bate-papo.',
+      },
+      {
+        titulo: 'Artefato, não conselho',
+        descricao:
+          'Você sai com coisas que existem fora da sua cabeça: o currículo revisado, a lista de lacunas, o plano. Conselho se esquece; documento se executa.',
+      },
+      {
+        titulo: 'Acompanhamento com ritmo',
+        descricao:
+          'Uma mensagem sua por semana, curta: o que fez, o que travou. Travou duas semanas na mesma coisa, a gente conversa. É o que as mentorias que funcionam têm em comum: cadência, não intensidade.',
+      },
+    ],
+
+    metodologiaTitulo: 'Como funciona a sessão completa',
     metodologiaIntro:
       'O trabalho começa antes da chamada. Você me manda o currículo e o LinkedIn com antecedência e responde um questionário curto, para a sessão começar com o diagnóstico já feito — e não gastar os primeiros trinta minutos me contextualizando.',
     etapas: [
@@ -267,7 +293,7 @@ export const pt: Conteudo = {
           'Questionário sobre sua experiência, stack, nível de inglês, objetivo (remoto para fora, mudança de país) e restrições reais — visto, fuso, família. Leio seu currículo e LinkedIn antes de conversarmos.',
       },
       {
-        titulo: 'Onde você está',
+        titulo: 'Meta e realidade',
         duracao: '20 min',
         descricao:
           'Revisamos juntas o diagnóstico e definimos o alvo concreto: que tipo de vaga, em que mercado, em que prazo. Sem isso, o resto do encontro vira conselho genérico.',
@@ -282,16 +308,16 @@ export const pt: Conteudo = {
         titulo: 'Lacunas técnicas',
         duracao: '35 min',
         descricao:
-          'Mapa do que falta para o nível que você quer: Kubernetes, infraestrutura como código, observabilidade, cloud, on-call. Saio de lá com uma lista priorizada por impacto na contratação, não por ordem alfabética.',
+          'Mapa do que falta para o nível que você quer: Kubernetes, infraestrutura como código, observabilidade, cloud, on-call. Você sai com uma lista priorizada por impacto na contratação, não por ordem alfabética.',
       },
       {
-        titulo: 'Estratégia de busca',
+        titulo: 'Opções: estratégia de busca',
         duracao: '20 min',
         descricao:
           'Onde as vagas realmente aparecem, como abordar, o que esperar de cada etapa do processo lá fora (triagem, system design, behavioral) e como se posicionar na conversa de salário.',
       },
       {
-        titulo: 'Plano de 90 dias',
+        titulo: 'Ação: plano de 90 dias',
         duracao: '5 min',
         descricao:
           'Fechamos com o que fazer nas próximas doze semanas, em ordem de prioridade. Coisa executável, não lista de desejos.',
@@ -302,9 +328,60 @@ export const pt: Conteudo = {
     entregaveis: [
       'Seu currículo revisado, com os apontamentos por escrito.',
       'O mapa das lacunas técnicas, priorizado.',
-      'O plano de 90 dias.',
+      'O plano de 90 dias preenchido.',
+      'O banco de perguntas de entrevista SRE, por etapa.',
       'Acompanhamento por WhatsApp para dúvidas depois da sessão.',
     ],
+
+    planosTitulo: 'Formatos e preços',
+    planosIntro:
+      'Nem todo momento pede duas horas. Tem formato para quem só quer saber se o currículo está certo, para quem quer acompanhamento por um mês, e para quem prefere dividir o custo com mais gente.',
+    porPessoa: 'por pessoa',
+    planos: {
+      diagnostico: {
+        nome: 'Diagnóstico',
+        descricao: 'Quarenta e cinco minutos para responder uma pergunta: o que está travando você.',
+        inclui: [
+          'Revisão do currículo e do LinkedIn, com apontamentos por escrito',
+          'As três coisas para corrigir primeiro',
+          'Indicação do formato seguinte, se fizer sentido',
+        ],
+      },
+      sessao: {
+        nome: 'Sessão completa',
+        descricao: 'Duas horas, as seis etapas, e você sai com plano.',
+        inclui: [
+          'Tudo do diagnóstico',
+          'Mapa de lacunas técnicas priorizado',
+          'Estratégia de busca e de entrevista',
+          'Plano de 90 dias e banco de perguntas',
+          'WhatsApp para dúvidas por 30 dias',
+        ],
+      },
+      pacote: {
+        nome: 'Acompanhamento de 30 dias',
+        descricao: 'Para quem quer executar o plano com alguém olhando junto.',
+        inclui: [
+          'Sessão completa de abertura (2h)',
+          'Duas sessões de 1h nas semanas seguintes',
+          'Uma simulação de entrevista em inglês, gravada',
+          'Revisão de cada candidatura que você quiser mandar',
+          'WhatsApp durante todo o período',
+        ],
+      },
+      turma: {
+        nome: 'Turma pequena',
+        descricao: 'Até seis pessoas. Três encontros de 1h30. O formato mais acessível.',
+        inclui: [
+          'Encontro 1: currículo e LinkedIn para fora',
+          'Encontro 2: lacunas técnicas por nível',
+          'Encontro 3: processo seletivo e negociação',
+          'Materiais da mentoria para todo mundo',
+          'Grupo no WhatsApp durante o mês',
+        ],
+      },
+    },
+    materiaisChamada: 'Quer começar sozinha? Os materiais gratuitos estão aqui.',
 
     ressalvaTitulo: 'O que esta mentoria não é',
     ressalva:
@@ -312,17 +389,63 @@ export const pt: Conteudo = {
 
     formTitulo: 'Quero agendar',
     formIntro:
-      'Me conta um pouco de você. Respondo combinando data, horário e forma de pagamento.',
+      'Me conta um pouco de você e qual formato faz mais sentido. Respondo combinando data, horário e forma de pagamento.',
     campoNome: 'Nome',
     campoEmail: 'E-mail',
     campoWhatsapp: 'WhatsApp',
     campoCargo: 'Cargo e tempo de experiência',
     campoObjetivo: 'O que você quer alcançar',
     campoObjetivoDica:
-      'Ex.: trabalhar remoto para fora, mudar de país, subir de nível na empresa atual.',
-    formBotao: 'Enviar por e-mail',
-    formNota:
-      'O botão abre seu aplicativo de e-mail com tudo já preenchido — você só confere e envia.',
+      'Ex.: trabalhar remoto para fora, mudar de país, subir de nível na empresa atual. Se já souber o formato, diga qual.',
+    formBotao: 'Enviar',
+    formNota: 'Chega direto no meu e-mail. Respondo por lá ou pelo WhatsApp.',
+    formEnviando: 'Enviando…',
+    formSucesso: 'Recebi! Te respondo em breve por e-mail ou WhatsApp.',
+    formInvalido: 'Confere os campos: nome, e-mail, WhatsApp e um objetivo com pelo menos uma frase.',
+    formLimite: 'Você já enviou algumas vezes. Espera um pouco antes de tentar de novo.',
+    formErro: 'Não consegui enviar agora. Tenta de novo em instantes — ou me chama no LinkedIn.',
+  },
+
+  materiais: {
+    eyebrow: '# materiais',
+    tituloPagina: 'Materiais',
+    descricao:
+      'Guias e checklists que uso na mentoria. Alguns estão aqui na íntegra, de graça — comece por eles. Os outros vêm com a mentoria.',
+    seloGratuito: 'gratuito',
+    seloMentoria: 'incluído na mentoria',
+    leitura: '{min} min de leitura',
+    avisoIdioma: 'Este material está escrito em português.',
+    incluidoNaMentoria:
+      'Este material é entregue a quem faz a mentoria — preenchido junto, na sessão, e não como PDF genérico.',
+    verMentoria: 'Ver a mentoria',
+    voltarMateriais: 'Voltar para materiais',
+    itens: {
+      'checklist-curriculo-internacional': {
+        titulo: 'Checklist: currículo para vaga internacional',
+        descricao:
+          'Trinta itens, do formato ao inglês, para passar antes de mandar o currículo para fora. Cada "não" é uma correção.',
+      },
+      'linkedin-para-recrutador-gringo': {
+        titulo: 'LinkedIn que recrutador de fora encontra',
+        descricao:
+          'Como aparecer na busca do LinkedIn Recruiter e convencer em dez segundos: título, resumo, habilidades e os erros que fecham a porta.',
+      },
+      'mapa-competencias-sre': {
+        titulo: 'Mapa de competências SRE/DevOps por nível',
+        descricao:
+          'O que uma vaga júnior, pleno e sênior de fato cobra na entrevista — e em que ordem estudar. Para saber onde você está e o que vem depois.',
+      },
+      'plano-90-dias': {
+        titulo: 'Plano de 90 dias',
+        descricao:
+          'Doze semanas em três blocos — ficar visível, fechar a maior lacuna, entrevistar — com um artefato por semana. Preenchido junto, na sessão.',
+      },
+      'banco-perguntas-entrevista-sre': {
+        titulo: 'Banco de perguntas de entrevista SRE',
+        descricao:
+          'Cinquenta perguntas reais de processos para fora, da triagem à negociação, com o que o entrevistador quer ouvir em cada uma.',
+      },
+    },
   },
 
   meta: {

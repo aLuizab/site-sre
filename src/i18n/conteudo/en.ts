@@ -44,6 +44,7 @@ export const en: Conteudo = {
     palestras: 'Talks',
     artigos: 'Articles',
     mentoria: 'Mentoring',
+    materiais: 'Resources',
   },
 
   secoes: {
@@ -235,6 +236,7 @@ export const en: Conteudo = {
       { nome: 'talks', descricao: 'where I spoke' },
       { nome: 'articles', descricao: 'what I wrote' },
       { nome: 'mentoring', descricao: 'international career mentoring' },
+      { nome: 'resources', descricao: 'free guides and checklists' },
       { nome: 'theme', descricao: 'toggle light and dark' },
       { nome: 'clear', descricao: 'clear the screen' },
     ],
@@ -248,7 +250,7 @@ export const en: Conteudo = {
     eyebrow: '# mentoring',
     tituloPagina: 'International career mentoring',
     resumo:
-      'Two hours with me, over video, to review your CV, map the technical gaps holding you back and build a concrete plan to reach the international market. After the session, you keep access to me on WhatsApp for follow-up questions.',
+      'Direction for people in infrastructure, DevOps or SRE who want to reach the international market: where you are, what is missing for the level you want, and where to start. In formats and prices that fit different moments of a career.',
     precoNota: '2h session + WhatsApp follow-up',
     ctaBotao: 'Book a session',
     ctaAssunto: 'International career mentoring',
@@ -261,7 +263,31 @@ export const en: Conteudo = {
       'People who want to know what is technically missing for the level they are aiming at — and in what order to study it.',
     ],
 
-    metodologiaTitulo: 'How it works',
+    principiosTitulo: 'What the method is built on',
+    principios: [
+      {
+        titulo: 'GROW: goal, reality, options, will',
+        descricao:
+          'John Whitmore\'s model, used by the most effective career mentoring and coaching programs. Every session goes through the four questions, in order: where you want to get, where you really are, which paths exist, and what you will do by next week.',
+      },
+      {
+        titulo: 'Diagnosis before the conversation',
+        descricao:
+          'CV, LinkedIn and a questionnaire arrive first. The session opens with the map ready, not with you explaining who you are — that is what separates direction from small talk.',
+      },
+      {
+        titulo: 'Artifacts, not advice',
+        descricao:
+          'You leave with things that exist outside your head: the reviewed CV, the gap list, the plan. Advice gets forgotten; documents get executed.',
+      },
+      {
+        titulo: 'Follow-up with a rhythm',
+        descricao:
+          'One short message from you per week: what you did, what got stuck. Stuck two weeks on the same thing, we talk. It is what mentoring programs that work have in common: cadence, not intensity.',
+      },
+    ],
+
+    metodologiaTitulo: 'How the full session works',
     metodologiaIntro:
       'The work starts before the call. You send me your CV and LinkedIn ahead of time and answer a short questionnaire, so the session opens with the diagnosis already done — instead of spending the first thirty minutes on context.',
     etapas: [
@@ -272,7 +298,7 @@ export const en: Conteudo = {
           'A questionnaire about your experience, stack, English level, goal (remote for a foreign company, relocation) and real constraints — visa, time zone, family. I read your CV and LinkedIn before we talk.',
       },
       {
-        titulo: 'Where you are',
+        titulo: 'Goal and reality',
         duracao: '20 min',
         descricao:
           'We go through the diagnosis together and set a concrete target: what kind of role, in which market, on what timeline. Without that, the rest of the session turns into generic advice.',
@@ -290,13 +316,13 @@ export const en: Conteudo = {
           'A map of what is missing for the level you want: Kubernetes, infrastructure as code, observability, cloud, on-call. You leave with a list ordered by hiring impact, not alphabetically.',
       },
       {
-        titulo: 'Search strategy',
+        titulo: 'Options: search strategy',
         duracao: '20 min',
         descricao:
           'Where the roles actually show up, how to approach them, what to expect from each stage abroad (screening, system design, behavioral) and how to position yourself in the salary conversation.',
       },
       {
-        titulo: '90-day plan',
+        titulo: 'Will: 90-day plan',
         duracao: '5 min',
         descricao:
           'We close with what to do over the next twelve weeks, in priority order. Something executable, not a wish list.',
@@ -307,9 +333,60 @@ export const en: Conteudo = {
     entregaveis: [
       'Your reviewed CV, with the notes in writing.',
       'The map of technical gaps, prioritized.',
-      'The 90-day plan.',
+      'The 90-day plan, filled in.',
+      'The SRE interview question bank, by stage.',
       'WhatsApp follow-up for questions after the session.',
     ],
+
+    planosTitulo: 'Formats and prices',
+    planosIntro:
+      'Not every moment calls for two hours. There is a format for someone who just wants to know if the CV is right, for someone who wants a month of follow-up, and for people who prefer to split the cost.',
+    porPessoa: 'per person',
+    planos: {
+      diagnostico: {
+        nome: 'Diagnosis',
+        descricao: 'Forty-five minutes to answer one question: what is holding you back.',
+        inclui: [
+          'CV and LinkedIn review, with written notes',
+          'The three things to fix first',
+          'A pointer to the next format, if it makes sense',
+        ],
+      },
+      sessao: {
+        nome: 'Full session',
+        descricao: 'Two hours, all six steps, and you leave with a plan.',
+        inclui: [
+          'Everything in the diagnosis',
+          'Prioritized technical gap map',
+          'Search and interview strategy',
+          '90-day plan and question bank',
+          'WhatsApp for questions for 30 days',
+        ],
+      },
+      pacote: {
+        nome: '30-day follow-up',
+        descricao: 'For executing the plan with someone watching alongside.',
+        inclui: [
+          'Full opening session (2h)',
+          'Two 1h sessions in the following weeks',
+          'One recorded mock interview in English',
+          'Review of every application you want to send',
+          'WhatsApp throughout',
+        ],
+      },
+      turma: {
+        nome: 'Small group',
+        descricao: 'Up to six people. Three 1h30 meetings. The most affordable format.',
+        inclui: [
+          'Meeting 1: CV and LinkedIn for abroad',
+          'Meeting 2: technical gaps by level',
+          'Meeting 3: hiring process and negotiation',
+          'Mentoring materials for everyone',
+          'WhatsApp group for the month',
+        ],
+      },
+    },
+    materiaisChamada: 'Want to start on your own? The free resources are here.',
 
     ressalvaTitulo: 'What this mentoring is not',
     ressalva:
@@ -317,17 +394,63 @@ export const en: Conteudo = {
 
     formTitulo: 'Book a session',
     formIntro:
-      'Tell me a bit about yourself. I reply with dates, times and how to pay.',
+      'Tell me a bit about yourself and which format makes sense. I reply with dates, times and how to pay.',
     campoNome: 'Name',
     campoEmail: 'Email',
     campoWhatsapp: 'WhatsApp',
     campoCargo: 'Role and years of experience',
     campoObjetivo: 'What you want to achieve',
     campoObjetivoDica:
-      'E.g.: work remotely for a foreign company, relocate, move up at your current job.',
-    formBotao: 'Send by email',
-    formNota:
-      'The button opens your email app with everything filled in — you just review and send.',
+      'E.g.: work remotely for a foreign company, relocate, move up at your current job. If you already know the format, say which.',
+    formBotao: 'Send',
+    formNota: 'Lands straight in my inbox. I reply there or on WhatsApp.',
+    formEnviando: 'Sending…',
+    formSucesso: 'Got it! I will get back to you soon by email or WhatsApp.',
+    formInvalido: 'Check the fields: name, email, WhatsApp and a goal of at least one sentence.',
+    formLimite: 'You have sent a few already. Wait a bit before trying again.',
+    formErro: 'I could not send it right now. Try again in a moment — or message me on LinkedIn.',
+  },
+
+  materiais: {
+    eyebrow: '# resources',
+    tituloPagina: 'Resources',
+    descricao:
+      'Guides and checklists I use in mentoring. Some are here in full, for free — start with those. The others come with the mentoring.',
+    seloGratuito: 'free',
+    seloMentoria: 'included in mentoring',
+    leitura: '{min} min read',
+    avisoIdioma: 'This resource is written in Portuguese.',
+    incluidoNaMentoria:
+      'This resource is delivered to mentees — filled in together, in the session, not as a generic PDF.',
+    verMentoria: 'See the mentoring',
+    voltarMateriais: 'Back to resources',
+    itens: {
+      'checklist-curriculo-internacional': {
+        titulo: 'Checklist: CV for international roles',
+        descricao:
+          'Thirty items, from format to English, to go through before sending your CV abroad. Every "no" is a fix.',
+      },
+      'linkedin-para-recrutador-gringo': {
+        titulo: 'A LinkedIn foreign recruiters actually find',
+        descricao:
+          'How to show up in LinkedIn Recruiter search and convince in ten seconds: headline, summary, skills, and the mistakes that close the door.',
+      },
+      'mapa-competencias-sre': {
+        titulo: 'SRE/DevOps skills map by level',
+        descricao:
+          'What junior, mid and senior roles really test in interviews — and in what order to study. To know where you are and what comes next.',
+      },
+      'plano-90-dias': {
+        titulo: '90-day plan',
+        descricao:
+          'Twelve weeks in three blocks — get visible, close the biggest gap, interview — with one artifact per week. Filled in together, in the session.',
+      },
+      'banco-perguntas-entrevista-sre': {
+        titulo: 'SRE interview question bank',
+        descricao:
+          'Fifty real questions from international hiring processes, from screening to negotiation, with what the interviewer wants to hear in each.',
+      },
+    },
   },
 
   meta: {
