@@ -1,0 +1,24 @@
+# Fases do build no Railway (Nixpacks).
+#
+# Existe por dois motivos concretos, os dois vindos de build quebrado:
+#
+# 1. UMA instalação só. O Nixpacks já instala na fase `install`; quando o
+#    buildCommand instalava de novo, o segundo `npm ci` tentava apagar o
+#    node_modules e batia em "EBUSY: resource busy or locked,
+#    rmdir '/app/node_modules/.cache'" — o Docker mantém esse diretório
+#    montado como cache entre as camadas.
+#
+# 2. `--include=dev` explícito. O ambiente de build do Railway vem com
+#    NPM_CONFIG_PRODUCTION=true, e variável de ambiente tem precedência
+#    sobre .npmrc do projeto. Sem dev, o build morre no PostCSS: o
+#    @tailwindcss/postcss e o typescript são devDependencies e são
+#    necessários para compilar. (Testado: sem dev, quebra; com dev, passa.)
+
+[phases.install]
+cmds = ["npm ci --include=dev"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm run start"
