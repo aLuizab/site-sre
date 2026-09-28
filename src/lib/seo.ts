@@ -2,7 +2,38 @@ import type { Metadata } from 'next';
 import { perfil } from '@/data/perfil';
 import { locales, localeInfo, defaultLocale, type Locale } from '@/i18n/config';
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+const SITE_URL_PADRAO = 'http://localhost:3000';
+
+/**
+ * URL pública do site, vinda de NEXT_PUBLIC_SITE_URL.
+ *
+ * Cuidados que o build já cobrou:
+ *
+ * 1. `||` em vez de `??`. Variável não definida no GitHub Actions chega
+ *    como string vazia, não como undefined — e `??` só cai no padrão
+ *    para null/undefined. A string vazia passava adiante e estourava
+ *    `new URL('/pt', '')` na geração das páginas.
+ * 2. Valor inválido derruba o build inteiro num ponto distante daqui.
+ *    Melhor avisar e seguir com o padrão do que falhar com
+ *    "Invalid URL" três arquivos adiante.
+ * 3. Barra no fim é removida para não gerar canonical com "//".
+ */
+function resolverSiteUrl(): string {
+  const bruta = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!bruta) return SITE_URL_PADRAO;
+
+  try {
+    new URL(bruta);
+    return bruta.replace(/\/+$/, '');
+  } catch {
+    console.warn(
+      `[seo] NEXT_PUBLIC_SITE_URL inválida (${bruta}); usando ${SITE_URL_PADRAO}`
+    );
+    return SITE_URL_PADRAO;
+  }
+}
+
+export const SITE_URL = resolverSiteUrl();
 export const SITE_NAME = perfil.nome;
 
 /**
