@@ -39,8 +39,12 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      # `npm run typecheck` roda `next typegen` antes do `tsc`. Os tipos
+      # de rota (PageProps, LayoutProps) são gerados pelo Next em
+      # .next/types, que está no .gitignore — num checkout limpo eles
+      # ainda não existem, e o tsc sozinho falharia.
       - name: Checar tipos
-        run: npx tsc --noEmit
+        run: npm run typecheck
 
       - name: Lint
         run: npm run lint
