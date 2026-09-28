@@ -31,6 +31,7 @@ export const palestras: PalestraBase[] = [
   {
     slug: 'agilidade-na-pratica',
     data: '2026-04',
+    capa: '/palestras/agilidade-na-pratica/slide.png',
     fotos: [],
     slidesPdf: '/slides/agilidade-na-pratica.pdf',
     tags: ['agilidade', 'workshop', 'hackathon'],
@@ -54,6 +55,7 @@ export const palestras: PalestraBase[] = [
   {
     slug: 'workshop-empreendedorismo',
     data: '2025-07',
+    capa: '/palestras/workshop-empreendedorismo/slide.png',
     fotos: [],
     slidesPdf: '/slides/workshop-empreendedorismo.pdf',
     tags: ['empreendedorismo', 'workshop', 'hackathon'],
@@ -63,6 +65,7 @@ export const palestras: PalestraBase[] = [
     data: '2022-11',
     capa: '/palestras/devopsdays-belem/capa.png',
     fotos: [],
+    slidesPdf: '/slides/devopsdays-belem.pdf',
     tags: ['devops', 'build and run'],
   },
 ];

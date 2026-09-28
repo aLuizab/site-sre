@@ -144,7 +144,8 @@ export const es: Conteudo = {
       local: '',
       descricao:
         'Taller para los equipos del hackathon: metodologías ágiles aplicadas a un proyecto que tiene que salir en pocos días. Cómo organizar el trabajo, dividir el alcance y llegar al final del evento con algo entregado.',
-      capaAlt: '',
+      capaAlt:
+        'Diapositiva de apertura de la charla Agilidad en la Práctica, con el subtítulo "Metodologías ágiles para que arrases en tu proyecto"',
       fotosAlt: [],
     },
     'cloud-native-day-sp': {
@@ -173,7 +174,8 @@ export const es: Conteudo = {
       local: '',
       descricao:
         'Emprendimiento simplificado, planificado y accesible, para los equipos del hackathon. De la idea inicial al pitch, pasando por design thinking y planificación — lo suficiente para sacar una idea de la cabeza y defenderla ante un jurado.',
-      capaAlt: '',
+      capaAlt:
+        'Diapositiva de apertura del taller, titulada "¡Idealización, planificación y acción!"',
       fotosAlt: [],
     },
     'devopsdays-belem': {

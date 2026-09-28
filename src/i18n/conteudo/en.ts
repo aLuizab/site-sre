@@ -145,7 +145,8 @@ export const en: Conteudo = {
       local: '',
       descricao:
         'A workshop for the hackathon teams: agile methods applied to a project that has to ship in a few days. How to organise the work, split the scope and reach the end of the event with something actually delivered.',
-      capaAlt: '',
+      capaAlt:
+        'Opening slide of the Agile in Practice talk, subtitled "Agile methods to nail your project"',
       fotosAlt: [],
     },
     'cloud-native-day-sp': {
@@ -174,7 +175,8 @@ export const en: Conteudo = {
       local: '',
       descricao:
         'Entrepreneurship made simple, planned and accessible, for the hackathon teams. From the initial idea to the pitch, through design thinking and planning — enough to get an idea out of your head and defend it in front of a panel.',
-      capaAlt: '',
+      capaAlt:
+        'Opening slide of the workshop, titled "Ideation, planning and action!"',
       fotosAlt: [],
     },
     'devopsdays-belem': {

@@ -140,7 +140,8 @@ export const pt: Conteudo = {
       local: '',
       descricao:
         'Workshop para os times do hackathon: metodologias ágeis aplicadas a um projeto que precisa sair do papel em poucos dias. Como organizar o trabalho, dividir o escopo e chegar ao fim do evento com algo entregue.',
-      capaAlt: '',
+      capaAlt:
+        'Slide de abertura da apresentação Agilidade na Prática, com o subtítulo "Metodologias ágeis para você arrasar no seu projeto"',
       fotosAlt: [],
     },
     'cloud-native-day-sp': {
@@ -169,7 +170,8 @@ export const pt: Conteudo = {
       local: '',
       descricao:
         'Empreendedorismo simplificado, planejado e acessível, para os times do hackathon. Da idealização ao pitch, passando por design thinking e planejamento — o suficiente para tirar uma ideia da cabeça e defendê-la diante de uma banca.',
-      capaAlt: '',
+      capaAlt:
+        'Slide de abertura do workshop, com o título "Idealização, planejamento e ação!"',
       fotosAlt: [],
     },
     'devopsdays-belem': {
