@@ -139,30 +139,42 @@ export const en: Conteudo = {
   },
 
   palestras: {
-    'observabilidade-na-pratica': {
-      titulo: 'Observability in practice: notes from a firefighter',
-      evento: 'SRE Meetup SP',
+    'agilidade-na-pratica': {
+      titulo: 'Agile in practice',
+      evento: 'HackMundo',
+      local: '',
+      descricao:
+        'A workshop for the hackathon teams: agile methods applied to a project that has to ship in a few days. How to organise the work, split the scope and reach the end of the event with something actually delivered.',
+      capaAlt: '',
+      fotosAlt: [],
+    },
+    'cloud-native-day-sp': {
+      titulo: 'From Prometheus to GPT: a new era of intelligent observability',
+      evento: 'Cloud Native Day São Paulo',
       local: 'São Paulo, Brazil',
       descricao:
-        'How to leave firefighting mode behind and build real observability: metrics, logs and traces that actually help diagnose incidents in production. A practical tour through dashboards, actionable alerts and the mistakes beginners make most often.',
+        'The path from traditional observability — metrics, Prometheus, dashboards — to the point where language models join the war room. What changes in incident diagnosis when a machine helps read the signal, and what stays human work.',
       capaAlt:
-        'Cover of the talk Observability in practice, with the title over a dark background',
-      fotosAlt: [
-        'Ana Luiza presenting on stage at SRE Meetup SP',
-        'Audience following the talk about observability',
-      ],
+        'Ana Luiza Primo in front of the Cloud Native Day São Paulo sponsor wall',
+      fotosAlt: [],
     },
-    'sre-alem-do-hype': {
-      titulo: 'SRE beyond the hype: what actually changes day to day',
-      evento: 'Kubernetes Community Days',
-      local: 'Online',
+    'softskills-devops': {
+      titulo: 'The soft skills a DevOps needs that nobody tells you about',
+      evento: 'DevOps Days Belo Horizonte',
+      local: 'Belo Horizonte, Brazil',
       descricao:
-        'SRE became a buzzword, but what actually changes in the routine of someone running production systems? I talk about SLOs that work, error budgets, blameless post-mortem culture and how all of it connects to Kubernetes day to day.',
-      capaAlt: 'Cover of the talk SRE beyond the hype, with the title over a dark background',
-      fotosAlt: [
-        'Live stream of the talk at Kubernetes Community Days',
-        'Slide about error budgets shown during the presentation',
-      ],
+        'Soft skills and resilience for a top-tier DevOps career. What holds a career together once the technical side is handled — communicating during an incident, working under pressure, and the conversations no course teaches.',
+      capaAlt: '',
+      fotosAlt: [],
+    },
+    'workshop-empreendedorismo': {
+      titulo: 'Entrepreneurship workshop',
+      evento: 'HackMundo',
+      local: '',
+      descricao:
+        'Entrepreneurship made simple, planned and accessible, for the hackathon teams. From the initial idea to the pitch, through design thinking and planning — enough to get an idea out of your head and defend it in front of a panel.',
+      capaAlt: '',
+      fotosAlt: [],
     },
   },
 

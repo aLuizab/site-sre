@@ -67,7 +67,8 @@ export default async function PalestraDetailPage(
           {texto.titulo}
         </h1>
         <p className="mt-1 text-muted">
-          {texto.evento} · {texto.local}
+          {texto.evento}
+          {texto.local ? ` · ${texto.local}` : ''}
         </p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {palestra.tags.map((tag) => (

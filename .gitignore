@@ -43,3 +43,8 @@ next-env.d.ts
 
 # script local de conveniência (caminho e versão de Node da máquina)
 .dev-run.sh
+
+# originais de apresentação (158 MB; o site serve os PDFs em public/slides)
+*.pptx
+*.ppt
+*:Zone.Identifier

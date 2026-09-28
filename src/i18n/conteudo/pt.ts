@@ -134,30 +134,42 @@ export const pt: Conteudo = {
   },
 
   palestras: {
-    'observabilidade-na-pratica': {
-      titulo: 'Observabilidade na prática: de quem apaga incêndio',
-      evento: 'SRE Meetup SP',
+    'agilidade-na-pratica': {
+      titulo: 'Agilidade na prática',
+      evento: 'HackMundo',
+      local: '',
+      descricao:
+        'Workshop para os times do hackathon: metodologias ágeis aplicadas a um projeto que precisa sair do papel em poucos dias. Como organizar o trabalho, dividir o escopo e chegar ao fim do evento com algo entregue.',
+      capaAlt: '',
+      fotosAlt: [],
+    },
+    'cloud-native-day-sp': {
+      titulo: 'Do Prometheus ao GPT: uma nova era na observabilidade inteligente',
+      evento: 'Cloud Native Day São Paulo',
       local: 'São Paulo, SP',
       descricao:
-        'Como sair do modo "apaga incêndio" e construir observabilidade de verdade: métricas, logs e traces que efetivamente ajudam a diagnosticar incidentes em produção. Um passeio prático por dashboards, alertas acionáveis e os erros mais comuns de quem está começando.',
+        'O caminho da observabilidade tradicional — métricas, Prometheus, dashboards — até o ponto em que modelos de linguagem entram na war room. O que muda no diagnóstico de incidentes quando a máquina ajuda a interpretar o sinal, e o que continua sendo trabalho de gente.',
       capaAlt:
-        'Capa da palestra Observabilidade na prática, com o título sobre fundo escuro',
-      fotosAlt: [
-        'Ana Luiza apresentando no palco do SRE Meetup SP',
-        'Plateia acompanhando a apresentação sobre observabilidade',
-      ],
+        'Ana Luiza Primo no painel de patrocinadores do Cloud Native Day São Paulo',
+      fotosAlt: [],
     },
-    'sre-alem-do-hype': {
-      titulo: 'SRE além do hype: o que muda no dia a dia',
-      evento: 'Kubernetes Community Days',
-      local: 'Online',
+    'softskills-devops': {
+      titulo: 'Softskills que um devops precisa ter mas ninguém te conta',
+      evento: 'DevOps Days Belo Horizonte',
+      local: 'Belo Horizonte, MG',
       descricao:
-        'SRE virou palavra da moda, mas o que muda de verdade na rotina de quem opera sistemas em produção? Falo sobre SLOs que funcionam, error budgets, cultura de post-mortem sem culpa e como isso se conecta com Kubernetes no dia a dia.',
-      capaAlt: 'Capa da palestra SRE além do hype, com o título sobre fundo escuro',
-      fotosAlt: [
-        'Transmissão ao vivo da palestra no Kubernetes Community Days',
-        'Slide sobre error budgets exibido durante a apresentação',
-      ],
+        'Soft skills e resiliência para uma carreira DevOps de elite. O que sustenta a carreira depois que a parte técnica já está resolvida — comunicação em incidente, trabalho sob pressão e as conversas que ninguém ensina em curso.',
+      capaAlt: '',
+      fotosAlt: [],
+    },
+    'workshop-empreendedorismo': {
+      titulo: 'Workshop de empreendedorismo',
+      evento: 'HackMundo',
+      local: '',
+      descricao:
+        'Empreendedorismo simplificado, planejado e acessível, para os times do hackathon. Da idealização ao pitch, passando por design thinking e planejamento — o suficiente para tirar uma ideia da cabeça e defendê-la diante de uma banca.',
+      capaAlt: '',
+      fotosAlt: [],
     },
   },
 

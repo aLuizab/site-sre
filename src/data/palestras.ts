@@ -10,9 +10,14 @@
 export interface PalestraBase {
   /** kebab-case, único — vira a URL /<idioma>/palestras/[slug]. */
   slug: string;
-  /** ISO "AAAA-MM-DD" — chave de ordenação e <time dateTime>. */
+  /**
+   * "AAAA-MM" ou "AAAA-MM-DD" — chave de ordenação e <time dateTime>.
+   * Use só ano e mês quando o dia exato não for conhecido, em vez de
+   * inventar uma data cheia.
+   */
   data: string;
-  capa: string;
+  /** Opcional: nem toda palestra tem foto. Sem capa, o card mostra só texto. */
+  capa?: string;
   /** Um src por foto; o texto alternativo vem do dicionário, na ordem. */
   fotos: string[];
   /** Caminho local em /public/slides/ ou URL externa (SpeakerDeck etc.). */
@@ -21,29 +26,36 @@ export interface PalestraBase {
   tags: string[];
 }
 
-/** Adicione uma palestra nova aqui e traduza nos três dicionários. */
+/** Mais recente no topo. */
 export const palestras: PalestraBase[] = [
   {
-    slug: 'observabilidade-na-pratica',
-    data: '2025-09-12',
-    capa: '/palestras/observabilidade-na-pratica/capa.svg',
-    fotos: [
-      '/palestras/observabilidade-na-pratica/foto-1.svg',
-      '/palestras/observabilidade-na-pratica/foto-2.svg',
-    ],
-    slidesPdf: '/slides/observabilidade-na-pratica.pdf',
-    tags: ['observabilidade', 'sre', 'grafana'],
+    slug: 'agilidade-na-pratica',
+    data: '2026-04',
+    fotos: [],
+    slidesPdf: '/slides/agilidade-na-pratica.pdf',
+    tags: ['agilidade', 'workshop', 'hackathon'],
   },
   {
-    slug: 'sre-alem-do-hype',
-    data: '2025-11-04',
-    capa: '/palestras/sre-alem-do-hype/capa.svg',
-    fotos: [
-      '/palestras/sre-alem-do-hype/foto-1.svg',
-      '/palestras/sre-alem-do-hype/foto-2.svg',
-    ],
-    slidesPdf: '/slides/sre-alem-do-hype.pdf',
-    tags: ['sre', 'kubernetes', 'carreira'],
+    slug: 'cloud-native-day-sp',
+    data: '2025-10',
+    capa: '/palestras/cloud-native-day-sp/capa.png',
+    fotos: [],
+    slidesPdf: '/slides/cloud-native-day-sp.pdf',
+    tags: ['observabilidade', 'prometheus', 'ia', 'cloud native'],
+  },
+  {
+    slug: 'softskills-devops',
+    data: '2025-10',
+    fotos: [],
+    slidesPdf: '/slides/softskills-devops.pdf',
+    tags: ['soft skills', 'devops', 'carreira'],
+  },
+  {
+    slug: 'workshop-empreendedorismo',
+    data: '2025-07',
+    fotos: [],
+    slidesPdf: '/slides/workshop-empreendedorismo.pdf',
+    tags: ['empreendedorismo', 'workshop', 'hackathon'],
   },
 ];
 
