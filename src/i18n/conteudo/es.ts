@@ -163,7 +163,8 @@ export const es: Conteudo = {
       local: 'Belo Horizonte, Brasil',
       descricao:
         'Soft skills y resiliencia para una carrera DevOps de élite. Lo que sostiene la carrera cuando la parte técnica ya está resuelta — comunicar durante un incidente, trabajar bajo presión y las conversaciones que ningún curso enseña.',
-      capaAlt: '',
+      capaAlt:
+        'Ana Luiza Primo frente al banner del DevOps Days Belo Horizonte',
       fotosAlt: [],
     },
     'workshop-empreendedorismo': {
@@ -173,6 +174,16 @@ export const es: Conteudo = {
       descricao:
         'Emprendimiento simplificado, planificado y accesible, para los equipos del hackathon. De la idea inicial al pitch, pasando por design thinking y planificación — lo suficiente para sacar una idea de la cabeza y defenderla ante un jurado.',
       capaAlt: '',
+      fotosAlt: [],
+    },
+    'devopsdays-belem': {
+      titulo: 'Build and Run',
+      evento: 'DevOps Days Belém',
+      local: 'Belém, Brasil',
+      descricao:
+        'Quien construye también opera: qué cambia en la rutina de un equipo cuando pasa a ser dueño de lo que puso en producción, del build a la guardia.',
+      capaAlt:
+        'Ana Luiza Primo junto al banner del DevOps Days Belém, sosteniendo un libro',
       fotosAlt: [],
     },
   },

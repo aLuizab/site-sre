@@ -46,6 +46,7 @@ export const palestras: PalestraBase[] = [
   {
     slug: 'softskills-devops',
     data: '2025-10',
+    capa: '/palestras/softskills-devops/capa.png',
     fotos: [],
     slidesPdf: '/slides/softskills-devops.pdf',
     tags: ['soft skills', 'devops', 'carreira'],
@@ -56,6 +57,13 @@ export const palestras: PalestraBase[] = [
     fotos: [],
     slidesPdf: '/slides/workshop-empreendedorismo.pdf',
     tags: ['empreendedorismo', 'workshop', 'hackathon'],
+  },
+  {
+    slug: 'devopsdays-belem',
+    data: '2022-11',
+    capa: '/palestras/devopsdays-belem/capa.png',
+    fotos: [],
+    tags: ['devops', 'build and run'],
   },
 ];
 
