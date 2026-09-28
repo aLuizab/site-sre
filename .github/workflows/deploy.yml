@@ -1,0 +1,116 @@
+name: CI e deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Dois deploys ao mesmo tempo podem chegar fora de ordem no Railway e
+# deixar no ar uma versão mais antiga. Um push novo cancela o anterior.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Permissão mínima: o workflow só precisa ler o código. Sem isso o
+# GITHUB_TOKEN vem com escrita, e uma dependência comprometida durante o
+# build poderia usá-lo para escrever no repositório.
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    name: Verificar
+    runs-on: ubuntu-latest
+    steps:
+      # Actions fixadas por SHA, não por tag: tag pode ser movida para
+      # outro commit sem aviso, e aí o pipeline passa a rodar código que
+      # ninguém revisou. O comentário ao lado diz a versão legível.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      # `npm ci` instala exatamente o que está no package-lock.json.
+      # `npm install` poderia resolver versões novas e fazer o build
+      # rodar com código diferente do que foi testado.
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Checar tipos
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          # Precisa existir no build: é NEXT_PUBLIC_*, então vai embutida
+          # no bundle. Sem ela, canonical e sitemap sairiam com localhost.
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+
+      # Só dependências de produção, e só falha em vulnerabilidade alta
+      # ou crítica — ruído de dev não deve travar o deploy.
+      - name: Auditar dependências
+        run: npm audit --omit=dev --audit-level=high
+
+  deploy:
+    name: Deploy no Railway
+    needs: verificar
+    # Três condições:
+    #  - nunca em pull request: um PR vindo de fork não pode disparar um
+    #    job que enxerga o token do Railway;
+    #  - só na main;
+    #  - só depois que RAILWAY_SERVICE existir. Enquanto o projeto no
+    #    Railway não estiver criado, o deploy fica pulado em vez de
+    #    falhar por falta de token e deixar o repositório vermelho.
+    if: >-
+      github.event_name == 'push'
+      && github.ref == 'refs/heads/main'
+      && vars.RAILWAY_SERVICE != ''
+    runs-on: ubuntu-latest
+
+    # O segredo fica guardado neste ambiente, não no repositório inteiro.
+    # Dá para exigir aprovação manual em Settings > Environments.
+    environment:
+      name: production
+      url: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Instalar Railway CLI
+        run: npm install -g @railway/cli@4
+
+      # `--ci` faz o comando esperar o build terminar e sair com erro se
+      # o deploy falhar; sem isso o job passaria mesmo com deploy quebrado.
+      - name: Publicar
+        run: railway up --service "${{ vars.RAILWAY_SERVICE }}" --ci
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      # Confere que o site respondeu depois do deploy. Falhar aqui deixa
+      # o job vermelho e o problema visível, em vez de silencioso.
+      - name: Verificar se o site respondeu
+        if: vars.NEXT_PUBLIC_SITE_URL != ''
+        run: |
+          url="${{ vars.NEXT_PUBLIC_SITE_URL }}/pt"
+          echo "checando $url"
+          for tentativa in $(seq 1 10); do
+            codigo=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "$url" || echo 000)
+            echo "  tentativa $tentativa: HTTP $codigo"
+            if [ "$codigo" = "200" ]; then
+              echo "site no ar"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "site não respondeu 200 depois de 10 tentativas"
+          exit 1

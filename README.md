@@ -187,29 +187,94 @@ Edite `src/app/[locale]/layout.tsx` (import de `next/font/google` ou
 
 ## Deploy no Railway
 
-O `railway.json` na raiz já define build, start e healthcheck.
+O deploy é feito pelo GitHub Actions (`.github/workflows/deploy.yml`),
+não pela integração automática do Railway com o GitHub. A diferença é que
+aqui **nada vai ao ar sem passar por tipos, lint, build e auditoria de
+dependências** — a integração nativa publica todo push, verde ou não.
 
-1. **Suba o repositório para o GitHub.**
-2. No Railway: *New Project* → *Deploy from GitHub repo* → selecione este
-   repositório.
-3. **Antes do primeiro build**, em *Variables*, defina:
+> Se você também conectar o repositório na integração do Railway, cada
+> push dispara **dois** deploys. Use um ou outro: ou a integração, ou
+> este workflow.
+
+### Passo a passo
+
+1. **No Railway**: *New Project* → *Empty Project* → dentro dele, *New* →
+   *Empty Service*. Anote o nome do serviço.
+
+2. **Variáveis do Railway** (aba *Variables* do serviço), antes do
+   primeiro build:
 
    ```
-   NEXT_PUBLIC_SITE_URL=https://<seu-domínio-ou-subdomínio>.up.railway.app
+   NEXT_PUBLIC_SITE_URL=https://<seu-domínio>.up.railway.app
    ```
 
-   Isso não é opcional: a variável é embutida no bundle em tempo de build,
-   então defini-la depois exige um **novo build**, não só um restart. Sem
-   ela, canonical, hreflang e sitemap apontam para `localhost`.
+   Não é opcional: por ser `NEXT_PUBLIC_*`, ela é embutida no bundle em
+   tempo de **build**. Definir depois exige um build novo, não só um
+   restart. Sem ela, canonical, hreflang e sitemap apontam para
+   `localhost`.
 
-4. Em *Settings* → *Networking*, gere o domínio público.
-5. Se usar domínio próprio, aponte o DNS e **atualize
-   `NEXT_PUBLIC_SITE_URL`**, refazendo o deploy.
+3. **Token do Railway**: *Project Settings* → *Tokens* → crie um **token
+   de projeto** e escolha o ambiente (`production`).
 
-O `PORT` é injetado pelo Railway e o `next start` o respeita; o
-`-H 0.0.0.0` no script `start` garante que o servidor não suba preso em
-`localhost`. O healthcheck aponta para `/pt` em vez de `/`, porque a raiz
-responde `307` (redirecionamento de idioma) e não `200`.
+   Use token de **projeto**, não de conta. O de conta dá acesso a tudo
+   que você tem no Railway; o de projeto só alcança este serviço, e é o
+   que limita o estrago se vazar.
+
+4. **No GitHub**, em *Settings* → *Secrets and variables* → *Actions*:
+
+   | Onde | Nome | Valor |
+   | --- | --- | --- |
+   | **Secrets** | `RAILWAY_TOKEN` | o token do passo 3 |
+   | **Variables** | `RAILWAY_SERVICE` | nome do serviço no Railway |
+   | **Variables** | `NEXT_PUBLIC_SITE_URL` | a URL pública do site |
+
+   O token vai em *Secrets* (fica oculto no log); os outros dois em
+   *Variables*, que não são segredo e aparecem no log — o que ajuda a
+   depurar.
+
+5. **Ambiente protegido** (recomendado): *Settings* → *Environments* →
+   crie `production`. Ali dá para exigir aprovação manual antes de cada
+   deploy e restringir a branch. O workflow já aponta para esse ambiente.
+
+6. `git push` na `main`. O workflow verifica, publica e confere se o
+   site respondeu `200`.
+
+### O que o pipeline faz
+
+```
+push/PR  →  verificar: tsc → lint → build → npm audit
+                            ↓ (só push na main, só se tudo passou)
+                         deploy: railway up → checa HTTP 200
+```
+
+Decisões de segurança, e o porquê de cada uma:
+
+- **`permissions: contents: read`** — sem isso o `GITHUB_TOKEN` vem com
+  escrita, e uma dependência comprometida durante o build poderia usá-lo
+  para escrever no repositório.
+- **O segredo só existe no job de deploy**, que nunca roda em pull
+  request. Um PR vindo de fork não alcança o token do Railway.
+- **Actions fixadas por SHA**, não por tag: tag pode ser movida para
+  outro commit sem aviso, e aí o pipeline roda código que ninguém
+  revisou.
+- **`npm ci`** instala exatamente o lockfile. `npm install` poderia
+  resolver versões novas e fazer o build rodar com código diferente do
+  que foi testado.
+- **`npm audit --omit=dev --audit-level=high`** trava o deploy em
+  vulnerabilidade alta ou crítica de produção, e ignora ruído de dev.
+- **`concurrency`** cancela o deploy anterior: dois em paralelo podem
+  chegar fora de ordem e deixar no ar uma versão mais antiga.
+
+### Detalhes do runtime
+
+O `railway.json` define build, start e healthcheck. O `PORT` é injetado
+pelo Railway e o `next start` o respeita; o `-H 0.0.0.0` no script
+`start` garante que o servidor não suba preso em `localhost`. O
+healthcheck aponta para `/pt`, não `/`, porque a raiz responde `307`
+(redirecionamento de idioma) e o Railway marcaria o deploy como
+não-saudável.
+
+O `.railwayignore` mantém os `.pptx` (158 MB) fora do upload.
 
 ## Segurança
 

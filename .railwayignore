@@ -1,0 +1,22 @@
+# O que NÃO sobe no `railway up`.
+#
+# O CLI já respeita o .gitignore, mas os .pptx somam 158 MB e subiriam a
+# cada deploy se algum dia essa regra mudar. Explícito aqui, sem depender
+# de comportamento implícito.
+*.pptx
+*.ppt
+*:Zone.Identifier
+
+# Build local e dependências: o Railway refaz os dois.
+node_modules
+.next
+out
+
+# Nada disso é usado em produção.
+.git
+.github
+*.md
+!README.md
+.env*
+!.env.example
+.dev-run.sh
