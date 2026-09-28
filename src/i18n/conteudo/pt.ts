@@ -100,7 +100,10 @@ export const pt: Conteudo = {
       cargo: 'Site Reliability Engineer',
       localizacao: 'Remoto',
       bullets: [
-        'Confiabilidade e observabilidade de sistemas em produção, em contrato remoto para fora do Brasil.',
+        'Deploys em produção e automação de deploy canary com GitHub Actions.',
+        'Implementação de ferramentas de observabilidade.',
+        'Desenvolvimento de soluções de observabilidade com IA.',
+        'Plantão on-call.',
       ],
     },
     itau: {
