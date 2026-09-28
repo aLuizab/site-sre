@@ -43,6 +43,7 @@ export interface Conteudo {
     projetos: string;
     palestras: string;
     artigos: string;
+    mentoria: string;
   };
 
   secoes: {
@@ -65,6 +66,25 @@ export interface Conteudo {
   newsletter: {
     /** Rótulo do bloco de inscrição no painel flutuante. */
     eyebrow: string;
+  };
+
+  /** Página da mentoria. */
+  mentoria: {
+    eyebrow: string;
+    tituloPagina: string;
+    resumo: string;
+    /** Complemento do preço, ex.: "2h + acompanhamento por WhatsApp". */
+    precoNota: string;
+    ctaBotao: string;
+    /** Assunto do e-mail que o botão abre. */
+    ctaAssunto: string;
+    paraQuemTitulo: string;
+    paraQuem: string[];
+    metodologiaTitulo: string;
+    metodologiaIntro: string;
+    etapas: { titulo: string; duracao: string; descricao: string }[];
+    entregaveisTitulo: string;
+    entregaveis: string[];
   };
 
   ui: {

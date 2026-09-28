@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entradas: Entrada[] = [
     { caminho: '', changeFrequency: 'monthly', priority: 1 },
     { caminho: '/artigos', changeFrequency: 'weekly', priority: 0.8 },
+    { caminho: '/mentoria', changeFrequency: 'monthly', priority: 0.9 },
     ...palestras.map(
       (p): Entrada => ({
         caminho: `/palestras/${p.slug}`,

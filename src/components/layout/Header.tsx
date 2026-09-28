@@ -14,6 +14,7 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
     { href: `/${locale}#palestras`, label: c.nav.palestras },
     // Página própria, não âncora da home.
     { href: `/${locale}/artigos`, label: c.nav.artigos },
+    { href: `/${locale}/mentoria`, label: c.nav.mentoria },
   ];
 
   return (

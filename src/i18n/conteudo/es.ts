@@ -8,7 +8,7 @@ export const es: Conteudo = {
   perfil: {
     saudacao: '¡Hola! Soy Ana Luiza 👋',
     tagline:
-      'Site Reliability Engineer / DevOps Engineer: fiabilidad, observabilidad y rendimiento en producción.',
+      'Site Reliability Engineer/DevOps Engineer | Carrera Internacional',
     bio: [
       'Soy Site Reliability Engineer y me enfoco en la fiabilidad, la observabilidad y el rendimiento de sistemas en producción. He trabajado con plataformas de alto tráfico de cara al cliente, definiendo SLOs/SLIs, reduciendo el MTTR y construyendo observabilidad de punta a punta.',
       'También creo contenido sobre carrera en SRE/DevOps y hago mentoría a profesionales que quieren crecer en el área, incluso de cara al mercado internacional.',
@@ -23,6 +23,7 @@ export const es: Conteudo = {
     projetos: 'Proyectos',
     palestras: 'Charlas',
     artigos: 'Artículos',
+    mentoria: 'Mentoría',
   },
 
   secoes: {
@@ -177,9 +178,77 @@ export const es: Conteudo = {
     eyebrow: '# newsletter',
   },
 
+  mentoria: {
+    eyebrow: '# mentoría',
+    tituloPagina: 'Mentoría de carrera internacional',
+    resumo:
+      'Dos horas conmigo, por videollamada, para revisar tu currículum, mapear las brechas técnicas que te están frenando y armar un plan concreto para llegar al mercado internacional. Después de la sesión, sigues con acceso a mí por WhatsApp para resolver dudas.',
+    precoNota: '2h de mentoría + acompañamiento por WhatsApp',
+    ctaBotao: 'Quiero agendar',
+    ctaAssunto: 'Mentoría de carrera internacional',
+
+    paraQuemTitulo: 'Para quién es',
+    paraQuem: [
+      'Quien ya trabaja con infraestructura, DevOps o SRE y quiere postular a vacantes fuera de Brasil.',
+      'Quien envía currículums al exterior y no recibe respuesta, sin saber dónde está el problema.',
+      'Quien sabe lo que hace en su día a día, pero no logra traducirlo a lo que busca un reclutador extranjero.',
+      'Quien quiere saber qué le falta técnicamente para el nivel al que apunta — y en qué orden estudiarlo.',
+    ],
+
+    metodologiaTitulo: 'Cómo funciona',
+    metodologiaIntro:
+      'El trabajo empieza antes de la llamada. Me envías tu currículum y tu LinkedIn con anticipación y respondes un cuestionario corto, para que la sesión arranque con el diagnóstico ya hecho — y no gastar los primeros treinta minutos en contexto.',
+    etapas: [
+      {
+        titulo: 'Diagnóstico',
+        duracao: 'antes de la sesión',
+        descricao:
+          'Cuestionario sobre tu experiencia, stack, nivel de inglés, objetivo (remoto para el exterior, mudanza de país) y restricciones reales — visa, huso horario, familia. Leo tu currículum y tu LinkedIn antes de conversar.',
+      },
+      {
+        titulo: 'Dónde estás',
+        duracao: '20 min',
+        descricao:
+          'Revisamos juntas el diagnóstico y definimos el objetivo concreto: qué tipo de vacante, en qué mercado, en qué plazo. Sin eso, el resto del encuentro se vuelve consejo genérico.',
+      },
+      {
+        titulo: 'Currículum y LinkedIn',
+        duracao: '40 min',
+        descricao:
+          'Revisión línea por línea según el estándar internacional: qué cortar, qué reescribir con verbos de impacto y números, y cómo pasar el filtro automatizado (ATS). El currículum brasileño y el internacional siguen reglas distintas — y ahí es donde la mayoría se traba.',
+      },
+      {
+        titulo: 'Brechas técnicas',
+        duracao: '35 min',
+        descricao:
+          'Mapa de lo que falta para el nivel que quieres: Kubernetes, infraestructura como código, observabilidad, cloud, on-call. Sales con una lista priorizada por impacto en la contratación, no por orden alfabético.',
+      },
+      {
+        titulo: 'Estrategia de búsqueda',
+        duracao: '20 min',
+        descricao:
+          'Dónde aparecen realmente las vacantes, cómo abordarlas, qué esperar de cada etapa del proceso en el exterior (screening, system design, behavioral) y cómo posicionarte en la conversación salarial.',
+      },
+      {
+        titulo: 'Plan de 90 días',
+        duracao: '5 min',
+        descricao:
+          'Cerramos con qué hacer en las próximas doce semanas, en orden de prioridad. Algo ejecutable, no una lista de deseos.',
+      },
+    ],
+
+    entregaveisTitulo: 'Qué te llevas',
+    entregaveis: [
+      'Tu currículum revisado, con las observaciones por escrito.',
+      'El mapa de brechas técnicas, priorizado.',
+      'El plan de 90 días.',
+      'Acompañamiento por WhatsApp para dudas después de la sesión.',
+    ],
+  },
+
   meta: {
     titulo: 'Ana Luiza Primo — Site Reliability Engineer',
     descricao:
-      'Site Reliability Engineer / DevOps Engineer: fiabilidad, observabilidad y rendimiento en producción.',
+      'Site Reliability Engineer/DevOps Engineer | Carrera Internacional',
   },
 };
