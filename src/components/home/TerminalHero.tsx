@@ -26,15 +26,15 @@ export function TerminalHero({ locale, c }: { locale: Locale; c: Conteudo }) {
       />
 
       <Container alinhamento="esquerda">
-        <div className="overflow-hidden rounded-xl border border-border bg-black/25 shadow-lg backdrop-blur">
+        <div className="overflow-hidden rounded-xl border border-term-border bg-term text-term-fg shadow-lg">
           {/* Barra de título */}
-          <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
+          <div className="flex items-center gap-2 border-b border-term-border px-4 py-2.5">
             <span className="flex gap-1.5" aria-hidden="true">
               <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
               <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
               <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
             </span>
-            <p className="grow text-center font-mono text-xs text-muted">
+            <p className="grow text-center font-mono text-xs text-term-muted">
               {c.terminal.tituloJanela}
             </p>
             {/* Espaço espelhando os três pontos, para o título ficar centrado. */}
@@ -50,13 +50,13 @@ export function TerminalHero({ locale, c }: { locale: Locale; c: Conteudo }) {
                   width={88}
                   height={88}
                   priority
-                  className="shrink-0 rounded-full border border-border"
+                  className="shrink-0 rounded-full border border-term-border"
                 />
                 <div>
                   <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
                     {c.perfil.saudacao}
                   </h1>
-                  <p className="mt-1 text-muted">{c.perfil.tagline}</p>
+                  <p className="mt-1 text-term-muted">{c.perfil.tagline}</p>
                 </div>
               </div>
             </Bloco>
@@ -64,8 +64,8 @@ export function TerminalHero({ locale, c }: { locale: Locale; c: Conteudo }) {
             <Bloco comando="cat sobre.txt" atraso={1}>
               <ul className="space-y-2">
                 {c.perfil.destaques.map((d, i) => (
-                  <li key={i} className="flex gap-2 text-muted">
-                    <span className="select-none text-accent" aria-hidden="true">
+                  <li key={i} className="flex gap-2 text-term-muted">
+                    <span className="select-none text-term-accent" aria-hidden="true">
                       —
                     </span>
                     <span>
@@ -101,10 +101,10 @@ function Bloco({
       style={{ animationDelay: `${atraso * 260}ms` } as React.CSSProperties}
     >
       <p className="flex gap-2">
-        <span className="select-none text-accent" aria-hidden="true">
+        <span className="select-none text-term-accent" aria-hidden="true">
           $
         </span>
-        <span className="text-foreground">{comando}</span>
+        <span className="text-term-fg">{comando}</span>
       </p>
       <div className="mt-3 pl-4">{children}</div>
     </div>
@@ -137,7 +137,7 @@ function LinhaDestaque({
       {texto.slice(0, i)}
       <Link
         href={destino}
-        className="text-foreground underline decoration-accent underline-offset-4 transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="text-term-fg underline decoration-term-accent underline-offset-4 transition-colors hover:text-term-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-term-accent"
       >
         {linkTexto}
       </Link>

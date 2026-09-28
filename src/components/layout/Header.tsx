@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
 import { perfil } from '@/data/perfil';
 import { Container } from '@/components/ui/Container';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
@@ -6,39 +7,104 @@ import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import type { Locale } from '@/i18n/config';
 import type { Conteudo } from '@/i18n';
 
+/**
+ * Cabeçalho com dois arranjos.
+ *
+ * Em telas largas (lg+) os seis links ficam em linha. Abaixo disso eles
+ * não cabem: quebravam em duas fileiras e empurravam o cabeçalho, e no
+ * celular viravam um amontoado. Então viram um menu recolhido.
+ *
+ * O menu é um <details>: disclosure nativo, que abre e fecha por teclado
+ * e é anunciado por leitor de tela sem ARIA manual, e que funciona
+ * mesmo se o JavaScript não carregar.
+ *
+ * O <summary> precisa ser o PRIMEIRO FILHO do <details> — se ficar
+ * aninhado num <div>, o navegador entende que falta summary e desenha um
+ * "Saiba mais" próprio no topo. Por isso o nome fica fora do <details>,
+ * e o painel é posicionado por absolute em vez de ficar no fluxo.
+ */
 export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
   const navItems = [
     { href: `/${locale}#sobre`, label: c.nav.sobre },
     { href: `/${locale}#experiencia`, label: c.nav.experiencia },
     { href: `/${locale}#projetos`, label: c.nav.projetos },
     { href: `/${locale}#palestras`, label: c.nav.palestras },
-    // Página própria, não âncora da home.
+    // Páginas próprias, não âncoras da home.
     { href: `/${locale}/artigos`, label: c.nav.artigos },
     { href: `/${locale}/mentoria`, label: c.nav.mentoria },
   ];
 
+  const classeLink =
+    'text-sm text-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+
+  const nome = (
+    <Link
+      href={`/${locale}`}
+      className="font-mono text-sm font-semibold tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      {perfil.nome}
+    </Link>
+  );
+
   return (
-    <header className="border-b border-border">
+    <header className="relative z-50 border-b border-border">
       <Container wide>
-        <div className="flex h-16 flex-wrap items-center justify-between gap-4">
-          <Link
-            href={`/${locale}`}
-            className="font-mono text-sm font-semibold tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        <div className="flex h-16 items-center justify-between gap-6">
+          {nome}
+
+          {/* Menu recolhido, até lg. */}
+          <details className="group lg:hidden">
+            <summary
+              aria-label={c.ui.navPrincipal}
+              className="flex cursor-pointer list-none items-center rounded-full border border-border p-2 text-muted transition-colors hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden"
+            >
+              <Menu size={18} aria-hidden="true" className="group-open:hidden" />
+              <X size={18} aria-hidden="true" className="hidden group-open:block" />
+            </summary>
+
+            {/*
+              Absolute e ancorado no <header>: o painel cobre a largura
+              inteira e passa por cima do conteúdo, em vez de empurrar a
+              página para baixo ao abrir.
+            */}
+            <nav
+              aria-label={c.ui.navPrincipal}
+              className="absolute inset-x-0 top-full z-40 border-b border-border bg-background px-6 pb-6 pt-4 shadow-lg"
+            >
+              <ul className="flex flex-col gap-4">
+                {navItems.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className={classeLink}>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4">
+                <LanguageSwitcher locale={locale} rotulo={c.ui.seletorIdioma} />
+                <ThemeToggle
+                  paraClaro={c.ui.temaParaClaro}
+                  paraEscuro={c.ui.temaParaEscuro}
+                />
+              </div>
+            </nav>
+          </details>
+
+          {/* Arranjo em linha, a partir de lg. */}
+          <nav
+            aria-label={c.ui.navPrincipal}
+            className="hidden items-center gap-x-5 lg:flex"
           >
-            {perfil.nome}
-          </Link>
-          <nav aria-label={c.ui.navPrincipal} className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
+              <Link key={item.href} href={item.href} className={classeLink}>
                 {item.label}
               </Link>
             ))}
             <LanguageSwitcher locale={locale} rotulo={c.ui.seletorIdioma} />
-            <ThemeToggle paraClaro={c.ui.temaParaClaro} paraEscuro={c.ui.temaParaEscuro} />
+            <ThemeToggle
+              paraClaro={c.ui.temaParaClaro}
+              paraEscuro={c.ui.temaParaEscuro}
+            />
           </nav>
         </div>
       </Container>

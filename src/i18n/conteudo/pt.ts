@@ -305,6 +305,24 @@ export const pt: Conteudo = {
       'O plano de 90 dias.',
       'Acompanhamento por WhatsApp para dúvidas depois da sessão.',
     ],
+
+    ressalvaTitulo: 'O que esta mentoria não é',
+    ressalva:
+      'Ela não garante uma vaga internacional — ninguém honesto garante isso. O objetivo é te dar direcionamento: entender onde você está hoje, o que falta para o nível que você quer e por onde começar. O resultado depende do trabalho que você faz depois da sessão.',
+
+    formTitulo: 'Quero agendar',
+    formIntro:
+      'Me conta um pouco de você. Respondo combinando data, horário e forma de pagamento.',
+    campoNome: 'Nome',
+    campoEmail: 'E-mail',
+    campoWhatsapp: 'WhatsApp',
+    campoCargo: 'Cargo e tempo de experiência',
+    campoObjetivo: 'O que você quer alcançar',
+    campoObjetivoDica:
+      'Ex.: trabalhar remoto para fora, mudar de país, subir de nível na empresa atual.',
+    formBotao: 'Enviar por e-mail',
+    formNota:
+      'O botão abre seu aplicativo de e-mail com tudo já preenchido — você só confere e envia.',
   },
 
   meta: {

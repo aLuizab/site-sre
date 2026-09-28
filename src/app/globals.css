@@ -11,6 +11,41 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+
+  /* Janela do terminal — ver o bloco de tokens abaixo. */
+  --color-term: var(--term);
+  --color-term-fg: var(--term-fg);
+  --color-term-muted: var(--term-muted);
+  --color-term-accent: var(--term-accent);
+  --color-term-border: var(--term-border);
+}
+
+/*
+ * A janela do terminal tem tokens próprios, um jogo por tema.
+ *
+ * Antes ela usava um preto translúcido: no escuro funcionava, mas no
+ * claro virava um retângulo cinza chapado no meio da página branca.
+ * Agora é lilás no tema claro e roxo-escuro no tema escuro.
+ *
+ * O `--term-muted` do tema claro é mais escuro (42%) que o `--muted` da
+ * página (46%) de propósito: sobre a superfície lilás, 46% cairia para
+ * 6,3:1 e perderia o AAA. Em 42% fica 7,5:1 sobre o terminal e 8,3:1
+ * sobre a página.
+ */
+:root {
+  --term: oklch(95.5% 0.025 300);
+  --term-fg: oklch(14% 0.02 300);
+  --term-muted: oklch(42% 0.035 300);
+  --term-accent: oklch(47% 0.2 300);
+  --term-border: oklch(86% 0.035 300);
+}
+
+.dark {
+  --term: oklch(13% 0.04 300);
+  --term-fg: oklch(97% 0.005 300);
+  --term-muted: oklch(72% 0.04 300);
+  --term-accent: oklch(80% 0.15 300);
+  --term-border: oklch(30% 0.05 300);
 }
 
 /*

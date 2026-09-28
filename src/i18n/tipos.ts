@@ -113,6 +113,21 @@ export interface Conteudo {
     etapas: { titulo: string; duracao: string; descricao: string }[];
     entregaveisTitulo: string;
     entregaveis: string[];
+
+    /** Deixa claro o que a mentoria NÃO promete. */
+    ressalvaTitulo: string;
+    ressalva: string;
+
+    formTitulo: string;
+    formIntro: string;
+    campoNome: string;
+    campoEmail: string;
+    campoWhatsapp: string;
+    campoCargo: string;
+    campoObjetivo: string;
+    campoObjetivoDica: string;
+    formBotao: string;
+    formNota: string;
   };
 
   ui: {

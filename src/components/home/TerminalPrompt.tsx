@@ -96,13 +96,13 @@ export function TerminalPrompt({ locale, c }: { locale: Locale; c: Conteudo }) {
       {historico.map((l) => (
         <div key={l.id} className="mb-3">
           <p className="flex gap-2">
-            <span className="select-none text-accent" aria-hidden="true">
+            <span className="select-none text-term-accent" aria-hidden="true">
               $
             </span>
             <span>{l.comando}</span>
           </p>
           {/* whitespace-pre para o alinhamento da lista de ajuda. */}
-          <div className="mt-1 whitespace-pre pl-4 text-muted">
+          <div className="mt-1 whitespace-pre pl-4 text-term-muted">
             {l.saida.map((s, i) => (
               <p key={i}>{s}</p>
             ))}
@@ -122,7 +122,7 @@ export function TerminalPrompt({ locale, c }: { locale: Locale; c: Conteudo }) {
         }}
         className="flex items-center gap-2"
       >
-        <span className="select-none text-accent" aria-hidden="true">
+        <span className="select-none text-term-accent" aria-hidden="true">
           $
         </span>
         <label htmlFor="terminal-cmd" className="sr-only">
@@ -137,7 +137,7 @@ export function TerminalPrompt({ locale, c }: { locale: Locale; c: Conteudo }) {
           autoComplete="off"
           autoCapitalize="off"
           spellCheck={false}
-          className="w-full min-w-0 bg-transparent text-foreground caret-accent outline-none placeholder:text-muted/60"
+          className="w-full min-w-0 bg-transparent text-term-fg caret-term-accent outline-none placeholder:text-term-muted/70"
         />
       </form>
     </div>

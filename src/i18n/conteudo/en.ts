@@ -310,6 +310,24 @@ export const en: Conteudo = {
       'The 90-day plan.',
       'WhatsApp follow-up for questions after the session.',
     ],
+
+    ressalvaTitulo: 'What this mentoring is not',
+    ressalva:
+      'It does not guarantee an international job — nobody honest guarantees that. The goal is direction: understanding where you are today, what is missing for the level you want and where to start. The outcome depends on the work you do after the session.',
+
+    formTitulo: 'Book a session',
+    formIntro:
+      'Tell me a bit about yourself. I reply with dates, times and how to pay.',
+    campoNome: 'Name',
+    campoEmail: 'Email',
+    campoWhatsapp: 'WhatsApp',
+    campoCargo: 'Role and years of experience',
+    campoObjetivo: 'What you want to achieve',
+    campoObjetivoDica:
+      'E.g.: work remotely for a foreign company, relocate, move up at your current job.',
+    formBotao: 'Send by email',
+    formNota:
+      'The button opens your email app with everything filled in — you just review and send.',
   },
 
   meta: {

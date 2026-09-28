@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Check, Mail } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { mentoria } from '@/data/mentoria';
+import { FormularioMentoria } from '@/components/mentoria/FormularioMentoria';
 import { buildMetadata } from '@/lib/seo';
 import { locales, isLocale } from '@/i18n/config';
 import { getConteudo } from '@/i18n';
@@ -35,18 +36,6 @@ export default async function MentoriaPage(props: PageProps<'/[locale]/mentoria'
 
   const c = getConteudo(locale);
 
-  // mailto com assunto pronto: reduz o atrito de escrever do zero.
-  const href = `mailto:${mentoria.email}?subject=${encodeURIComponent(c.mentoria.ctaAssunto)}`;
-
-  const botao = (
-    <a
-      href={href}
-      className="inline-flex items-center gap-2 rounded-full border border-accent bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent dark:text-black"
-    >
-      <Mail size={16} aria-hidden="true" />
-      {c.mentoria.ctaBotao}
-    </a>
-  );
 
   return (
     <Container className="py-16">
@@ -72,8 +61,6 @@ export default async function MentoriaPage(props: PageProps<'/[locale]/mentoria'
           <p className="text-3xl font-semibold tracking-tight">{mentoria.preco}</p>
           <p className="mt-1 text-sm text-muted">{c.mentoria.precoNota}</p>
         </div>
-        <div className="grow" />
-        {botao}
       </div>
 
       <section className="mt-14">
@@ -138,7 +125,20 @@ export default async function MentoriaPage(props: PageProps<'/[locale]/mentoria'
         </ul>
       </section>
 
-      <div className="mt-12">{botao}</div>
+      <section className="mt-14 rounded-xl border border-border p-6">
+        <h2 className="text-lg font-semibold tracking-tight">
+          {c.mentoria.ressalvaTitulo}
+        </h2>
+        <p className="mt-3 text-muted">{c.mentoria.ressalva}</p>
+      </section>
+
+      <section id="agendar" className="mt-14 scroll-mt-24">
+        <h2 className="text-xl font-semibold tracking-tight">
+          {c.mentoria.formTitulo}
+        </h2>
+        <p className="mt-2 max-w-xl text-muted">{c.mentoria.formIntro}</p>
+        <FormularioMentoria c={c} />
+      </section>
     </Container>
   );
 }

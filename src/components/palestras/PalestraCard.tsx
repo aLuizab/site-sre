@@ -29,7 +29,10 @@ export function PalestraCard({
   return (
     <Link
       href={`/${locale}/palestras/${palestra.slug}`}
-      className="group block overflow-hidden rounded-xl border border-border transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      // h-full + flex: os cards de uma mesma linha ficam com a mesma
+      // altura, independentemente do tamanho do título e do nome do
+      // evento. Sem isso a grade fica com caixas de alturas diferentes.
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-border transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {palestra.capa ? (
         <Image
@@ -50,12 +53,23 @@ export function PalestraCard({
           className="aspect-video w-full bg-gradient-to-br from-accent/25 to-accent/5"
         />
       )}
-      <div className="p-4">
+      {/*
+        Alturas fixas no texto para todos os cards ficarem do mesmo
+        tamanho — inclusive no celular, onde a grade vira coluna única e
+        o `h-full` sozinho não iguala nada, porque cada card é sua
+        própria linha.
+
+        `line-clamp` corta com reticências; o título inteiro aparece na
+        página da palestra.
+      */}
+      <div className="flex grow flex-col p-4">
         <p className="font-mono text-xs text-accent">
           <time dateTime={palestra.data}>{palestra.dataFormatada}</time>
         </p>
-        <h3 className="mt-1 font-medium group-hover:text-accent">{palestra.titulo}</h3>
-        <p className="mt-1 text-sm text-muted">
+        <h3 className="mt-1 line-clamp-2 min-h-[3rem] font-medium group-hover:text-accent">
+          {palestra.titulo}
+        </h3>
+        <p className="mt-1 line-clamp-2 min-h-[2.5rem] text-sm text-muted">
           {palestra.evento}
           {palestra.local ? ` · ${palestra.local}` : ''}
         </p>

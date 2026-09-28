@@ -309,6 +309,24 @@ export const es: Conteudo = {
       'El plan de 90 días.',
       'Acompañamiento por WhatsApp para dudas después de la sesión.',
     ],
+
+    ressalvaTitulo: 'Lo que esta mentoría no es',
+    ressalva:
+      'No garantiza una vacante internacional — nadie honesto garantiza eso. El objetivo es darte dirección: entender dónde estás hoy, qué te falta para el nivel que quieres y por dónde empezar. El resultado depende del trabajo que hagas después de la sesión.',
+
+    formTitulo: 'Quiero agendar',
+    formIntro:
+      'Cuéntame un poco de ti. Respondo con fechas, horarios y forma de pago.',
+    campoNome: 'Nombre',
+    campoEmail: 'Correo',
+    campoWhatsapp: 'WhatsApp',
+    campoCargo: 'Puesto y años de experiencia',
+    campoObjetivo: 'Qué quieres lograr',
+    campoObjetivoDica:
+      'Ej.: trabajar en remoto para el exterior, mudarte de país, subir de nivel en tu empresa actual.',
+    formBotao: 'Enviar por correo',
+    formNota:
+      'El botón abre tu aplicación de correo con todo ya escrito — solo revisas y envías.',
   },
 
   meta: {
