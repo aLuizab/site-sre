@@ -29,4 +29,5 @@ export type {
   ConteudoPalestra,
   ConteudoPerfil,
   ConteudoSecao,
+  Destaque,
 } from '@/i18n/tipos';

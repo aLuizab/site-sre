@@ -7,12 +7,31 @@ import type { Conteudo } from '@/i18n/tipos';
  */
 export const en: Conteudo = {
   perfil: {
-    saudacao: "Hi! I'm Ana Luiza 👋",
+    saudacao: "Hi! I'm Ana Luiza",
     tagline:
       'Site Reliability Engineer/DevOps Engineer | International Career',
     bio: [
       "I'm a Site Reliability Engineer focused on the reliability, observability and performance of production systems. I've worked on high-traffic customer-facing platforms, defining SLOs/SLIs, bringing MTTR down and building observability end to end.",
       'I also create content about SRE/DevOps careers and mentor people who want to grow in the field, including those aiming at the international market.',
+    ],
+    destaques: [
+      {
+        texto:
+          "I've worked at Stone Payments, Banco Iti and Itaú Unibanco — banks, payment providers and financial services.",
+      },
+      {
+        texto: 'Today I work on international contracts in the United States.',
+      },
+      {
+        texto: 'I also mentor people building an international tech career.',
+        linkTexto: 'mentor people building an international tech career',
+        href: '/mentoria',
+      },
+      {
+        texto: 'And I write about SRE, cloud and career.',
+        linkTexto: 'write about SRE, cloud and career',
+        href: '/artigos',
+      },
     ],
     avatarAlt: 'Profile picture of Ana Luiza Primo',
     localizacao: 'Brazil',
@@ -128,12 +147,6 @@ export const en: Conteudo = {
     'ohio-english': 'Business English',
   },
 
-  empresas: {
-    stone: 'Stone Payments',
-    iti: 'Banco Iti',
-    itau: 'Itaú Unibanco',
-    internacional: 'international contracts in the United States',
-  },
 
   projetos: {
     '100-dias-kubernetes':
@@ -203,6 +216,25 @@ export const en: Conteudo = {
     descricao:
       "What I've been writing about SRE, cloud, architecture and career. Published on Medium.",
     vazio: 'No articles published yet.',
+  },
+
+  terminal: {
+    prompt: 'ana@sre',
+    tituloJanela: 'ana@sre: ~',
+    rotuloEntrada: 'Type a command',
+    dica: "type 'help' to see the commands",
+    naoEncontrado: 'command not found: {cmd}',
+    ajuda: 'available commands:',
+    comandos: [
+      { nome: 'about', descricao: 'who I am' },
+      { nome: 'experience', descricao: 'professional background' },
+      { nome: 'projects', descricao: 'what I built' },
+      { nome: 'talks', descricao: 'where I spoke' },
+      { nome: 'articles', descricao: 'what I wrote' },
+      { nome: 'mentoring', descricao: 'international career mentoring' },
+      { nome: 'theme', descricao: 'toggle light and dark' },
+      { nome: 'clear', descricao: 'clear the screen' },
+    ],
   },
 
   newsletter: {

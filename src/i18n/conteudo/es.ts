@@ -6,12 +6,31 @@ import type { Conteudo } from '@/i18n/tipos';
  */
 export const es: Conteudo = {
   perfil: {
-    saudacao: '¡Hola! Soy Ana Luiza 👋',
+    saudacao: '¡Hola! Soy Ana Luiza',
     tagline:
       'Site Reliability Engineer/DevOps Engineer | Carrera Internacional',
     bio: [
       'Soy Site Reliability Engineer y me enfoco en la fiabilidad, la observabilidad y el rendimiento de sistemas en producción. He trabajado con plataformas de alto tráfico de cara al cliente, definiendo SLOs/SLIs, reduciendo el MTTR y construyendo observabilidad de punta a punta.',
       'También creo contenido sobre carrera en SRE/DevOps y hago mentoría a profesionales que quieren crecer en el área, incluso de cara al mercado internacional.',
+    ],
+    destaques: [
+      {
+        texto:
+          'He trabajado en Stone Pagamentos, Banco Iti e Itaú Unibanco — bancos, medios de pago y servicios financieros.',
+      },
+      {
+        texto: 'Hoy trabajo en contratos internacionales en Estados Unidos.',
+      },
+      {
+        texto: 'También hago mentoría de carrera internacional en tecnología.',
+        linkTexto: 'mentoría de carrera internacional',
+        href: '/mentoria',
+      },
+      {
+        texto: 'Y escribo sobre SRE, cloud y carrera.',
+        linkTexto: 'escribo sobre SRE, cloud y carrera',
+        href: '/artigos',
+      },
     ],
     avatarAlt: 'Foto de perfil de Ana Luiza Primo',
     localizacao: 'Brasil',
@@ -127,12 +146,6 @@ export const es: Conteudo = {
     'ohio-english': 'Business English',
   },
 
-  empresas: {
-    stone: 'Stone Pagamentos',
-    iti: 'Banco Iti',
-    itau: 'Itaú Unibanco',
-    internacional: 'contratos internacionales en Estados Unidos',
-  },
 
   projetos: {
     '100-dias-kubernetes':
@@ -202,6 +215,25 @@ export const es: Conteudo = {
     descricao:
       'Lo que vengo escribiendo sobre SRE, cloud, arquitectura y carrera. Publicado en Medium.',
     vazio: 'Todavía no hay artículos publicados.',
+  },
+
+  terminal: {
+    prompt: 'ana@sre',
+    tituloJanela: 'ana@sre: ~',
+    rotuloEntrada: 'Escribe un comando',
+    dica: "escribe 'ayuda' para ver los comandos",
+    naoEncontrado: 'comando no encontrado: {cmd}',
+    ajuda: 'comandos disponibles:',
+    comandos: [
+      { nome: 'sobre', descricao: 'quién soy' },
+      { nome: 'experiencia', descricao: 'trayectoria profesional' },
+      { nome: 'proyectos', descricao: 'lo que construí' },
+      { nome: 'charlas', descricao: 'dónde hablé' },
+      { nome: 'articulos', descricao: 'lo que escribí' },
+      { nome: 'mentoria', descricao: 'mentoría de carrera internacional' },
+      { nome: 'tema', descricao: 'alterna claro y oscuro' },
+      { nome: 'limpiar', descricao: 'limpia la pantalla' },
+    ],
   },
 
   newsletter: {

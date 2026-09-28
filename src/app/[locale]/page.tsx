@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
-import { Hero } from '@/components/home/Hero';
-import { CompaniesRow } from '@/components/home/CompaniesRow';
+import { TerminalHero } from '@/components/home/TerminalHero';
 import { SocialLinks } from '@/components/home/SocialLinks';
 import { AboutSection } from '@/components/home/AboutSection';
 import { ExperienciaSection } from '@/components/home/ExperienciaSection';
@@ -30,10 +29,9 @@ export default async function Home(props: PageProps<'/[locale]'>) {
      */
     <div className="mx-auto w-full max-w-7xl lg:grid lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-10 lg:px-6">
       <div className="min-w-0">
-        <Hero c={c} />
+        <TerminalHero locale={locale} c={c} />
         <Container alinhamento="esquerda">
-          <div className="space-y-10 pb-12">
-            <CompaniesRow c={c} />
+          <div className="pb-12">
             <SocialLinks locale={locale} c={c} />
           </div>
         </Container>

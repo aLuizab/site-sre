@@ -2,12 +2,31 @@ import type { Conteudo } from '@/i18n/tipos';
 
 export const pt: Conteudo = {
   perfil: {
-    saudacao: 'Oi! Eu sou a Ana Luiza 👋',
+    saudacao: 'Oi! Eu sou a Ana Luiza',
     tagline:
       'Site Reliability Engineer/DevOps Engineer | Carreira Internacional',
     bio: [
       'Sou Site Reliability Engineer com foco em confiabilidade, observabilidade e performance de sistemas em produção. Já trabalhei com plataformas de alto tráfego voltadas ao cliente, definindo SLOs/SLIs, reduzindo MTTR e construindo observabilidade ponta a ponta.',
       'Também crio conteúdo sobre carreira em SRE/DevOps e mentoro profissionais que querem crescer na área, inclusive para o mercado internacional.',
+    ],
+    destaques: [
+      {
+        texto:
+          'Já atuei em Stone Pagamentos, Banco Iti e Itaú Unibanco — bancos, meios de pagamento e serviços financeiros.',
+      },
+      {
+        texto: 'Hoje atuo em contratos internacionais nos Estados Unidos.',
+      },
+      {
+        texto: 'Também faço mentoria de carreira internacional em tecnologia.',
+        linkTexto: 'mentoria de carreira internacional',
+        href: '/mentoria',
+      },
+      {
+        texto: 'E escrevo sobre SRE, cloud e carreira.',
+        linkTexto: 'escrevo sobre SRE, cloud e carreira',
+        href: '/artigos',
+      },
     ],
     avatarAlt: 'Foto de perfil de Ana Luiza Primo',
     localizacao: 'Brasil',
@@ -123,12 +142,6 @@ export const pt: Conteudo = {
     'ohio-english': 'Business English',
   },
 
-  empresas: {
-    stone: 'Stone Pagamentos',
-    iti: 'Banco Iti',
-    itau: 'Itaú Unibanco',
-    internacional: 'contratos internacionais nos Estados Unidos',
-  },
 
   projetos: {
     '100-dias-kubernetes':
@@ -198,6 +211,25 @@ export const pt: Conteudo = {
     descricao:
       'O que venho escrevendo sobre SRE, cloud, arquitetura e carreira. Publicado no Medium.',
     vazio: 'Nenhum artigo publicado ainda.',
+  },
+
+  terminal: {
+    prompt: 'ana@sre',
+    tituloJanela: 'ana@sre: ~',
+    rotuloEntrada: 'Digite um comando',
+    dica: "digite 'ajuda' para ver os comandos",
+    naoEncontrado: 'comando não encontrado: {cmd}',
+    ajuda: 'comandos disponíveis:',
+    comandos: [
+      { nome: 'sobre', descricao: 'quem sou eu' },
+      { nome: 'experiencia', descricao: 'trajetória profissional' },
+      { nome: 'projetos', descricao: 'o que eu construí' },
+      { nome: 'palestras', descricao: 'onde eu falei' },
+      { nome: 'artigos', descricao: 'o que eu escrevi' },
+      { nome: 'mentoria', descricao: 'mentoria de carreira internacional' },
+      { nome: 'tema', descricao: 'alterna claro e escuro' },
+      { nome: 'limpar', descricao: 'limpa a tela' },
+    ],
   },
 
   newsletter: {

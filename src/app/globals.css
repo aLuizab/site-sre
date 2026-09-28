@@ -53,6 +53,43 @@ body {
 }
 
 /*
+ * Entrada das linhas do terminal, uma depois da outra.
+ *
+ * Anima opacidade e deslocamento de conteúdo que JÁ ESTÁ no DOM — não
+ * escreve texto letra a letra. Assim o buscador e o leitor de tela veem
+ * a apresentação inteira, e quem tem o JavaScript bloqueado também.
+ *
+ * `backwards` mantém o estado inicial durante o atraso; sem isso a linha
+ * pisca visível antes de começar.
+ */
+@keyframes revelar {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.revela {
+  animation: revelar 380ms ease-out backwards;
+}
+
+/*
+ * Sem animação, tudo aparece de uma vez. A regra global de
+ * prefers-reduced-motion mais abaixo reduz a duração, mas o `backwards`
+ * ainda seguraria o estado inicial durante o atraso — por isso o
+ * `animation: none` explícito aqui.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .revela {
+    animation: none !important;
+  }
+}
+
+/*
  * Brilho suave atrás do hero, na cor de destaque. Puramente decorativo:
  * dá profundidade ao topo sem entrar no caminho do texto.
  *

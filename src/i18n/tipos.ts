@@ -1,8 +1,22 @@
+/**
+ * Uma linha da apresentação, no estilo "Já atuei em...".
+ * `linkTexto` precisa ser um trecho de `texto`: o componente parte a
+ * frase nele e transforma só esse pedaço em link.
+ */
+export interface Destaque {
+  texto: string;
+  linkTexto?: string;
+  /** Relativo ao idioma ("/mentoria") ou âncora ("#projetos"). */
+  href?: string;
+}
+
 export interface ConteudoPerfil {
   saudacao: string;
   tagline: string;
   /** Um parágrafo por item — renderizados como <p> separados. */
   bio: string[];
+  /** Linhas da apresentação, abaixo do nome. */
+  destaques: Destaque[];
   avatarAlt: string;
   localizacao: string;
 }
@@ -61,6 +75,20 @@ export interface Conteudo {
     tituloPagina: string;
     descricao: string;
     vazio: string;
+  };
+
+  /** Interface do terminal na apresentação. */
+  terminal: {
+    /** Usuário e host mostrados no prompt, ex.: "ana@sre". */
+    prompt: string;
+    tituloJanela: string;
+    /** Rótulo acessível do campo de comando. */
+    rotuloEntrada: string;
+    dica: string;
+    naoEncontrado: string;
+    /** Usa {comandos}. */
+    ajuda: string;
+    comandos: { nome: string; descricao: string }[];
   };
 
   newsletter: {
@@ -149,8 +177,6 @@ export interface Conteudo {
   experiencia: Record<string, ConteudoExperiencia>;
   /** id de data/formacao.ts -> nome do curso. */
   formacao: Record<string, string>;
-  /** id de data/empresas.ts -> nome exibido. */
-  empresas: Record<string, string>;
   /** id de data/projetos.ts -> descrição. */
   projetos: Record<string, string>;
   /** slug de data/palestras.ts -> textos da palestra. */
