@@ -116,6 +116,14 @@ export interface Conteudo {
     tituloSlides: string;
     tituloFotos: string;
     baixarSlides: string;
+    slideAnterior: string;
+    slideProximo: string;
+    /** Usa {atual} e {total}. */
+    slideContador: string;
+    /** Usa {n} e {total}. */
+    slideAlt: string;
+    /** Diz que o PDF é a versão legível por leitor de tela. */
+    slidesAcessibilidade: string;
     verSlides: string;
     /** Usa {titulo}. */
     tituloGravacao: string;

@@ -20,6 +20,12 @@ export interface PalestraBase {
   capa?: string;
   /** Um src por foto; o texto alternativo vem do dicionário, na ordem. */
   fotos: string[];
+  /**
+   * Quantos slides foram exportados para /public/palestras/<slug>/slides/,
+   * nomeados 01.png, 02.png... O visualizador monta os caminhos a partir
+   * daqui, em vez de listar o diretorio em tempo de build.
+   */
+  slides?: number;
   /** Caminho local em /public/slides/ ou URL externa (SpeakerDeck etc.). */
   slidesPdf?: string;
   videoUrl?: string;
@@ -30,6 +36,7 @@ export interface PalestraBase {
 export const palestras: PalestraBase[] = [
   {
     slug: 'agilidade-na-pratica',
+    slides: 15,
     data: '2026-04',
     capa: '/palestras/agilidade-na-pratica/slide.png',
     fotos: [],
@@ -38,6 +45,7 @@ export const palestras: PalestraBase[] = [
   },
   {
     slug: 'cloud-native-day-sp',
+    slides: 19,
     data: '2025-10',
     capa: '/palestras/cloud-native-day-sp/capa.png',
     fotos: [],
@@ -46,6 +54,7 @@ export const palestras: PalestraBase[] = [
   },
   {
     slug: 'softskills-devops',
+    slides: 16,
     data: '2025-10',
     capa: '/palestras/softskills-devops/capa.png',
     fotos: [],
@@ -54,6 +63,7 @@ export const palestras: PalestraBase[] = [
   },
   {
     slug: 'workshop-empreendedorismo',
+    slides: 23,
     data: '2025-07',
     capa: '/palestras/workshop-empreendedorismo/slide.png',
     fotos: [],
@@ -62,6 +72,7 @@ export const palestras: PalestraBase[] = [
   },
   {
     slug: 'devopsdays-belem',
+    slides: 15,
     data: '2022-11',
     capa: '/palestras/devopsdays-belem/capa.png',
     fotos: [],

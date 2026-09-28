@@ -55,6 +55,12 @@ export const pt: Conteudo = {
     tituloSlides: '# slides',
     tituloFotos: '# fotos',
     baixarSlides: 'Baixar slides',
+    slideAnterior: 'Slide anterior',
+    slideProximo: 'Próximo slide',
+    slideContador: '{atual} de {total}',
+    slideAlt: 'Slide {n} de {total}',
+    slidesAcessibilidade:
+      'Os slides são imagens; o PDF é a versão que leitor de tela consegue ler.',
     verSlides: 'Ver slides',
     tituloGravacao: 'Gravação: {titulo}',
     rotuloSlides: 'Slides: {titulo}',

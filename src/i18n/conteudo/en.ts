@@ -60,6 +60,12 @@ export const en: Conteudo = {
     tituloSlides: '# slides',
     tituloFotos: '# photos',
     baixarSlides: 'Download slides',
+    slideAnterior: 'Previous slide',
+    slideProximo: 'Next slide',
+    slideContador: '{atual} of {total}',
+    slideAlt: 'Slide {n} of {total}',
+    slidesAcessibilidade:
+      'The slides are images; the PDF is the version a screen reader can read.',
     verSlides: 'View slides',
     tituloGravacao: 'Recording: {titulo}',
     rotuloSlides: 'Slides: {titulo}',

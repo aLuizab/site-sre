@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Chip } from '@/components/ui/Chip';
 import { PdfViewer } from '@/components/palestras/PdfViewer';
+import { VisualizadorSlides } from '@/components/palestras/VisualizadorSlides';
 import { PhotoGallery } from '@/components/palestras/PhotoGallery';
 import { VideoEmbed } from '@/components/palestras/VideoEmbed';
 import { palestras, getPalestraBySlug } from '@/data/palestras';
@@ -90,7 +91,26 @@ export default async function PalestraDetailPage(
         </div>
       ) : null}
 
-      {palestra.slidesPdf ? (
+      {palestra.slides ? (
+        <div className="mt-10">
+          <h2 className="mb-4 font-mono text-sm text-muted">{c.ui.tituloSlides}</h2>
+          <VisualizadorSlides
+            slug={palestra.slug}
+            total={palestra.slides}
+            titulo={preencher(c.ui.rotuloSlides, { titulo: texto.titulo })}
+            pdfUrl={palestra.slidesPdf}
+            rotulos={{
+              anterior: c.ui.slideAnterior,
+              proximo: c.ui.slideProximo,
+              contador: c.ui.slideContador,
+              slideAlt: c.ui.slideAlt,
+              baixar: c.ui.baixarSlides,
+              avisoAcessibilidade: c.ui.slidesAcessibilidade,
+            }}
+          />
+        </div>
+      ) : palestra.slidesPdf ? (
+        /* Palestra com PDF mas sem slides exportados: só o botão. */
         <div className="mt-10">
           <h2 className="mb-4 font-mono text-sm text-muted">{c.ui.tituloSlides}</h2>
           <PdfViewer

@@ -59,6 +59,12 @@ export const es: Conteudo = {
     tituloSlides: '# diapositivas',
     tituloFotos: '# fotos',
     baixarSlides: 'Descargar diapositivas',
+    slideAnterior: 'Diapositiva anterior',
+    slideProximo: 'Diapositiva siguiente',
+    slideContador: '{atual} de {total}',
+    slideAlt: 'Diapositiva {n} de {total}',
+    slidesAcessibilidade:
+      'Las diapositivas son imágenes; el PDF es la versión que un lector de pantalla puede leer.',
     verSlides: 'Ver diapositivas',
     tituloGravacao: 'Grabación: {titulo}',
     rotuloSlides: 'Diapositivas: {titulo}',
