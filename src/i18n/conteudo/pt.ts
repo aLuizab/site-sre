@@ -7,7 +7,7 @@ export const pt: Conteudo = {
       { texto: 'SRE em um contrato internacional nos Estados Unidos. Antes: Stone, iti e Itaú.' },
       { texto: 'Estudei Project Management e Business English na Ohio University.' },
       {
-        texto: 'Construo produtos próprios — hoje, o Dueto, o NutriMatch e o Cert Tracker.',
+        texto: 'Construo produtos próprios — hoje, o Dueto, o NutriMatch, o Cert Tracker e o Ramo.',
         linkTexto: 'produtos próprios',
         href: '#projetos',
       },
@@ -106,6 +106,11 @@ export const pt: Conteudo = {
       resumo: 'Estudos para certificações',
       descricao:
         'App desktop e offline para estudar para certificações de AWS, Kubernetes, Linux, Docker e Terraform: plano diário pelos pesos oficiais de cada prova, flashcards com repetição espaçada (FSRS), simulados por domínio, caderno de erros e um Readiness Score que diz quando agendar a prova. Também roda no navegador como PWA.',
+    },
+    ramo: {
+      resumo: 'Git e Gitflow na prática',
+      descricao:
+        'App web para treinar Git sem medo: um repositório simulado no navegador, com terminal que aceita a sintaxe real do Git, grafo de commits local e remoto, 44 missões em trilhas, fluxograma do Gitflow, pull request simulado e um modo socorro para quando algo dá errado. 100% em português.',
     },
   },
 

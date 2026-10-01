@@ -7,7 +7,7 @@ export const en: Conteudo = {
       { texto: 'SRE on an international contract in the United States. Before that: Stone, iti and Itaú.' },
       { texto: 'I studied Project Management and Business English at Ohio University.' },
       {
-        texto: 'I build my own products — right now, Dueto, NutriMatch and Cert Tracker.',
+        texto: 'I build my own products — right now, Dueto, NutriMatch, Cert Tracker and Ramo.',
         linkTexto: 'build my own products',
         href: '#projetos',
       },
@@ -106,6 +106,11 @@ export const en: Conteudo = {
       resumo: 'Certification study tracker',
       descricao:
         'Offline desktop app for studying for AWS, Kubernetes, Linux, Docker and Terraform certifications: a daily plan based on each exam’s official domain weights, spaced-repetition flashcards (FSRS), practice exams by domain, a mistakes log and a Readiness Score that tells you when to book the exam. Also runs in the browser as a PWA.',
+    },
+    ramo: {
+      resumo: 'Git and Gitflow, hands-on',
+      descricao:
+        'Web app (in Portuguese) for practicing Git without fear: a simulated repository in the browser, with a terminal that accepts real Git syntax, local and remote commit graphs, 44 missions across learning tracks, a Gitflow flowchart, simulated pull requests and a rescue mode for when things go wrong.',
     },
   },
 

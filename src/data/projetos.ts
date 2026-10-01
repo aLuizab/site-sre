@@ -46,4 +46,11 @@ export const projetos: ProjetoBase[] = [
       versao: 'v0.1.0',
     },
   },
+  {
+    id: 'ramo',
+    nome: 'Ramo',
+    plataforma: 'web',
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'PWA'],
+    demoUrl: 'https://ramo.aluiza.tech',
+  },
 ];
