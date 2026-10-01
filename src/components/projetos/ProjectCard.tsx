@@ -43,14 +43,16 @@ export function ProjectCard({
             </a>
           ) : null}
           {projeto.demoUrl ? (
+            // O domínio fica escrito: é o site do produto, e o texto já
+            // diz para onde o link leva, sem precisar de aria-label.
             <a
               href={projeto.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={preencher(c.ui.ariaDemo, { nome: projeto.nome })}
-              className="text-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="inline-flex items-center gap-1.5 font-mono text-sm text-muted underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              <ExternalLink size={20} aria-hidden="true" />
+              <ExternalLink size={16} aria-hidden="true" />
+              {new URL(projeto.demoUrl).hostname}
             </a>
           ) : null}
         </div>

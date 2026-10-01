@@ -176,8 +176,6 @@ export interface Conteudo {
     creditoRodape: string;
     /** Usa {nome}. */
     ariaRepositorio: string;
-    /** Usa {nome}. */
-    ariaDemo: string;
     voltarPalestras: string;
     tituloSlides: string;
     tituloFotos: string;

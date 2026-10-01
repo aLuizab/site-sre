@@ -58,7 +58,6 @@ export const en: Conteudo = {
     seletorIdioma: 'Choose language',
     creditoRodape: 'Built by {nome} with Next.js and TailwindCSS. © {ano}.',
     ariaRepositorio: '{nome} repository on GitHub',
-    ariaDemo: 'View {nome} demo',
     voltarPalestras: 'Back to talks',
     tituloSlides: '# slides',
     tituloFotos: '# photos',

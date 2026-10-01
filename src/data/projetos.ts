@@ -25,5 +25,6 @@ export const projetos: ProjetoBase[] = [
     nome: 'NutriMatch',
     tags: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
     repoUrl: 'https://github.com/aLuizab/nutrimatch',
+    demoUrl: 'https://www.nutrimatch.com.br',
   },
 ];
