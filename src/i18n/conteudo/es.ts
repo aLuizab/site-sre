@@ -86,7 +86,7 @@ export const es: Conteudo = {
     dueto: {
       resumo: 'Finanzas personales y de empresa para devs',
       descricao:
-        'App de escritorio y offline (en portugués de Brasil) que reúne en un solo lugar el presupuesto personal y del hogar, la empresa que factura en dólares — facturas, impuestos del Simples Nacional, pró-labore, estado de resultados — y las inversiones. Los datos quedan en un SQLite local.',
+        'App de escritorio y offline (en portugués de Brasil) para organizar el dinero de una persona o de una familia: el presupuesto del mes, la empresa que factura en dólares (facturas, impuestos del Simples Nacional, pró-labore, estado de resultados) y las inversiones, en un solo lugar. Los datos quedan en un SQLite local.',
     },
     nutrimatch: {
       resumo: 'Pacientes y nutricionistas, sin burocracia',

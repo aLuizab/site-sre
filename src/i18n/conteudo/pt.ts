@@ -82,7 +82,7 @@ export const pt: Conteudo = {
     dueto: {
       resumo: 'Organização financeira PF e PJ para devs',
       descricao:
-        'App desktop e offline que junta num lugar só o orçamento pessoal e da casa, a empresa que fatura em dólar — notas, Simples Nacional com Fator R, pró-labore, DRE — e os investimentos. Os dados ficam num SQLite local.',
+        'App desktop e offline para organizar o dinheiro de uma pessoa ou de uma família: o orçamento do mês, a empresa que fatura em dólar (notas, Simples Nacional com Fator R, pró-labore, DRE) e os investimentos, num lugar só. Os dados ficam num SQLite local.',
     },
     nutrimatch: {
       resumo: 'Pacientes e nutricionistas, sem burocracia',
