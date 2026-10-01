@@ -16,11 +16,6 @@ import type { Conteudo, Destaque } from '@/i18n';
  * cliente. A animação revela texto que já está no DOM.
  */
 export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
-  const [primeiro, ...resto] = perfil.nome.split(' ');
-  // "Ana Luiza Primo" -> "Ana Luiza" / "Primo": o sobrenome em linha própria.
-  const linha1 = [primeiro, ...resto.slice(0, -1)].join(' ');
-  const linha2 = resto.at(-1) ?? '';
-
   return (
     <section className="grid border-b border-border lg:min-h-[min(calc(100svh-4rem),52rem)] lg:grid-cols-[minmax(0,1.8fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)]">
       <div className="relative flex flex-col gap-8 overflow-hidden px-6 pt-8 pb-12 sm:pt-10 lg:px-12 lg:py-12">
@@ -46,12 +41,10 @@ export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
 
           <div className="flex grow flex-col justify-between gap-10 p-6 font-mono sm:p-8 lg:p-10">
             <Bloco comando="whoami" atraso={0}>
-              <h1 className="brilho-crt text-[clamp(2.5rem,6vw,6.5rem)] font-semibold leading-[0.95] tracking-tighter">
-                <span className="block">{linha1}</span>{' '}
-                <span className="block">
-                  {linha2}
-                  <span className="cursor-piscando" aria-hidden="true" />
-                </span>
+              {/* Nome inteiro numa linha: o tamanho acompanha a largura da tela. */}
+              <h1 className="brilho-crt whitespace-nowrap text-[clamp(1.9rem,4.8vw,5.5rem)] font-semibold leading-none tracking-tighter">
+                {perfil.nome}
+                <span className="cursor-piscando" aria-hidden="true" />
               </h1>
               <p className="mt-5 text-base text-term-accent sm:text-lg">{c.perfil.tagline}</p>
             </Bloco>
@@ -87,7 +80,7 @@ export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
         e o rosto fica no centro. No celular vira um bloco abaixo do texto,
         com altura limitada para não tomar a tela.
       */}
-      <div className="relative aspect-[3/4] max-h-[30rem] border-t border-border bg-term sm:aspect-[4/5] lg:max-h-none lg:aspect-auto lg:border-t-0 lg:border-l">
+      <div className="relative h-[28rem] w-full border-t border-border bg-term sm:h-[34rem] lg:h-auto lg:border-t-0 lg:border-l">
         <Image
           src={perfil.avatar}
           alt={c.perfil.avatarAlt}
@@ -100,9 +93,9 @@ export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 to-transparent"
           aria-hidden="true"
         />
-        <p className="absolute inset-x-0 bottom-0 flex justify-between gap-4 px-6 py-4 font-mono text-xs uppercase tracking-[0.2em] text-white/85 lg:px-8">
+        <p className="absolute inset-x-0 bottom-0 flex justify-between gap-4 whitespace-nowrap px-6 py-4 font-mono text-xs uppercase tracking-[0.2em] text-white/85 lg:px-8">
           <span>{c.terminal.tituloJanela}</span>
-          <span>{c.ui.cargoJsonLd}</span>
+          <span className="hidden xl:inline">{c.ui.cargoJsonLd}</span>
         </p>
       </div>
     </section>
