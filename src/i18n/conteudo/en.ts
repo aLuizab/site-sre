@@ -82,7 +82,7 @@ export const en: Conteudo = {
     dueto: {
       resumo: 'Personal and business finances for developers',
       descricao:
-        'Offline desktop app (in Brazilian Portuguese) that brings household finances, a company billing in US dollars — invoices, Simples Nacional taxes, owner’s pay, income statement — and investments into one place. Data stays in a local SQLite file.',
+        'Offline desktop app (in Brazilian Portuguese) that brings your personal and household budget, a company billing in US dollars — invoices, Simples Nacional taxes, owner’s pay, income statement — and investments into one place. Data stays in a local SQLite file.',
     },
     nutrimatch: {
       resumo: 'Patients and nutritionists, no red tape',
