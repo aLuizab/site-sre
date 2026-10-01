@@ -11,21 +11,16 @@ export interface Destaque {
 }
 
 export interface ConteudoPerfil {
-  saudacao: string;
   tagline: string;
-  /** Um parágrafo por item — renderizados como <p> separados. */
-  bio: string[];
   /** Linhas da apresentação, abaixo do nome. */
   destaques: Destaque[];
   avatarAlt: string;
-  localizacao: string;
 }
 
-export interface ConteudoExperiencia {
-  empresa: string;
-  cargo: string;
-  localizacao?: string;
-  bullets: string[];
+export interface ConteudoProjeto {
+  /** Uma linha: o que é, para quem. */
+  resumo: string;
+  descricao: string;
 }
 
 export interface ConteudoPalestra {
@@ -52,27 +47,34 @@ export interface Conteudo {
   perfil: ConteudoPerfil;
 
   nav: {
-    sobre: string;
-    experiencia: string;
     projetos: string;
-    palestras: string;
+    comunidade: string;
     artigos: string;
     mentoria: string;
     materiais: string;
   };
 
   secoes: {
-    sobre: ConteudoSecao;
-    experiencia: ConteudoSecao;
     projetos: ConteudoSecao;
-    palestras: ConteudoSecao;
-    videos: ConteudoSecao;
-    artigos: ConteudoSecao;
-    instagram: ConteudoSecao;
+    comunidade: ConteudoSecao & {
+      intro: string;
+      /** Títulos dos blocos dentro da seção. */
+      palestras: string;
+      artigos: string;
+      redes: string;
+      /** Caixa de contato ao lado da introdução. */
+      cta: { titulo: string; mentoria: string; linkedin: string };
+      /** Bloco do YouTube em destaque. `assistir` usa {titulo}. */
+      youtube: { ultimoVideo: string; maisVideos: string; verCanal: string; assistir: string };
+    };
   };
+
+  /** Descrição de cada rede no bloco de comunidade, pelo `id` de data/socials.ts. */
+  redes: Partial<Record<'youtube' | 'instagram', string>>;
 
   /** Página de artigos do Medium. */
   artigos: {
+    eyebrow: string;
     tituloPagina: string;
     descricao: string;
     vazio: string;
@@ -176,22 +178,8 @@ export interface Conteudo {
     seletorIdioma: string;
     /** Usa {nome} e {ano}. */
     creditoRodape: string;
-    /** Usa {passadas} e {atual}. */
-    trajetoriaComAtual: string;
-    /** Usa {passadas}. */
-    trajetoriaSemAtual: string;
-    /** Conjunção da lista de empresas: "A, B e C". */
-    conjuncaoE: string;
-    formacao: string;
-    stackFerramentas: string;
     /** Usa {nome}. */
     ariaRepositorio: string;
-    /** Usa {nome}. */
-    ariaDemo: string;
-    filtroTodas: string;
-    filtrarPorTag: string;
-    semPalestras: string;
-    semPalestrasComTag: string;
     voltarPalestras: string;
     tituloSlides: string;
     tituloFotos: string;
@@ -209,9 +197,7 @@ export interface Conteudo {
     tituloGravacao: string;
     /** Usa {titulo}. */
     rotuloSlides: string;
-    verTodosVideos: string;
     verTodosArtigos: string;
-    verPerfilInstagram: string;
     voltarInicio: string;
     /**
      * Contador de inscritos do YouTube. O número é buscado ao vivo, então
@@ -220,17 +206,11 @@ export interface Conteudo {
      */
     inscritosUm: string;
     inscritosVarios: string;
-    /** Rótulo do período em curso na timeline. */
-    atual: string;
     cargoJsonLd: string;
   };
 
-  /** Indexado pelo `id` de data/experiencia.ts. */
-  experiencia: Record<string, ConteudoExperiencia>;
-  /** id de data/formacao.ts -> nome do curso. */
-  formacao: Record<string, string>;
-  /** id de data/projetos.ts -> descrição. */
-  projetos: Record<string, string>;
+  /** id de data/projetos.ts -> textos do projeto. */
+  projetos: Record<string, ConteudoProjeto>;
   /** slug de data/palestras.ts -> textos da palestra. */
   palestras: Record<string, ConteudoPalestra>;
 

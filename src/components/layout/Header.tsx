@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { perfil } from '@/data/perfil';
-import { Container } from '@/components/ui/Container';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import type { Locale } from '@/i18n/config';
@@ -10,7 +9,7 @@ import type { Conteudo } from '@/i18n';
 /**
  * Cabeçalho com dois arranjos.
  *
- * Em telas largas (lg+) os seis links ficam em linha. Abaixo disso eles
+ * Em telas largas (lg+) os links ficam em linha. Abaixo disso eles
  * não cabem: quebravam em duas fileiras e empurravam o cabeçalho, e no
  * celular viravam um amontoado. Então viram um menu recolhido.
  *
@@ -25,10 +24,8 @@ import type { Conteudo } from '@/i18n';
  */
 export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
   const navItems = [
-    { href: `/${locale}#sobre`, label: c.nav.sobre },
-    { href: `/${locale}#experiencia`, label: c.nav.experiencia },
     { href: `/${locale}#projetos`, label: c.nav.projetos },
-    { href: `/${locale}#palestras`, label: c.nav.palestras },
+    { href: `/${locale}#comunidade`, label: c.nav.comunidade },
     // Páginas próprias, não âncoras da home.
     { href: `/${locale}/artigos`, label: c.nav.artigos },
     { href: `/${locale}/mentoria`, label: c.nav.mentoria },
@@ -50,8 +47,8 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
   );
 
   return (
-    <header className="relative z-50 border-b border-border">
-      <Container wide>
+    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
+      <div className="px-6 lg:px-12">
         <div className="flex h-16 items-center justify-between gap-6">
           {nome}
 
@@ -110,7 +107,7 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
             />
           </nav>
         </div>
-      </Container>
+      </div>
     </header>
   );
 }

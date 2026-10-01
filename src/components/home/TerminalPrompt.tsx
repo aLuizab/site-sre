@@ -32,23 +32,22 @@ export function TerminalPrompt({ locale, c }: { locale: Locale; c: Conteudo }) {
   /** Âncoras da home e páginas, por comando, em cada idioma. */
   const destinos: Record<string, string> = {
     // português
-    sobre: '#sobre',
-    experiencia: '#experiencia',
     projetos: '#projetos',
+    comunidade: '#comunidade',
     palestras: '#palestras',
     artigos: '/artigos',
     mentoria: '/mentoria',
     materiais: '/materiais',
     // inglês
-    about: '#sobre',
-    experience: '#experiencia',
     projects: '#projetos',
+    community: '#comunidade',
     talks: '#palestras',
     articles: '/artigos',
     mentoring: '/mentoria',
     resources: '/materiais',
     // espanhol
     proyectos: '#projetos',
+    comunidad: '#comunidade',
     charlas: '#palestras',
     articulos: '/artigos',
     materiales: '/materiais',

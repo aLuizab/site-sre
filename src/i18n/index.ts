@@ -25,9 +25,9 @@ export function preencher(
 
 export type {
   Conteudo,
-  ConteudoExperiencia,
   ConteudoPalestra,
   ConteudoPerfil,
+  ConteudoProjeto,
   ConteudoSecao,
   Destaque,
 } from '@/i18n/tipos';

@@ -5,10 +5,10 @@ Engineer. Next.js (App Router) + TypeScript + TailwindCSS, tipografia
 monospace em todo o site, em **três idiomas** (português, inglês e
 espanhol).
 
-Todo o conteúdo (sobre, experiência, projetos, palestras e últimos vídeos)
-fica em seções da própria home; cada palestra ainda ganha sua própria
-página para hospedar slides em PDF, galeria de fotos e vídeo sem pesar a
-landing page.
+A home é enxuta de propósito — não é currículo: apresentação, projetos
+e contribuições para a comunidade (palestras, artigos e redes). Cada
+palestra ganha sua própria página para hospedar slides em PDF, galeria de
+fotos e vídeo sem pesar a landing page.
 
 ## Rodando localmente
 
@@ -79,18 +79,16 @@ falharem, a seção some e o contador não aparece — nunca um número inventad
 
 ## Estrutura da página
 
-A home (`src/app/[locale]/page.tsx`) empilha as seções, cada uma com um
+A home (`src/app/[locale]/page.tsx`) usa a largura toda da tela: hero
+dividido ao meio e seções com rótulo numerado à esquerda
+(`components/home/SecaoEditorial.tsx`). Empilha as seções, cada uma com um
 `id` para navegação por âncora:
 
 | Seção | Âncora | Componente |
 | --- | --- | --- |
-| Hero | — | `components/home/Hero.tsx` |
-| Empresas + redes | — | `components/home/CompaniesRow.tsx`, `SocialLinks.tsx` |
-| Sobre mim | `#sobre` | `components/home/AboutSection.tsx` |
-| Experiência | `#experiencia` | `components/home/ExperienciaSection.tsx` |
+| Hero em tela cheia (nome, foto, redes, terminal) | — | `components/home/Hero.tsx`, `SocialLinks.tsx` |
 | Projetos | `#projetos` | `components/home/ProjetosSection.tsx` |
-| Palestras | `#palestras` | `components/home/PalestrasSection.tsx` |
-| Últimos vídeos | `#videos` | `components/home/LatestVideos.tsx` |
+| Comunidade: palestras, artigos, redes | `#comunidade` (`#palestras`) | `components/home/ComunidadeSection.tsx` |
 
 Páginas próprias, fora da home:
 
@@ -107,13 +105,9 @@ Páginas próprias, fora da home:
 
 | Arquivo de dados | Dicionário correspondente | O que controla |
 | --- | --- | --- |
-| `src/data/perfil.ts` | `perfil` | Nome e avatar / saudação, tagline, bio |
-| `src/data/empresas.ts` | `empresas` | Seção "Já atuei em..." |
-| `src/data/socials.ts` | — | Links de redes (URLs não traduzem) |
-| `src/data/experiencia.ts` | `experiencia` | Datas e logos / cargo, empresa, bullets |
-| `src/data/formacao.ts` | `formacao` | Instituição e período / nome do curso |
-| `src/data/stack.ts` | — | Chips de ferramentas (nomes técnicos) |
-| `src/data/projetos.ts` | `projetos` | Repo, tags / descrição |
+| `src/data/perfil.ts` | `perfil` | Nome e avatar / tagline e linhas da apresentação |
+| `src/data/projetos.ts` | `projetos` | Links, tags / resumo e descrição |
+| `src/data/socials.ts` | `redes` | Links das redes (não traduzem) / descrição no bloco de comunidade |
 | `src/data/palestras.ts` | `palestras` | Slug, data, arquivos / título, descrição |
 
 ### Adicionando uma nova palestra
@@ -152,27 +146,6 @@ O slug é o mesmo nos três idiomas de propósito: a URL fica estável e só o
 prefixo de idioma muda. Todo `alt` é obrigatório — preencha com descrição
 real, não deixe vazio.
 
-### Adicionando uma nova experiência
-
-No **topo** do array em `src/data/experiencia.ts` (mais recente primeiro):
-
-```ts
-{ id: 'empresa-x', periodoInicio: '2026-02', periodoFim: 'atual', logo: '/logos/x.svg' }
-```
-
-`periodoInicio` e `periodoFim` aceitam `'AAAA'` ou `'AAAA-MM'` — use só o
-ano quando não souber o mês, em vez de inventar um. Depois, nos três
-dicionários:
-
-```ts
-'empresa-x': {
-  empresa: 'Nome da empresa',
-  cargo: 'Cargo',
-  localizacao: 'Remoto',
-  bullets: ['Ponto de impacto 1', 'Ponto de impacto 2'],
-}
-```
-
 ### Trocando a cor de destaque
 
 Duas linhas de `src/app/globals.css` — uma por tema. O tom claro precisa
@@ -195,8 +168,6 @@ Edite `src/app/[locale]/layout.tsx` (import de `next/font/google` ou
 - **Palestras**: as duas em `src/data/palestras.ts` são fictícias, assim
   como as fotos e PDFs em `public/palestras/` e `public/slides/`. Uma
   delas tem um `videoUrl` que aponta para um vídeo placeholder.
-- **Empresa atual**: em `src/data/empresas.ts` o item `atual: true` está
-  como "uma empresa internacional" (genérico de propósito).
 
 ## Mentoria e materiais
 

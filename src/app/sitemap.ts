@@ -17,8 +17,8 @@ type Entrada = {
  * duas em `alternates.languages` — é assim que o Google entende que são
  * traduções da mesma página, e não conteúdo duplicado.
  *
- * O site é uma landing page única: experiência, projetos e palestras são
- * seções de "/", não rotas próprias. Só o detalhe de cada palestra tem
+ * O site é uma landing page única: projetos e comunidade são seções
+ * de "/", não rotas próprias. Só o detalhe de cada palestra tem
  * URL dedicada.
  */
 export default function sitemap(): MetadataRoute.Sitemap {

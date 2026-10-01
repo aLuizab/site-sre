@@ -2,54 +2,63 @@ import type { Conteudo } from '@/i18n/tipos';
 
 export const pt: Conteudo = {
   perfil: {
-    saudacao: 'Oi! Eu sou a Ana Luiza',
-    tagline:
-      'Site Reliability Engineer/DevOps Engineer | Carreira Internacional',
-    bio: [
-      'Sou Site Reliability Engineer com foco em confiabilidade, observabilidade e performance de sistemas em produção. Já trabalhei com plataformas de alto tráfego voltadas ao cliente, definindo SLOs/SLIs, reduzindo MTTR e construindo observabilidade ponta a ponta.',
-      'Também crio conteúdo sobre carreira em SRE/DevOps e mentoro profissionais que querem crescer na área, inclusive para o mercado internacional.',
-    ],
+    tagline: 'Site Reliability Engineer · Tecnologia e Carreira',
     destaques: [
+      { texto: 'SRE em um contrato internacional nos Estados Unidos. Antes: Stone, iti e Itaú.' },
+      { texto: 'Estudei Project Management e Business English na Ohio University.' },
       {
-        texto:
-          'Já atuei em Stone Pagamentos, Banco Iti e Itaú Unibanco — bancos, meios de pagamento e serviços financeiros.',
+        texto: 'Construo produtos próprios — hoje, o Dueto e o NutriMatch.',
+        linkTexto: 'produtos próprios',
+        href: '#projetos',
       },
       {
-        texto: 'Hoje atuo em um contrato internacional nos Estados Unidos.',
+        texto: 'Palestro, escrevo e falo de carreira em tecnologia no YouTube e no Instagram.',
+        linkTexto: 'Palestro, escrevo',
+        href: '#comunidade',
       },
       {
-        texto: 'Também faço mentoria de carreira internacional em tecnologia.',
+        texto: 'E faço mentoria de carreira internacional.',
         linkTexto: 'mentoria de carreira internacional',
         href: '/mentoria',
       },
-      {
-        texto: 'E escrevo sobre SRE, cloud e carreira.',
-        linkTexto: 'escrevo sobre SRE, cloud e carreira',
-        href: '/artigos',
-      },
     ],
     avatarAlt: 'Foto de perfil de Ana Luiza Primo',
-    localizacao: 'Brasil',
   },
 
   nav: {
-    sobre: 'Sobre',
-    experiencia: 'Experiência',
     projetos: 'Projetos',
-    palestras: 'Palestras',
+    comunidade: 'Comunidade',
     artigos: 'Artigos',
     mentoria: 'Mentoria',
     materiais: 'Materiais',
   },
 
   secoes: {
-    sobre: { eyebrow: '# sobre', titulo: 'Sobre mim' },
-    experiencia: { eyebrow: '# experiência', titulo: 'Trajetória profissional' },
-    projetos: { eyebrow: '# projetos', titulo: 'Meus projetos' },
-    palestras: { eyebrow: '# palestras', titulo: 'Palestras & Apresentações' },
-    videos: { eyebrow: '# youtube', titulo: 'Últimos vídeos' },
-    artigos: { eyebrow: '# medium', titulo: 'Artigos' },
-    instagram: { eyebrow: '# instagram', titulo: 'No Instagram' },
+    projetos: { eyebrow: 'projetos', titulo: 'Produtos que eu construo.' },
+    comunidade: {
+      eyebrow: 'comunidade',
+      titulo: 'Palestras, artigos & conteúdo.',
+      intro: 'O que eu compartilho além do trabalho: palestras em eventos, artigos e conteúdo sobre carreira em tecnologia.',
+      palestras: 'Palestras',
+      artigos: 'Artigos',
+      redes: 'Conteúdo',
+      cta: {
+        titulo: 'Tem um evento, uma palestra ou uma carreira para destravar?',
+        mentoria: 'Conhecer a mentoria',
+        linkedin: 'Falar no LinkedIn',
+      },
+      youtube: {
+        ultimoVideo: 'último vídeo',
+        maisVideos: 'mais vídeos',
+        verCanal: 'Ver o canal',
+        assistir: 'Assistir no YouTube: {titulo}',
+      },
+    },
+  },
+
+  redes: {
+    youtube: 'Vídeos sobre SRE, DevOps e carreira em tecnologia.',
+    instagram: 'Conteúdo curto sobre carreira em tecnologia.',
   },
 
   ui: {
@@ -60,17 +69,7 @@ export const pt: Conteudo = {
     temaParaEscuro: 'Mudar para o tema escuro',
     seletorIdioma: 'Escolher idioma',
     creditoRodape: 'Criado por {nome} com Next.js e TailwindCSS. © {ano}.',
-    trajetoriaComAtual: 'Já atuei em {passadas}, e hoje atuo em {atual}.',
-    trajetoriaSemAtual: 'Já atuei em {passadas}.',
-    conjuncaoE: 'e',
-    formacao: 'formação',
-    stackFerramentas: 'stack & ferramentas',
     ariaRepositorio: 'Repositório de {nome} no GitHub',
-    ariaDemo: 'Ver demo de {nome}',
-    filtroTodas: 'todas',
-    filtrarPorTag: 'Filtrar por tag',
-    semPalestras: 'Em breve, novas palestras.',
-    semPalestrasComTag: 'Nenhuma palestra encontrada com essa tag.',
     voltarPalestras: 'Voltar para palestras',
     tituloSlides: '# slides',
     tituloFotos: '# fotos',
@@ -84,76 +83,24 @@ export const pt: Conteudo = {
     verSlides: 'Ver slides',
     tituloGravacao: 'Gravação: {titulo}',
     rotuloSlides: 'Slides: {titulo}',
-    verTodosVideos: 'Ver todos os vídeos no canal',
     verTodosArtigos: 'Ver todos os artigos',
-    verPerfilInstagram: 'Ver o perfil no Instagram',
     voltarInicio: 'Voltar para o início',
     inscritosUm: '{n} inscrito',
     inscritosVarios: '{n} inscritos',
-
-    atual: 'atual',
     cargoJsonLd: 'Site Reliability Engineer',
   },
 
-  experiencia: {
-    internacional: {
-      empresa: 'Contrato internacional — Estados Unidos',
-      cargo: 'Site Reliability Engineer',
-      localizacao: 'Remoto',
-      bullets: [
-        'Deploys em produção e automação de deploy canary com GitHub Actions.',
-        'Implementação de ferramentas de observabilidade.',
-        'Desenvolvimento de soluções de observabilidade com IA.',
-        'Plantão on-call.',
-      ],
-    },
-    itau: {
-      empresa: 'Itaú Unibanco',
-      cargo: 'Site Reliability Engineer — nível M',
-      localizacao: 'São Paulo, SP',
-      bullets: [
-        'Time de observabilidade dos canais principais do app do banco — login, home e autenticação.',
-        'Mapeamento das aplicações e de suas arquiteturas para atuar em problemas e incidentes.',
-        'Construção de alertas e dashboards com o time, para monitorar e manter o app disponível ao cliente.',
-      ],
-    },
-    iti: {
-      empresa: 'iti — banco digital do Itaú',
-      cargo: 'Site Reliability Engineer — nível M',
-      localizacao: 'São Paulo, SP',
-      bullets: [
-        'Orquestração de incidentes, sustentação de canais e condução das cerimônias de post-mortem.',
-        'Cultura de SLOs e observabilidade proativa; instrumentação de microsserviços .NET Core e Kotlin.',
-        'Sustentação de centenas de microsserviços em Kubernetes/AWS EKS, com Splunk, Grafana, AppDynamics, Jaeger, Loki e Elasticsearch.',
-        'Plantão on-call, eliminação de toil por automação e testes de performance com JMeter.',
-      ],
-    },
-    stone: {
-      empresa: 'Stone Pagamentos',
-      cargo: 'Site Reliability Engineer — nível J',
-      localizacao: 'São Paulo, SP',
-      bullets: [
-        'Time de operações e infraestrutura responsável pelo ciclo de vida de um conjunto de serviços: deploy, disponibilidade, performance, mudanças e emergências.',
-        'Capacity planning e automação de infraestrutura como código no Google Cloud.',
-        'Interface com os times de desenvolvimento e com governança, garantindo aderência a padrões e compliance.',
-      ],
-    },
-  },
-
-  formacao: {
-    inatel: 'Engenharia de Produção',
-    'ohio-pm': 'Project Management',
-    'ohio-english': 'Business English',
-  },
-
-
   projetos: {
-    '100-dias-kubernetes':
-      'Registro público do desafio #100DiasDeKubernetes inteiro em português, traduzindo e ampliando o material da Anais Urlichs com referências brasileiras. Repositório colaborativo, aberto a forks e pull requests.',
-    'datadog-automation':
-      'API em Flask que gera dashboards e monitores do Datadog a partir dos dados da aplicação e da conta AWS, com 9 tipos de dashboard e 12 de monitor. Tem wizard interativo e vai containerizada com Docker e Nginx.',
-    'arquitetura-celular':
-      'Projeto Terraform que provisiona uma arquitetura celular na AWS: células independentes em AZs diferentes, cada uma com VPC, NAT gateway, cluster EKS e ALB próprios — isolando falhas por célula.',
+    dueto: {
+      resumo: 'Organização financeira PF e PJ para devs',
+      descricao:
+        'App desktop e offline para organizar o dinheiro de uma pessoa ou de uma família: o orçamento do mês, a empresa que fatura em dólar (notas, Simples Nacional com Fator R, pró-labore, DRE) e os investimentos, num lugar só. Os dados ficam num SQLite local.',
+    },
+    nutrimatch: {
+      resumo: 'Pacientes e nutricionistas, sem burocracia',
+      descricao:
+        'Plataforma que conecta pacientes a nutricionistas: busca por profissional, agendamento de consultas online ou presenciais, agenda do nutricionista e painel de administração. Projeto da FETIN 2026, no Inatel.',
+    },
   },
 
   palestras: {
@@ -209,8 +156,8 @@ export const pt: Conteudo = {
     },
   },
 
-
   artigos: {
+    eyebrow: '# artigos',
     tituloPagina: 'Artigos',
     descricao:
       'O que venho escrevendo sobre SRE, cloud, arquitetura e carreira. Publicado no Medium.',
@@ -225,9 +172,8 @@ export const pt: Conteudo = {
     naoEncontrado: 'comando não encontrado: {cmd}',
     ajuda: 'comandos disponíveis:',
     comandos: [
-      { nome: 'sobre', descricao: 'quem sou eu' },
-      { nome: 'experiencia', descricao: 'trajetória profissional' },
       { nome: 'projetos', descricao: 'o que eu construí' },
+      { nome: 'comunidade', descricao: 'palestras, artigos e conteúdo' },
       { nome: 'palestras', descricao: 'onde eu falei' },
       { nome: 'artigos', descricao: 'o que eu escrevi' },
       { nome: 'mentoria', descricao: 'mentoria de carreira internacional' },
@@ -449,8 +395,8 @@ export const pt: Conteudo = {
   },
 
   meta: {
-    titulo: 'Ana Luiza Primo — Site Reliability Engineer',
+    titulo: 'Ana Luiza Primo - Technology and Career',
     descricao:
-      'Site Reliability Engineer/DevOps Engineer | Carreira Internacional',
+      'Ana Luiza Primo é Site Reliability Engineer e cria conteúdo sobre tecnologia e carreira internacional. Projetos, palestras, artigos e mentoria.',
   },
 };

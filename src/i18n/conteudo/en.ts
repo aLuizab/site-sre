@@ -1,60 +1,64 @@
 import type { Conteudo } from '@/i18n/tipos';
 
-/**
- * A bio e os bullets de experiência reaproveitam o inglês que a própria
- * Ana Luiza já escreveu em github.com/aLuizab/my-cv e no repo portfolio,
- * para o texto sair na voz dela e não numa tradução literal do português.
- */
 export const en: Conteudo = {
   perfil: {
-    saudacao: "Hi! I'm Ana Luiza",
-    tagline:
-      'Site Reliability Engineer/DevOps Engineer | International Career',
-    bio: [
-      "I'm a Site Reliability Engineer focused on the reliability, observability and performance of production systems. I've worked on high-traffic customer-facing platforms, defining SLOs/SLIs, bringing MTTR down and building observability end to end.",
-      'I also create content about SRE/DevOps careers and mentor people who want to grow in the field, including those aiming at the international market.',
-    ],
+    tagline: 'Site Reliability Engineer · Technology and Career',
     destaques: [
+      { texto: 'SRE on an international contract in the United States. Before that: Stone, iti and Itaú.' },
+      { texto: 'I studied Project Management and Business English at Ohio University.' },
       {
-        texto:
-          "I've worked at Stone Payments, Banco Iti and Itaú Unibanco — banks, payment providers and financial services.",
+        texto: 'I build my own products — right now, Dueto and NutriMatch.',
+        linkTexto: 'build my own products',
+        href: '#projetos',
       },
       {
-        texto: 'Today I work on an international contract in the United States.',
+        texto: 'I give talks, write, and talk about tech careers on YouTube and Instagram.',
+        linkTexto: 'give talks, write',
+        href: '#comunidade',
       },
       {
-        texto: 'I also mentor people building an international tech career.',
-        linkTexto: 'mentor people building an international tech career',
+        texto: 'And I mentor people building an international career.',
+        linkTexto: 'mentor people building an international career',
         href: '/mentoria',
-      },
-      {
-        texto: 'And I write about SRE, cloud and career.',
-        linkTexto: 'write about SRE, cloud and career',
-        href: '/artigos',
       },
     ],
     avatarAlt: 'Profile picture of Ana Luiza Primo',
-    localizacao: 'Brazil',
   },
 
   nav: {
-    sobre: 'About',
-    experiencia: 'Experience',
     projetos: 'Projects',
-    palestras: 'Talks',
+    comunidade: 'Community',
     artigos: 'Articles',
     mentoria: 'Mentoring',
     materiais: 'Resources',
   },
 
   secoes: {
-    sobre: { eyebrow: '# about', titulo: 'About me' },
-    experiencia: { eyebrow: '# experience', titulo: 'Professional experience' },
-    projetos: { eyebrow: '# projects', titulo: 'My projects' },
-    palestras: { eyebrow: '# talks', titulo: 'Talks & Presentations' },
-    videos: { eyebrow: '# youtube', titulo: 'Latest videos' },
-    artigos: { eyebrow: '# medium', titulo: 'Articles' },
-    instagram: { eyebrow: '# instagram', titulo: 'On Instagram' },
+    projetos: { eyebrow: 'projects', titulo: 'Products I build.' },
+    comunidade: {
+      eyebrow: 'community',
+      titulo: 'Talks, articles & content.',
+      intro: 'What I share beyond my day job: conference talks, articles and content about tech careers.',
+      palestras: 'Talks',
+      artigos: 'Articles',
+      redes: 'Content',
+      cta: {
+        titulo: 'Have an event, a talk, or a career move to plan?',
+        mentoria: 'See the mentoring',
+        linkedin: 'Talk on LinkedIn',
+      },
+      youtube: {
+        ultimoVideo: 'latest video',
+        maisVideos: 'more videos',
+        verCanal: 'Visit the channel',
+        assistir: 'Watch on YouTube: {titulo}',
+      },
+    },
+  },
+
+  redes: {
+    youtube: 'Videos about SRE, DevOps and tech careers.',
+    instagram: 'Short-form content about tech careers.',
   },
 
   ui: {
@@ -65,17 +69,7 @@ export const en: Conteudo = {
     temaParaEscuro: 'Switch to dark theme',
     seletorIdioma: 'Choose language',
     creditoRodape: 'Built by {nome} with Next.js and TailwindCSS. © {ano}.',
-    trajetoriaComAtual: "I've worked at {passadas}, and today I work on {atual}.",
-    trajetoriaSemAtual: "I've worked at {passadas}.",
-    conjuncaoE: 'and',
-    formacao: 'education',
-    stackFerramentas: 'stack & tools',
     ariaRepositorio: '{nome} repository on GitHub',
-    ariaDemo: 'View {nome} demo',
-    filtroTodas: 'all',
-    filtrarPorTag: 'Filter by tag',
-    semPalestras: 'New talks coming soon.',
-    semPalestrasComTag: 'No talks found with that tag.',
     voltarPalestras: 'Back to talks',
     tituloSlides: '# slides',
     tituloFotos: '# photos',
@@ -89,76 +83,24 @@ export const en: Conteudo = {
     verSlides: 'View slides',
     tituloGravacao: 'Recording: {titulo}',
     rotuloSlides: 'Slides: {titulo}',
-    verTodosVideos: 'See all videos on the channel',
     verTodosArtigos: 'See all articles',
-    verPerfilInstagram: 'See the Instagram profile',
     voltarInicio: 'Back to home',
     inscritosUm: '{n} subscriber',
     inscritosVarios: '{n} subscribers',
-
-    atual: 'present',
     cargoJsonLd: 'Site Reliability Engineer',
   },
 
-  experiencia: {
-    internacional: {
-      empresa: 'International contract — United States',
-      cargo: 'Site Reliability Engineer',
-      localizacao: 'Remote',
-      bullets: [
-        'Production deploys and canary deployment automation with GitHub Actions.',
-        'Rollout of observability tooling.',
-        'Building AI-assisted observability solutions.',
-        'On-call rotation.',
-      ],
-    },
-    itau: {
-      empresa: 'Itaú Unibanco',
-      cargo: 'Site Reliability Engineer — M level',
-      localizacao: 'São Paulo, Brazil',
-      bullets: [
-        "Observability team supporting the main channels of the bank's app — login, home and authentication.",
-        'Mapping the applications and their architectures in order to act on problems and incidents.',
-        'Building alerts and dashboards with the team to monitor the app and keep it available to customers.',
-      ],
-    },
-    iti: {
-      empresa: "iti — Itaú's digital bank",
-      cargo: 'Site Reliability Engineer — M level',
-      localizacao: 'São Paulo, Brazil',
-      bullets: [
-        'Incident orchestration, channel support and post-mortem ceremonies.',
-        'SLO culture and proactive observability; instrumentation of .NET Core and Kotlin microservices.',
-        'Supported hundreds of microservices on Kubernetes/AWS EKS with Splunk, Grafana, AppDynamics, Jaeger, Loki and Elasticsearch.',
-        'On-call engineer, eliminating toil through automation and running performance tests with JMeter.',
-      ],
-    },
-    stone: {
-      empresa: 'Stone Payments',
-      cargo: 'Site Reliability Engineer — J level',
-      localizacao: 'São Paulo, Brazil',
-      bullets: [
-        'Operations and infrastructure team owning the full service lifecycle: deployment, availability, performance, change management and emergencies.',
-        'Capacity planning and infrastructure-as-code automation on Google Cloud.',
-        'Worked closely with development teams and with governance, ensuring adherence to standards and compliance.',
-      ],
-    },
-  },
-
-  formacao: {
-    inatel: 'Production Engineering',
-    'ohio-pm': 'Project Management',
-    'ohio-english': 'Business English',
-  },
-
-
   projetos: {
-    '100-dias-kubernetes':
-      'A public log of the #100DiasDeKubernetes challenge written entirely in Portuguese, translating and expanding on Anais Urlichs’ material with Brazilian references. A collaborative repository, open to forks and pull requests.',
-    'datadog-automation':
-      'A Flask API that generates Datadog dashboards and monitors from application and AWS account data, covering 9 dashboard types and 12 monitor types. Includes an interactive wizard and ships containerized with Docker and Nginx.',
-    'arquitetura-celular':
-      'A Terraform project that provisions a cell-based architecture on AWS: independent cells in separate AZs, each with its own VPC, NAT gateway, EKS cluster and ALB — so failures stay contained within a cell.',
+    dueto: {
+      resumo: 'Personal and business finances for developers',
+      descricao:
+        'Offline desktop app (in Brazilian Portuguese) for managing the money of one person or a whole family: the monthly budget, a company billing in US dollars (invoices, Simples Nacional taxes, owner’s pay, income statement) and investments, all in one place. Data stays in a local SQLite file.',
+    },
+    nutrimatch: {
+      resumo: 'Patients and nutritionists, no red tape',
+      descricao:
+        'Platform that connects patients with nutritionists: search, online or in-person appointment booking, the nutritionist’s calendar and an admin panel. Built for FETIN 2026 at Inatel.',
+    },
   },
 
   palestras: {
@@ -214,8 +156,8 @@ export const en: Conteudo = {
     },
   },
 
-
   artigos: {
+    eyebrow: '# articles',
     tituloPagina: 'Articles',
     descricao:
       "What I've been writing about SRE, cloud, architecture and career. Published on Medium.",
@@ -230,9 +172,8 @@ export const en: Conteudo = {
     naoEncontrado: 'command not found: {cmd}',
     ajuda: 'available commands:',
     comandos: [
-      { nome: 'about', descricao: 'who I am' },
-      { nome: 'experience', descricao: 'professional background' },
       { nome: 'projects', descricao: 'what I built' },
+      { nome: 'community', descricao: 'talks, articles and content' },
       { nome: 'talks', descricao: 'where I spoke' },
       { nome: 'articles', descricao: 'what I wrote' },
       { nome: 'mentoring', descricao: 'international career mentoring' },
@@ -454,8 +395,8 @@ export const en: Conteudo = {
   },
 
   meta: {
-    titulo: 'Ana Luiza Primo — Site Reliability Engineer',
+    titulo: 'Ana Luiza Primo - Technology and Career',
     descricao:
-      'Site Reliability Engineer/DevOps Engineer | International Career',
+      'Ana Luiza Primo is a Site Reliability Engineer who creates content about technology and international careers. Projects, talks, articles and mentoring.',
   },
 };

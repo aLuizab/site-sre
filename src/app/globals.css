@@ -155,3 +155,57 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Cursor do terminal: uma barra fina (o "pipe") que pisca depois do
+ * nome. steps(1) faz acender e apagar seco, como num terminal de
+ * verdade, em vez de esmaecer.
+ */
+@keyframes piscar {
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-piscando {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.85em;
+  margin-left: 0.12em;
+  vertical-align: -0.05em;
+  background: var(--term-accent);
+  animation: piscar 1.06s steps(1) infinite;
+}
+
+/*
+ * Ar de monitor antigo: linhas de varredura bem fracas por cima da
+ * janela e um brilho leve no nome. Fracos de propósito — é textura,
+ * não pode atrapalhar a leitura.
+ */
+.crt {
+  position: relative;
+}
+
+.crt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    oklch(0% 0 0 / 0.06) 3px
+  );
+}
+
+.dark .brilho-crt {
+  text-shadow: 0 0 18px oklch(80% 0.15 300 / 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-piscando {
+    animation: none;
+  }
+}
