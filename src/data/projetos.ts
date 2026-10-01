@@ -14,6 +14,8 @@ export interface ProjetoBase {
   tags: string[];
   repoUrl?: string;
   demoUrl?: string;
+  /** Página de uma release para baixar o app, com a versão para o rótulo. */
+  download?: { url: string; versao: string };
 }
 
 export const projetos: ProjetoBase[] = [
@@ -32,5 +34,23 @@ export const projetos: ProjetoBase[] = [
     tags: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
     repoUrl: 'https://github.com/aLuizab/nutrimatch',
     demoUrl: 'https://www.nutrimatch.com.br',
+  },
+  {
+    id: 'cert-tracker',
+    nome: 'Cert Tracker',
+    plataforma: 'desktop',
+    tags: ['Electron', 'React', 'TypeScript', 'IndexedDB', 'PWA'],
+    repoUrl: 'https://github.com/aLuizab/cert-tracker',
+    download: {
+      url: 'https://github.com/aLuizab/cert-tracker/releases/tag/v0.1.0',
+      versao: 'v0.1.0',
+    },
+  },
+  {
+    id: 'ramo',
+    nome: 'Ramo',
+    plataforma: 'web',
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'PWA'],
+    demoUrl: 'https://ramo.aluiza.tech',
   },
 ];
