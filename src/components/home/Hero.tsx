@@ -7,9 +7,9 @@ import type { Locale } from '@/i18n/config';
 import type { Conteudo, Destaque } from '@/i18n';
 
 /**
- * Apresentação em tela cheia, dividida ao meio a partir de lg: nome,
- * apresentação e redes à esquerda; a foto ocupando a metade direita
- * inteira, de ponta a ponta.
+ * Apresentação em tela cheia a partir de lg: nome, apresentação e redes
+ * à esquerda; a foto numa coluna estreita à direita, em retrato, de
+ * ponta a ponta na altura.
  *
  * A identidade de terminal continua nos detalhes — o prompt `$`, a
  * fonte mono, a legenda da foto e o campo de comando — em vez de numa
@@ -25,7 +25,7 @@ export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
   const linha2 = resto.at(-1) ?? '';
 
   return (
-    <section className="grid border-b border-border lg:min-h-[min(calc(100svh-4rem),60rem)] lg:grid-cols-2">
+    <section className="grid border-b border-border lg:min-h-[min(calc(100svh-4rem),52rem)] lg:grid-cols-[minmax(0,1.8fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)]">
       <div className="relative flex flex-col justify-between gap-12 overflow-hidden px-6 pt-10 pb-12 sm:pt-14 lg:px-12 lg:py-14">
         <div
           className="brilho-hero pointer-events-none absolute inset-0 -z-10"
@@ -69,16 +69,17 @@ export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
       </div>
 
       {/*
-        A foto vai de borda a borda na metade direita. No celular vira um
-        bloco largo logo abaixo do texto, sem esticar a página inteira.
+        Coluna estreita em retrato: a foto quadrada é cortada nas laterais
+        e o rosto fica no centro. No celular vira um bloco abaixo do texto,
+        com altura limitada para não tomar a tela.
       */}
-      <div className="relative aspect-[4/5] border-t border-border bg-term sm:aspect-[4/3] lg:aspect-auto lg:border-t-0 lg:border-l">
+      <div className="relative aspect-[3/4] max-h-[30rem] border-t border-border bg-term sm:aspect-[4/5] lg:max-h-none lg:aspect-auto lg:border-t-0 lg:border-l">
         <Image
           src={perfil.avatar}
           alt={c.perfil.avatarAlt}
           fill
           priority
-          sizes="(min-width: 1024px) 50vw, 100vw"
+          sizes="(min-width: 1280px) 32vw, (min-width: 1024px) 36vw, 100vw"
           className="object-cover object-[50%_30%]"
         />
         <div
