@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, ArrowUpRight, Play } from 'lucide-react';
 import { SecaoEditorial, RotuloBloco } from '@/components/home/SecaoEditorial';
 import { ArtigoCard } from '@/components/artigos/ArtigoCard';
 import { EmbedInstagram } from '@/components/instagram/EmbedInstagram';
@@ -9,18 +10,18 @@ import { socials } from '@/data/socials';
 import { instagramPosts, codigoDoPost } from '@/data/instagram';
 import { SOCIAL_ICONS } from '@/lib/socialIcons';
 import { getPublicacoes } from '@/lib/publicacoes';
-import { getInscritos } from '@/lib/youtube';
+import { getInscritos, getVideosLongos, type VideoRecente } from '@/lib/youtube';
 import { formatarData } from '@/lib/formatarData';
 import { rotuloInscritos } from '@/components/home/SocialLinks';
 import type { Locale } from '@/i18n/config';
-import type { Conteudo } from '@/i18n';
+import { preencher, type Conteudo } from '@/i18n';
 
 const classeFoco =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
 
 /**
- * O que é contribuição para a comunidade, num lugar só: palestras,
- * artigos e as redes onde sai o conteúdo. Cada bloco é curto de
+ * O que é contribuição para a comunidade, num lugar só: o conteúdo
+ * (YouTube em destaque), as palestras e os artigos. Cada bloco é curto de
  * propósito — o detalhe fica na página da palestra, em /artigos e na
  * própria rede.
  */
@@ -35,13 +36,14 @@ export function ComunidadeSection({ locale, c }: { locale: Locale; c: Conteudo }
           <Contato locale={locale} c={c} />
         </div>
 
+        {/* YouTube primeiro: é o conteúdo em destaque da seção. */}
+        <Suspense fallback={<Redes locale={locale} c={c} inscritos={null} videos={[]} />}>
+          <RedesComContador locale={locale} c={c} />
+        </Suspense>
         <Palestras locale={locale} c={c} />
         {/* Suspense para os feeds do Medium/Substack não segurarem o resto. */}
         <Suspense fallback={null}>
           <Artigos locale={locale} c={c} />
-        </Suspense>
-        <Suspense fallback={<Redes locale={locale} c={c} inscritos={null} />}>
-          <RedesComContador locale={locale} c={c} />
         </Suspense>
       </div>
     </SecaoEditorial>
@@ -160,26 +162,32 @@ async function Artigos({ locale, c }: { locale: Locale; c: Conteudo }) {
 }
 
 async function RedesComContador({ locale, c }: { locale: Locale; c: Conteudo }) {
-  return <Redes locale={locale} c={c} inscritos={await getInscritos()} />;
+  const [inscritos, videos] = await Promise.all([getInscritos(), getVideosLongos(4)]);
+  return <Redes locale={locale} c={c} inscritos={inscritos} videos={videos ?? []} />;
 }
 
+type RedeConteudo = (typeof socials)[number] & { id: keyof Conteudo['redes'] };
+
 /**
- * Um card por rede de conteúdo (as que têm descrição no dicionário), e
- * logo abaixo os posts do Instagram listados em data/instagram.ts, se
- * houver algum.
+ * O YouTube vem em destaque, com a miniatura do vídeo longo mais recente
+ * e os seguintes menores logo abaixo. As outras redes (hoje, o
+ * Instagram) ficam em cards simples, e os posts listados em
+ * data/instagram.ts entram depois, se houver algum.
  */
 function Redes({
   locale,
   c,
   inscritos,
+  videos,
 }: {
   locale: Locale;
   c: Conteudo;
   inscritos: number | null;
+  videos: VideoRecente[];
 }) {
-  const redes = socials.filter(
-    (s): s is typeof s & { id: keyof Conteudo['redes'] } => s.id in c.redes
-  );
+  const redes = socials.filter((s): s is RedeConteudo => s.id in c.redes);
+  const youtube = redes.find((r) => r.id === 'youtube');
+  const outras = redes.filter((r) => r.id !== 'youtube');
   const posts = instagramPosts
     .map(codigoDoPost)
     .filter((codigo): codigo is string => codigo !== null);
@@ -189,41 +197,50 @@ function Redes({
   return (
     <div>
       <RotuloBloco>{c.secoes.comunidade.redes}</RotuloBloco>
-      <ul className="grid gap-4 md:grid-cols-2">
-        {redes.map((rede) => {
-          const Icon = SOCIAL_ICONS[rede.icon];
-          const contador =
-            rede.id === 'youtube' ? rotuloInscritos(inscritos, locale, c) : undefined;
 
-          return (
-            <li key={rede.id}>
-              <a
-                href={rede.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group flex h-full items-start gap-5 rounded-xl border border-border p-6 transition-colors hover:border-accent lg:p-8 ${classeFoco}`}
-              >
-                <Icon size={28} aria-hidden="true" className="shrink-0 text-accent" />
-                <span className="min-w-0 grow">
-                  <span className="flex items-center justify-between gap-2 text-xl font-semibold group-hover:text-accent">
-                    {rede.label}
-                    <ArrowUpRight
-                      size={18}
-                      aria-hidden="true"
-                      className="text-muted group-hover:text-accent"
-                    />
+      {youtube ? (
+        <YoutubeDestaque
+          rede={youtube}
+          locale={locale}
+          c={c}
+          contador={rotuloInscritos(inscritos, locale, c)}
+          videos={videos}
+        />
+      ) : null}
+
+      {outras.length > 0 ? (
+        <ul className={`mt-4 grid gap-4 ${outras.length > 1 ? 'md:grid-cols-2' : ''}`}>
+          {outras.map((rede) => {
+            const Icon = SOCIAL_ICONS[rede.icon];
+            return (
+              <li key={rede.id}>
+                <a
+                  href={rede.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group flex h-full items-start gap-5 rounded-xl border border-border p-6 transition-colors hover:border-accent ${classeFoco}`}
+                >
+                  <Icon size={24} aria-hidden="true" className="shrink-0 text-accent" />
+                  <span className="min-w-0 grow">
+                    <span className="flex items-center justify-between gap-2 text-lg font-semibold group-hover:text-accent">
+                      {rede.label}
+                      <ArrowUpRight
+                        size={18}
+                        aria-hidden="true"
+                        className="text-muted group-hover:text-accent"
+                      />
+                    </span>
+                    <span className="mt-1 block font-mono text-xs text-muted">
+                      {arrobaDe(rede.url)}
+                    </span>
+                    <span className="mt-3 block text-muted">{c.redes[rede.id]}</span>
                   </span>
-                  <span className="mt-1 block font-mono text-xs text-muted">
-                    {arrobaDe(rede.url)}
-                    {contador ? ` · ${contador}` : ''}
-                  </span>
-                  <span className="mt-3 block text-muted">{c.redes[rede.id]}</span>
-                </span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
 
       {posts.length > 0 ? (
         <ul className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -236,6 +253,153 @@ function Redes({
       ) : null}
     </div>
   );
+}
+
+/**
+ * Card largo do canal: miniatura grande do último vídeo longo à esquerda
+ * e o canal à direita. Sem vídeo longo (ou com o feed fora do ar), vira
+ * só o card do canal, ocupando a largura toda.
+ */
+function YoutubeDestaque({
+  rede,
+  locale,
+  c,
+  contador,
+  videos,
+}: {
+  rede: RedeConteudo;
+  locale: Locale;
+  c: Conteudo;
+  contador: string | undefined;
+  videos: VideoRecente[];
+}) {
+  const t = c.secoes.comunidade.youtube;
+  const Icon = SOCIAL_ICONS[rede.icon];
+  const [ultimo, ...anteriores] = videos;
+
+  return (
+    <div className="overflow-hidden rounded-xl border border-border">
+      <div className={ultimo ? 'grid lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)]' : ''}>
+        {ultimo ? (
+          <Miniatura
+            video={ultimo}
+            rotulo={preencher(t.assistir, { titulo: ultimo.titulo })}
+            grande
+          />
+        ) : null}
+
+        <div className="flex flex-col justify-between gap-8 bg-term p-6 lg:p-10">
+          <div>
+            <div className="flex items-center gap-3">
+              <Icon size={32} aria-hidden="true" className="text-term-accent" />
+              <p className="text-2xl font-semibold tracking-tight text-term-fg">{rede.label}</p>
+            </div>
+            <p className="mt-2 font-mono text-xs text-term-muted">
+              {arrobaDe(rede.url)}
+              {contador ? ` · ${contador}` : ''}
+            </p>
+            <p className="mt-4 text-term-muted">{c.redes[rede.id]}</p>
+          </div>
+
+          {ultimo ? (
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-term-muted">
+                {t.ultimoVideo}
+              </p>
+              <a
+                href={urlDoVideo(ultimo.id)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-2 block text-lg font-semibold leading-snug text-term-fg hover:text-term-accent ${classeFoco}`}
+              >
+                {ultimo.titulo}
+              </a>
+              {ultimo.publicado ? (
+                <time
+                  dateTime={ultimo.publicado}
+                  className="mt-1 block font-mono text-xs text-term-muted"
+                >
+                  {formatarData(ultimo.publicado.slice(0, 10), locale)}
+                </time>
+              ) : null}
+            </div>
+          ) : null}
+
+          <a
+            href={rede.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex w-fit items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent/90 dark:text-black ${classeFoco}`}
+          >
+            {t.verCanal}
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+
+      {anteriores.length > 0 ? (
+        <div className="border-t border-border p-6 lg:p-8">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+            {t.maisVideos}
+          </p>
+          <ul className="grid gap-6 sm:grid-cols-3">
+            {anteriores.map((video) => (
+              <li key={video.id}>
+                <Miniatura
+                  video={video}
+                  rotulo={preencher(t.assistir, { titulo: video.titulo })}
+                />
+                <p className="mt-3 line-clamp-2 text-sm font-medium">{video.titulo}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+/** Miniatura 16:9 com o botão de play por cima; leva ao vídeo no YouTube. */
+function Miniatura({
+  video,
+  rotulo,
+  grande = false,
+}: {
+  video: VideoRecente;
+  rotulo: string;
+  grande?: boolean;
+}) {
+  return (
+    <a
+      href={urlDoVideo(video.id)}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={rotulo}
+      className={`group relative block aspect-video overflow-hidden bg-term ${grande ? 'lg:aspect-auto lg:h-full lg:min-h-[24rem]' : 'rounded-lg border border-border'} ${classeFoco}`}
+    >
+      <Image
+        src={video.thumbnail}
+        alt=""
+        fill
+        sizes={grande ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 640px) 25vw, 100vw'}
+        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/25"
+      >
+        <span
+          className={`flex items-center justify-center rounded-full bg-[#ff0033] text-white shadow-lg transition-transform group-hover:scale-110 ${grande ? 'h-16 w-16' : 'h-11 w-11'}`}
+        >
+          <Play size={grande ? 28 : 18} fill="currentColor" className="ml-0.5" />
+        </span>
+      </span>
+    </a>
+  );
+}
+
+function urlDoVideo(id: string): string {
+  return `https://www.youtube.com/watch?v=${id}`;
 }
 
 /** "https://www.instagram.com/aluiza.tech" -> "@aluiza.tech"; o YouTube já vem com @. */

@@ -64,6 +64,8 @@ export interface Conteudo {
       redes: string;
       /** Caixa de contato ao lado da introdução. */
       cta: { titulo: string; mentoria: string; linkedin: string };
+      /** Bloco do YouTube em destaque. `assistir` usa {titulo}. */
+      youtube: { ultimoVideo: string; maisVideos: string; verCanal: string; assistir: string };
     };
   };
 

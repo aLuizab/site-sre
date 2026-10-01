@@ -46,6 +46,12 @@ export const en: Conteudo = {
         mentoria: 'See the mentoring',
         linkedin: 'Talk on LinkedIn',
       },
+      youtube: {
+        ultimoVideo: 'latest video',
+        maisVideos: 'more videos',
+        verCanal: 'Visit the channel',
+        assistir: 'Watch on YouTube: {titulo}',
+      },
     },
   },
 

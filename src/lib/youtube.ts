@@ -2,85 +2,42 @@ export interface VideoRecente {
   id: string;
   titulo: string;
   thumbnail: string;
+  /** ISO, quando o feed informa; string vazia quando não. */
+  publicado: string;
 }
 
 /** Canal usado quando YOUTUBE_CHANNEL_ID não está no ambiente. */
 const CANAL_PADRAO = 'UCElHjg_0zR-BDqWqIlmQ0Gw';
 
 /**
- * Últimos vídeos do canal. Usa a YouTube Data API quando há YOUTUBE_API_KEY
- * e cai no feed RSS público do canal quando não há — o RSS não exige
- * credencial, então a seção funciona sem configuração nenhuma.
- * Retorna `null` só quando as duas vias falham; aí o chamador omite a seção.
- * Só roda em Server Components, então a API key nunca chega ao cliente.
+ * Vídeos longos mais recentes do canal — sem Shorts.
+ *
+ * O YouTube mantém, para todo canal, uma playlist só com os uploads
+ * longos: o id é `UULF` + o id do canal sem o `UC` do começo (a de
+ * Shorts é `UUSH`). O feed RSS dessa playlist é público, então não
+ * precisa de API key e não depende de adivinhar pela duração o que é
+ * Short.
+ *
+ * Retorna `[]` quando não há vídeo longo e `null` quando o feed falha;
+ * nos dois casos o chamador mostra só o card do canal.
  */
-export async function getLatestVideos(max = 3): Promise<VideoRecente[] | null> {
+export async function getVideosLongos(max = 4): Promise<VideoRecente[] | null> {
   const canalId = process.env.YOUTUBE_CHANNEL_ID ?? CANAL_PADRAO;
-  const apiKey = process.env.YOUTUBE_API_KEY;
+  const playlist = `UULF${canalId.replace(/^UC/, '')}`;
 
-  if (apiKey) {
-    const viaApi = await buscarViaApi(apiKey, canalId, max);
-    if (viaApi) return viaApi;
-  }
-
-  return buscarViaRss(canalId, max);
-}
-
-async function buscarViaApi(
-  apiKey: string,
-  canalId: string,
-  max: number
-): Promise<VideoRecente[] | null> {
-  try {
-    const url = new URL('https://www.googleapis.com/youtube/v3/search');
-    url.searchParams.set('key', apiKey);
-    url.searchParams.set('channelId', canalId);
-    url.searchParams.set('part', 'snippet');
-    url.searchParams.set('order', 'date');
-    url.searchParams.set('maxResults', String(max));
-    url.searchParams.set('type', 'video');
-
-    const res = await fetch(url, { next: { revalidate: 3600 } });
-    if (!res.ok) return null;
-
-    const json = await res.json();
-    type Item = {
-      id: { videoId: string };
-      snippet: { title: string; thumbnails: { medium: { url: string } } };
-    };
-
-    const items = json.items as Item[] | undefined;
-    if (!items?.length) return null;
-
-    return items.map((item) => ({
-      id: item.id.videoId,
-      titulo: item.snippet.title,
-      thumbnail: item.snippet.thumbnails.medium.url,
-    }));
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Feed RSS do canal — os 15 vídeos mais recentes, sem API key. O XML é
- * pequeno e de formato fixo, então extraímos por regex em vez de trazer
- * um parser só para isso.
- */
-async function buscarViaRss(
-  canalId: string,
-  max: number
-): Promise<VideoRecente[] | null> {
   try {
     const res = await fetch(
-      `https://www.youtube.com/feeds/videos.xml?channel_id=${canalId}`,
+      `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlist}`,
       { next: { revalidate: 3600 } }
     );
+    // 404 aqui é canal sem nenhum vídeo longo, não erro.
+    if (res.status === 404) return [];
     if (!res.ok) return null;
 
     const xml = await res.text();
     const videos: VideoRecente[] = [];
 
+    // O XML é pequeno e de formato fixo: regex basta, sem parser.
     for (const entrada of xml.split('<entry>').slice(1)) {
       const id = entrada.match(/<yt:videoId>([\w-]{11})<\/yt:videoId>/)?.[1];
       const titulo = entrada.match(/<media:title>([\s\S]*?)<\/media:title>/)?.[1];
@@ -89,14 +46,15 @@ async function buscarViaRss(
       videos.push({
         id,
         titulo: decodificarXml(titulo).trim(),
-        // hqdefault é 4:3 com tarjas; o object-cover do card recorta para 16:9.
-        thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+        // hq720 é 16:9 sem tarjas, em 1280x720 — aguenta o card grande.
+        thumbnail: `https://i.ytimg.com/vi/${id}/hq720.jpg`,
+        publicado: entrada.match(/<published>([^<]+)<\/published>/)?.[1] ?? '',
       });
 
       if (videos.length === max) break;
     }
 
-    return videos.length > 0 ? videos : null;
+    return videos;
   } catch {
     return null;
   }

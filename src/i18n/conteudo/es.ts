@@ -50,6 +50,12 @@ export const es: Conteudo = {
         mentoria: 'Conocer la mentoría',
         linkedin: 'Hablar por LinkedIn',
       },
+      youtube: {
+        ultimoVideo: 'último vídeo',
+        maisVideos: 'más vídeos',
+        verCanal: 'Ver el canal',
+        assistir: 'Ver en YouTube: {titulo}',
+      },
     },
   },
 
