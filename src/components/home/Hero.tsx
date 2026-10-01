@@ -7,13 +7,10 @@ import type { Locale } from '@/i18n/config';
 import type { Conteudo, Destaque } from '@/i18n';
 
 /**
- * Apresentação em tela cheia a partir de lg: nome, apresentação e redes
- * à esquerda; a foto numa coluna estreita à direita, em retrato, de
- * ponta a ponta na altura.
- *
- * A identidade de terminal continua nos detalhes — o prompt `$`, a
- * fonte mono, a legenda da foto e o campo de comando — em vez de numa
- * janela emoldurada que espremia tudo numa coluna estreita.
+ * Apresentação em tela cheia a partir de lg: à esquerda, uma janela de
+ * terminal antigo (linhas de varredura, cursor piscando depois do nome)
+ * com o nome, a apresentação e o campo de comando, e as redes logo
+ * abaixo; à direita, a foto numa coluna estreita em retrato.
  *
  * Todo o texto é HTML renderizado no servidor; só o campo de comando é
  * cliente. A animação revela texto que já está no DOM.
@@ -26,45 +23,62 @@ export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
 
   return (
     <section className="grid border-b border-border lg:min-h-[min(calc(100svh-4rem),52rem)] lg:grid-cols-[minmax(0,1.8fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)]">
-      <div className="relative flex flex-col justify-between gap-12 overflow-hidden px-6 pt-10 pb-12 sm:pt-14 lg:px-12 lg:py-14">
+      <div className="relative flex flex-col gap-8 overflow-hidden px-6 pt-8 pb-12 sm:pt-10 lg:px-12 lg:py-12">
         <div
           className="brilho-hero pointer-events-none absolute inset-0 -z-10"
           aria-hidden="true"
         />
 
-        <p className="revela font-mono text-xs uppercase tracking-[0.2em] text-muted">
-          <span className="text-accent">$</span> whoami
-        </p>
+        {/* Janela de terminal antigo: barra de título, comandos e cursor piscando. */}
+        <div className="crt flex grow flex-col overflow-hidden rounded-xl border border-term-border bg-term text-term-fg shadow-lg">
+          <div className="flex items-center gap-2 border-b border-term-border px-4 py-2.5">
+            <span className="flex gap-1.5" aria-hidden="true">
+              <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
+              <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
+              <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
+            </span>
+            <p className="grow text-center font-mono text-xs text-term-muted">
+              {c.terminal.tituloJanela}
+            </p>
+            {/* Espaço espelhando os três pontos, para o título ficar centrado. */}
+            <span className="w-[52px]" aria-hidden="true" />
+          </div>
 
-        <div className="revela" style={{ animationDelay: '120ms' }}>
-          <h1 className="text-[clamp(3rem,7vw,7.5rem)] font-semibold leading-[0.95] tracking-tighter">
-            <span className="block">{linha1}</span>{' '}
-            <span className="block">{linha2}</span>
-          </h1>
-          <p className="mt-6 font-mono text-base text-accent sm:text-lg">
-            {c.perfil.tagline}
-          </p>
+          <div className="flex grow flex-col justify-between gap-10 p-6 font-mono sm:p-8 lg:p-10">
+            <Bloco comando="whoami" atraso={0}>
+              <h1 className="brilho-crt text-[clamp(2.5rem,6vw,6.5rem)] font-semibold leading-[0.95] tracking-tighter">
+                <span className="block">{linha1}</span>{' '}
+                <span className="block">
+                  {linha2}
+                  <span className="cursor-piscando" aria-hidden="true" />
+                </span>
+              </h1>
+              <p className="mt-5 text-base text-term-accent sm:text-lg">{c.perfil.tagline}</p>
+            </Bloco>
+
+            <Bloco comando="cat sobre.txt" atraso={1}>
+              <ul className="max-w-2xl space-y-2 text-sm text-term-muted sm:text-base">
+                {c.perfil.destaques.map((d, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="select-none text-term-accent" aria-hidden="true">
+                      —
+                    </span>
+                    <span>
+                      <LinhaDestaque destaque={d} locale={locale} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Bloco>
+
+            <div className="text-sm">
+              <TerminalPrompt locale={locale} c={c} />
+            </div>
+          </div>
         </div>
 
-        <div className="revela space-y-8" style={{ animationDelay: '260ms' }}>
-          <ul className="max-w-xl space-y-2 text-muted">
-            {c.perfil.destaques.map((d, i) => (
-              <li key={i} className="flex gap-3">
-                <span className="select-none text-accent" aria-hidden="true">
-                  —
-                </span>
-                <span>
-                  <LinhaDestaque destaque={d} locale={locale} />
-                </span>
-              </li>
-            ))}
-          </ul>
-
+        <div className="revela" style={{ animationDelay: '520ms' }}>
           <SocialLinks locale={locale} c={c} />
-
-          <div className="max-w-xl rounded-lg border border-term-border bg-term px-4 py-3 font-mono text-sm text-term-fg">
-            <TerminalPrompt locale={locale} c={c} />
-          </div>
         </div>
       </div>
 
@@ -95,6 +109,30 @@ export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
   );
 }
 
+/** Um par comando + saída, com o prompt na frente. */
+function Bloco({
+  comando,
+  atraso,
+  children,
+}: {
+  comando: string;
+  /** Ordem de entrada na animação; vira um atraso em CSS. */
+  atraso: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="revela" style={{ animationDelay: `${atraso * 260}ms` }}>
+      <p className="flex gap-2 text-sm">
+        <span className="select-none text-term-accent" aria-hidden="true">
+          $
+        </span>
+        <span>{comando}</span>
+      </p>
+      <div className="mt-4 sm:pl-4">{children}</div>
+    </div>
+  );
+}
+
 /**
  * Renderiza a linha, transformando em link só o trecho indicado em
  * `linkTexto`. Se o trecho não existir na frase (tradução que mudou de
@@ -119,7 +157,7 @@ function LinhaDestaque({
       {texto.slice(0, i)}
       <Link
         href={`/${locale}${href}`}
-        className="text-foreground underline decoration-accent underline-offset-4 transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="text-term-fg underline decoration-term-accent underline-offset-4 transition-colors hover:text-term-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-term-accent"
       >
         {linkTexto}
       </Link>

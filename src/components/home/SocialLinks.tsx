@@ -1,7 +1,6 @@
 import { socials } from '@/data/socials';
 import { SOCIAL_ICONS } from '@/lib/socialIcons';
 import { PillButton } from '@/components/ui/PillButton';
-import { FadeIn } from '@/components/ui/FadeIn';
 import { getInscritos } from '@/lib/youtube';
 import { localeInfo, type Locale } from '@/i18n/config';
 import { preencher, type Conteudo } from '@/i18n';
@@ -34,20 +33,18 @@ export async function SocialLinks({ locale, c }: { locale: Locale; c: Conteudo }
   const contador = rotuloInscritos(await getInscritos(), locale, c);
 
   return (
-    <FadeIn>
-      <ul className="flex flex-wrap gap-3">
-        {socials.map((social) => (
-          <li key={social.id}>
-            <PillButton
-              href={social.url}
-              icon={SOCIAL_ICONS[social.icon]}
-              label={social.label}
-              sublabel={social.id === 'youtube' ? contador : undefined}
-              destaque={social.destaque}
-            />
-          </li>
-        ))}
-      </ul>
-    </FadeIn>
+    <ul className="flex flex-wrap gap-3">
+      {socials.map((social) => (
+        <li key={social.id}>
+          <PillButton
+            href={social.url}
+            icon={SOCIAL_ICONS[social.icon]}
+            label={social.label}
+            sublabel={social.id === 'youtube' ? contador : undefined}
+            destaque={social.destaque}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }
