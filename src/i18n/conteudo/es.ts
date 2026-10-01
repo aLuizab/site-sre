@@ -19,7 +19,7 @@ export const es: Conteudo = {
           'He trabajado en Stone Pagamentos, Banco Iti e Itaú Unibanco — bancos, medios de pago y servicios financieros.',
       },
       {
-        texto: 'Hoy trabajo en contratos internacionales en Estados Unidos.',
+        texto: 'Hoy trabajo en un contrato internacional en Estados Unidos.',
       },
       {
         texto: 'También hago mentoría de carrera internacional en tecnología.',
@@ -101,7 +101,7 @@ export const es: Conteudo = {
 
   experiencia: {
     internacional: {
-      empresa: 'Contratos internacionales — Estados Unidos',
+      empresa: 'Contrato internacional — Estados Unidos',
       cargo: 'Site Reliability Engineer',
       localizacao: 'Remoto',
       bullets: [
