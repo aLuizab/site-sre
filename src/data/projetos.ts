@@ -22,6 +22,8 @@ export const projetos: ProjetoBase[] = [
     nome: 'Dueto',
     plataforma: 'desktop',
     tags: ['Electron', 'React', 'TypeScript', 'SQLite'],
+    repoUrl: 'https://github.com/aLuizab/dueto',
+    demoUrl: 'https://dueto.aluiza.tech',
   },
   {
     id: 'nutrimatch',
