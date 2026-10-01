@@ -33,14 +33,19 @@ export const pt: Conteudo = {
   },
 
   secoes: {
-    projetos: { eyebrow: '# projetos', titulo: 'Projetos' },
+    projetos: { eyebrow: 'projetos', titulo: 'Produtos que eu construo.' },
     comunidade: {
-      eyebrow: '# comunidade',
-      titulo: 'Comunidade',
+      eyebrow: 'comunidade',
+      titulo: 'Palestras, artigos & conteúdo.',
       intro: 'O que eu compartilho além do trabalho: palestras em eventos, artigos e conteúdo sobre carreira em tecnologia.',
       palestras: 'Palestras',
       artigos: 'Artigos',
       redes: 'Conteúdo',
+      cta: {
+        titulo: 'Tem um evento, uma palestra ou uma carreira para destravar?',
+        mentoria: 'Conhecer a mentoria',
+        linkedin: 'Falar no LinkedIn',
+      },
     },
   },
 

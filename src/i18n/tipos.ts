@@ -62,6 +62,8 @@ export interface Conteudo {
       palestras: string;
       artigos: string;
       redes: string;
+      /** Caixa de contato ao lado da introdução. */
+      cta: { titulo: string; mentoria: string; linkedin: string };
     };
   };
 

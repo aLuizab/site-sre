@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { perfil } from '@/data/perfil';
-import { Container } from '@/components/ui/Container';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import type { Locale } from '@/i18n/config';
@@ -48,8 +47,8 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
   );
 
   return (
-    <header className="relative z-50 border-b border-border">
-      <Container wide>
+    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
+      <div className="px-6 lg:px-12">
         <div className="flex h-16 items-center justify-between gap-6">
           {nome}
 
@@ -108,7 +107,7 @@ export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
             />
           </nav>
         </div>
-      </Container>
+      </div>
     </header>
   );
 }

@@ -79,12 +79,14 @@ falharem, a seção some e o contador não aparece — nunca um número inventad
 
 ## Estrutura da página
 
-A home (`src/app/[locale]/page.tsx`) empilha as seções, cada uma com um
+A home (`src/app/[locale]/page.tsx`) usa a largura toda da tela: hero
+dividido ao meio e seções com rótulo numerado à esquerda
+(`components/home/SecaoEditorial.tsx`). Empilha as seções, cada uma com um
 `id` para navegação por âncora:
 
 | Seção | Âncora | Componente |
 | --- | --- | --- |
-| Hero (terminal) + redes | — | `components/home/TerminalHero.tsx`, `SocialLinks.tsx` |
+| Hero em tela cheia (nome, foto, redes, terminal) | — | `components/home/Hero.tsx`, `SocialLinks.tsx` |
 | Projetos | `#projetos` | `components/home/ProjetosSection.tsx` |
 | Comunidade: palestras, artigos, redes | `#comunidade` (`#palestras`) | `components/home/ComunidadeSection.tsx` |
 
