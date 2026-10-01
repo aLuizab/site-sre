@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Download } from 'lucide-react';
 import { GithubIcon } from '@/components/icons/BrandIcons';
 import { Chip } from '@/components/ui/Chip';
 import { SecaoEditorial } from '@/components/home/SecaoEditorial';
@@ -51,8 +51,19 @@ export function ProjetosSection({ c }: { c: Conteudo }) {
                     </li>
                   ))}
                 </ul>
-                {projeto.demoUrl || projeto.repoUrl ? (
+                {projeto.demoUrl || projeto.repoUrl || projeto.download ? (
                   <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                    {projeto.download ? (
+                      <a
+                        href={projeto.download.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${classeLink} text-foreground`}
+                      >
+                        <Download size={16} aria-hidden="true" />
+                        {preencher(c.ui.baixarVersao, { versao: projeto.download.versao })}
+                      </a>
+                    ) : null}
                     {projeto.demoUrl ? (
                       // O domínio fica escrito: diz para onde o link leva.
                       <a

@@ -7,7 +7,7 @@ export const en: Conteudo = {
       { texto: 'SRE on an international contract in the United States. Before that: Stone, iti and Itaú.' },
       { texto: 'I studied Project Management and Business English at Ohio University.' },
       {
-        texto: 'I build my own products — right now, Dueto and NutriMatch.',
+        texto: 'I build my own products — right now, Dueto, NutriMatch and Cert Tracker.',
         linkTexto: 'build my own products',
         href: '#projetos',
       },
@@ -70,6 +70,7 @@ export const en: Conteudo = {
     seletorIdioma: 'Choose language',
     creditoRodape: 'Built by {nome} with Next.js and TailwindCSS. © {ano}.',
     ariaRepositorio: '{nome} repository on GitHub',
+    baixarVersao: 'Download {versao}',
     voltarPalestras: 'Back to talks',
     tituloSlides: '# slides',
     tituloFotos: '# photos',
@@ -100,6 +101,11 @@ export const en: Conteudo = {
       resumo: 'Patients and nutritionists, no red tape',
       descricao:
         'Platform that connects patients with nutritionists: search, online or in-person appointment booking, the nutritionist’s calendar and an admin panel. Built for FETIN 2026 at Inatel.',
+    },
+    'cert-tracker': {
+      resumo: 'Certification study tracker',
+      descricao:
+        'Offline desktop app for studying for AWS, Kubernetes, Linux, Docker and Terraform certifications: a daily plan based on each exam’s official domain weights, spaced-repetition flashcards (FSRS), practice exams by domain, a mistakes log and a Readiness Score that tells you when to book the exam. Also runs in the browser as a PWA.',
     },
   },
 

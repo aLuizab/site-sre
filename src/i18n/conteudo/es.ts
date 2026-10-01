@@ -11,7 +11,7 @@ export const es: Conteudo = {
       { texto: 'SRE en un contrato internacional en Estados Unidos. Antes: Stone, iti e Itaú.' },
       { texto: 'Estudié Project Management y Business English en la Ohio University.' },
       {
-        texto: 'Construyo productos propios — hoy, Dueto y NutriMatch.',
+        texto: 'Construyo productos propios — hoy, Dueto, NutriMatch y Cert Tracker.',
         linkTexto: 'productos propios',
         href: '#projetos',
       },
@@ -74,6 +74,7 @@ export const es: Conteudo = {
     seletorIdioma: 'Elegir idioma',
     creditoRodape: 'Creado por {nome} con Next.js y TailwindCSS. © {ano}.',
     ariaRepositorio: 'Repositorio de {nome} en GitHub',
+    baixarVersao: 'Descargar {versao}',
     voltarPalestras: 'Volver a las charlas',
     tituloSlides: '# diapositivas',
     tituloFotos: '# fotos',
@@ -104,6 +105,11 @@ export const es: Conteudo = {
       resumo: 'Pacientes y nutricionistas, sin burocracia',
       descricao:
         'Plataforma que conecta pacientes con nutricionistas: búsqueda, reserva de consultas online o presenciales, agenda del profesional y panel de administración. Proyecto de la FETIN 2026, en el Inatel.',
+    },
+    'cert-tracker': {
+      resumo: 'Estudio para certificaciones',
+      descricao:
+        'App de escritorio y offline para estudiar certificaciones de AWS, Kubernetes, Linux, Docker y Terraform: plan diario según los pesos oficiales de cada examen, flashcards con repetición espaciada (FSRS), simulacros por dominio, cuaderno de errores y un Readiness Score que indica cuándo agendar el examen. También funciona en el navegador como PWA.',
     },
   },
 

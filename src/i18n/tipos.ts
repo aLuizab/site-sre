@@ -180,6 +180,8 @@ export interface Conteudo {
     creditoRodape: string;
     /** Usa {nome}. */
     ariaRepositorio: string;
+    /** Link de download de um app. Usa {versao}. */
+    baixarVersao: string;
     voltarPalestras: string;
     tituloSlides: string;
     tituloFotos: string;
