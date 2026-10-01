@@ -49,7 +49,7 @@ export function Hero({ locale, c }: { locale: Locale; c: Conteudo }) {
               <p className="mt-5 text-base text-term-accent sm:text-lg">{c.perfil.tagline}</p>
             </Bloco>
 
-            <Bloco comando="cat sobre.txt" atraso={1}>
+            <Bloco comando="cat about.txt" atraso={1}>
               <ul className="max-w-2xl space-y-2 text-sm text-term-muted sm:text-base">
                 {c.perfil.destaques.map((d, i) => (
                   <li key={i} className="flex gap-3">

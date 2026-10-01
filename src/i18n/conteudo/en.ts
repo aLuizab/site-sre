@@ -5,6 +5,7 @@ export const en: Conteudo = {
     tagline: 'Site Reliability Engineer · Technology and Career',
     destaques: [
       { texto: 'SRE on an international contract in the United States. Before that: Stone, iti and Itaú.' },
+      { texto: 'I studied Project Management and Business English at Ohio University.' },
       {
         texto: 'I build my own products — right now, Dueto and NutriMatch.',
         linkTexto: 'build my own products',
