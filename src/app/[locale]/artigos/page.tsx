@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ArtigoCard } from '@/components/artigos/ArtigoCard';
+import { EmbedSubstack } from '@/components/newsletter/EmbedSubstack';
 import { getPublicacoes } from '@/lib/publicacoes';
 import { formatarData } from '@/lib/formatarData';
 import { buildMetadata } from '@/lib/seo';
@@ -50,10 +51,14 @@ export default async function ArtigosPage(props: PageProps<'/[locale]/artigos'>)
 
       <div className="mt-6">
         <SectionHeading
-          eyebrow={c.secoes.artigos.eyebrow}
+          eyebrow={c.artigos.eyebrow}
           title={c.artigos.tituloPagina}
         />
         <p className="-mt-2 mb-8 max-w-2xl text-muted">{c.artigos.descricao}</p>
+      </div>
+
+      <div className="mb-10 max-w-md">
+        <EmbedSubstack titulo={c.newsletter.eyebrow} />
       </div>
 
       {artigos.length === 0 ? (

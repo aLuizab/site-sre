@@ -7,24 +7,31 @@ import { localeInfo, type Locale } from '@/i18n/config';
 import { preencher, type Conteudo } from '@/i18n';
 
 /**
+ * "12,4 mil inscritos" no idioma da página, ou undefined quando a busca
+ * falhou. Acima de 10 mil o número compacta, que é como o próprio
+ * YouTube mostra.
+ */
+export function rotuloInscritos(
+  inscritos: number | null,
+  locale: Locale,
+  c: Conteudo
+): string | undefined {
+  if (inscritos === null) return undefined;
+  return preencher(inscritos === 1 ? c.ui.inscritosUm : c.ui.inscritosVarios, {
+    n: new Intl.NumberFormat(localeInfo[locale].intl, {
+      notation: inscritos >= 10_000 ? 'compact' : 'standard',
+      maximumFractionDigits: 1,
+    }).format(inscritos),
+  });
+}
+
+/**
  * O contador de inscritos vem do YouTube a cada revalidação, em vez de
  * ficar chumbado no dicionário — número escrito à mão envelhece e vira
  * mentira. Se a busca falhar, o botão aparece sem contador.
  */
 export async function SocialLinks({ locale, c }: { locale: Locale; c: Conteudo }) {
-  const inscritos = await getInscritos();
-
-  const contador =
-    inscritos === null
-      ? undefined
-      : preencher(inscritos === 1 ? c.ui.inscritosUm : c.ui.inscritosVarios, {
-          // Acima de 10 mil o número compacta ("12,4 mil", "12.4K"),
-          // que é como o próprio YouTube mostra.
-          n: new Intl.NumberFormat(localeInfo[locale].intl, {
-            notation: inscritos >= 10_000 ? 'compact' : 'standard',
-            maximumFractionDigits: 1,
-          }).format(inscritos),
-        });
+  const contador = rotuloInscritos(await getInscritos(), locale, c);
 
   return (
     <FadeIn>

@@ -3,7 +3,7 @@ import { perfil } from '@/data/perfil';
 import { locales, defaultLocale, isLocale } from '@/i18n/config';
 import { getConteudo } from '@/i18n';
 
-export const alt = `${perfil.nome} — Site Reliability Engineer`;
+export const alt = `${perfil.nome} - Technology and Career`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

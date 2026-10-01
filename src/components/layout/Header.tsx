@@ -10,7 +10,7 @@ import type { Conteudo } from '@/i18n';
 /**
  * Cabeçalho com dois arranjos.
  *
- * Em telas largas (lg+) os seis links ficam em linha. Abaixo disso eles
+ * Em telas largas (lg+) os links ficam em linha. Abaixo disso eles
  * não cabem: quebravam em duas fileiras e empurravam o cabeçalho, e no
  * celular viravam um amontoado. Então viram um menu recolhido.
  *
@@ -25,10 +25,8 @@ import type { Conteudo } from '@/i18n';
  */
 export function Header({ locale, c }: { locale: Locale; c: Conteudo }) {
   const navItems = [
-    { href: `/${locale}#sobre`, label: c.nav.sobre },
-    { href: `/${locale}#experiencia`, label: c.nav.experiencia },
     { href: `/${locale}#projetos`, label: c.nav.projetos },
-    { href: `/${locale}#palestras`, label: c.nav.palestras },
+    { href: `/${locale}#comunidade`, label: c.nav.comunidade },
     // Páginas próprias, não âncoras da home.
     { href: `/${locale}/artigos`, label: c.nav.artigos },
     { href: `/${locale}/mentoria`, label: c.nav.mentoria },

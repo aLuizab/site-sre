@@ -84,7 +84,3 @@ export const palestras: PalestraBase[] = [
 export function getPalestraBySlug(slug: string): PalestraBase | undefined {
   return palestras.find((p) => p.slug === slug);
 }
-
-export function getAllTags(): string[] {
-  return Array.from(new Set(palestras.flatMap((p) => p.tags))).sort();
-}

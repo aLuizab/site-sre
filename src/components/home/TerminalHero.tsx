@@ -25,7 +25,7 @@ export function TerminalHero({ locale, c }: { locale: Locale; c: Conteudo }) {
         aria-hidden="true"
       />
 
-      <Container alinhamento="esquerda">
+      <Container>
         <div className="overflow-hidden rounded-xl border border-term-border bg-term text-term-fg shadow-lg">
           {/* Barra de título */}
           <div className="flex items-center gap-2 border-b border-term-border px-4 py-2.5">
@@ -54,7 +54,7 @@ export function TerminalHero({ locale, c }: { locale: Locale; c: Conteudo }) {
                 />
                 <div>
                   <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                    {c.perfil.saudacao}
+                    {perfil.nome}
                   </h1>
                   <p className="mt-1 text-term-muted">{c.perfil.tagline}</p>
                 </div>

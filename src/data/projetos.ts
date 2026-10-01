@@ -1,7 +1,10 @@
 /**
- * Nome do repositório, links e tags são termos técnicos e não mudam entre
- * idiomas. Só a descrição traduz — ela fica em
- * src/i18n/conteudo/<idioma>.ts, indexada por este `id`.
+ * Nome, links e tags são termos técnicos e não mudam entre idiomas. Resumo
+ * e descrição traduzem — ficam em src/i18n/conteudo/<idioma>.ts, indexados
+ * por este `id`.
+ *
+ * Sem `repoUrl` nem `demoUrl` o card aparece sem links: é o caso de
+ * projeto com código fechado e ainda sem página pública.
  */
 export interface ProjetoBase {
   id: string;
@@ -13,21 +16,14 @@ export interface ProjetoBase {
 
 export const projetos: ProjetoBase[] = [
   {
-    id: '100-dias-kubernetes',
-    nome: '100DiasDeKubernetes',
-    tags: ['Kubernetes', 'Docs', 'Community'],
-    repoUrl: 'https://github.com/aLuizab/100DiasDeKubernetes',
+    id: 'dueto',
+    nome: 'Dueto',
+    tags: ['Electron', 'React', 'TypeScript', 'SQLite'],
   },
   {
-    id: 'datadog-automation',
-    nome: 'datadog-automation',
-    tags: ['Python', 'Datadog', 'Observability'],
-    repoUrl: 'https://github.com/aLuizab/datadog-automation',
-  },
-  {
-    id: 'arquitetura-celular',
-    nome: 'arquitetura-celular',
-    tags: ['Terraform', 'AWS', 'High availability'],
-    repoUrl: 'https://github.com/aLuizab/arquitetura-celular',
+    id: 'nutrimatch',
+    nome: 'NutriMatch',
+    tags: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
+    repoUrl: 'https://github.com/aLuizab/nutrimatch',
   },
 ];
